@@ -450,12 +450,14 @@
 
         /* Auth Screen */
         .auth-screen {
-            max-width: 450px;
-            margin: 80px auto;
+            max-width: 520px;
+            margin: 60px auto;
             background: white;
-            padding: 50px;
-            border-radius: 20px;
+            padding: 60px 55px;
+            border-radius: 24px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
         }
 
         .auth-logo {
@@ -475,14 +477,14 @@
 
         .auth-screen h2 {
             color: #1a1a1a;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             text-align: center;
-            font-size: 28px;
+            font-size: 36px;
             font-weight: 700;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
 
         .form-group label {
@@ -490,15 +492,15 @@
             margin-bottom: 10px;
             color: #666;
             font-weight: 500;
-            font-size: 13px;
+            font-size: 14px;
         }
 
         .form-group input {
             width: 100%;
-            padding: 11px 14px;
+            padding: 14px 16px;
             border: 1.5px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: var(--text-sm);
+            border-radius: 12px;
+            font-size: 15px;
             transition: all 0.3s;
             background: white;
             color: #1a1a1a;
@@ -594,13 +596,13 @@
 
         .btn {
             width: 100%;
-            padding: 12px 20px;
+            padding: 15px 20px;
             background: var(--accent-primary);
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: var(--text-sm);
+            font-size: 16px;
             font-weight: 600;
             transition: all 0.3s;
             box-shadow: 0 2px 8px var(--accent-shadow);
@@ -1522,6 +1524,25 @@
             opacity: 0;
         }
 
+        /* Background Clothing Animation for Auth Screen */
+        .auth-bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .auth-bg-clothing {
+            position: absolute;
+            font-size: 35px;
+            animation: bgDropAndFade 8s linear infinite;
+            opacity: 0;
+        }
+
         @keyframes dropAndFade {
             0% {
                 transform: translateY(-50px) rotate(0deg);
@@ -1532,6 +1553,23 @@
             }
             70% {
                 opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes bgDropAndFade {
+            0% {
+                transform: translateY(-80px) rotate(0deg);
+                opacity: 0;
+            }
+            5% {
+                opacity: 0.15;
+            }
+            85% {
+                opacity: 0.15;
             }
             100% {
                 transform: translateY(100vh) rotate(360deg);
@@ -2604,6 +2642,9 @@
     </style>
 </head>
 <body>
+    <!-- Background Clothing Animation for Auth Screen -->
+    <div id="authBgAnimation" class="auth-bg-animation"></div>
+
     <!-- Auth Screen -->
     <div id="authScreen" class="auth-screen">
         <div class="auth-logo" onclick="window.location.reload()">
@@ -3611,6 +3652,11 @@
             checkAuth();
             setupEventListeners();
             initializeEmojiPicker();
+            
+            // Start background animation if on auth screen
+            if (!document.getElementById('authScreen').classList.contains('hidden')) {
+                startAuthBackgroundAnimation();
+            }
         });
 
         function setupEventListeners() {
@@ -3702,12 +3748,18 @@
             document.getElementById('name').value = '';
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
+            
+            // Restart background animation
+            startAuthBackgroundAnimation();
         }
 
         function showMainApp() {
             document.getElementById('authScreen').classList.add('hidden');
             document.getElementById('mainApp').classList.remove('hidden');
             document.getElementById('currentUser').textContent = currentUser;
+            
+            // Stop background animation
+            stopAuthBackgroundAnimation();
             
             // Get user's stored name
             const users = JSON.parse(localStorage.getItem('users') || '{}');
@@ -5452,6 +5504,61 @@
             setTimeout(() => {
                 container.remove();
             }, 4000);
+        }
+
+        // Background Clothing Animation for Auth Screen
+        let authAnimationInterval = null;
+        
+        function startAuthBackgroundAnimation() {
+            const container = document.getElementById('authBgAnimation');
+            if (!container) return;
+            
+            const clothingItems = ['👕', '👔', '👗', '👘', '👚', '👖', '👙', '🩱', '🧥', '🧤', '🧣', '🧦', '👟', '👠', '👡', '👢', '👞', '🥾', '🩴', '👒', '🎩', '🧢', '🎒', '👜', '💼', '🧳'];
+            
+            function createClothingItem() {
+                const item = document.createElement('div');
+                item.className = 'auth-bg-clothing';
+                item.textContent = clothingItems[Math.floor(Math.random() * clothingItems.length)];
+                
+                // Random horizontal position
+                item.style.left = Math.random() * 100 + '%';
+                
+                // Random delay
+                item.style.animationDelay = Math.random() * 2 + 's';
+                
+                // Random duration for variety
+                item.style.animationDuration = (6 + Math.random() * 4) + 's';
+                
+                container.appendChild(item);
+                
+                // Remove item after animation completes
+                setTimeout(() => {
+                    if (item.parentNode) {
+                        item.remove();
+                    }
+                }, 12000);
+            }
+            
+            // Create initial batch
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => createClothingItem(), i * 1000);
+            }
+            
+            // Keep creating new items periodically
+            authAnimationInterval = setInterval(() => {
+                createClothingItem();
+            }, 1500);
+        }
+        
+        function stopAuthBackgroundAnimation() {
+            if (authAnimationInterval) {
+                clearInterval(authAnimationInterval);
+                authAnimationInterval = null;
+            }
+            const container = document.getElementById('authBgAnimation');
+            if (container) {
+                container.innerHTML = '';
+            }
         }
     </script>
 
