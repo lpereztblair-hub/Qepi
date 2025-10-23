@@ -2614,7 +2614,11 @@
                 </text>
             </svg>
         </div>
-        <h2 id="authTitle">Welcome to Packing Planner</h2>
+        <h2 id="authTitle">Pack Smarter.</h2>
+        <div class="form-group">
+            <label id="nameLabel" for="name">Name</label>
+            <input type="text" id="name" placeholder="Enter your name">
+        </div>
         <div class="form-group">
             <label id="usernameLabel" for="username">Username</label>
             <input type="text" id="username" placeholder="Enter username">
@@ -2945,9 +2949,13 @@
         // Language translations
         const translations = {
             en: {
-                authTitle: "Welcome to Packing Planner",
+                authTitle: "Pack Smarter.",
+                nameLabel: "Name",
+                namePlaceholder: "Enter your name",
                 usernameLabel: "Username",
+                usernamePlaceholder: "Enter username",
                 passwordLabel: "Password",
+                passwordPlaceholder: "Enter password",
                 loginBtn: "Login",
                 registerBtn: "Register",
                 logoutBtn: "Logout",
@@ -3005,9 +3013,13 @@
                 logoutBtnText: "Logout"
             },
             es: {
-                authTitle: "Bienvenido a Planificador de Maletas",
+                authTitle: "Empaca Mejor.",
+                nameLabel: "Nombre",
+                namePlaceholder: "Ingresa tu nombre",
                 usernameLabel: "Usuario",
+                usernamePlaceholder: "Ingresa tu usuario",
                 passwordLabel: "Contraseña",
+                passwordPlaceholder: "Ingresa tu contraseña",
                 loginBtn: "Iniciar Sesión",
                 registerBtn: "Registrarse",
                 logoutBtn: "Cerrar Sesión",
@@ -3649,14 +3661,18 @@
             } else {
                 alert(currentLanguage === 'en' ? 'Invalid credentials' : 'Credenciales inválidas');
             }
+            
+            // Clear the name field after login
+            document.getElementById('name').value = '';
         }
 
         function register() {
+            const name = document.getElementById('name').value.trim();
             const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value;
 
-            if (!username || !password) {
-                alert(currentLanguage === 'en' ? 'Please enter username and password' : 'Por favor ingrese usuario y contraseña');
+            if (!name || !username || !password) {
+                alert(currentLanguage === 'en' ? 'Please enter name, username and password' : 'Por favor ingrese nombre, usuario y contraseña');
                 return;
             }
 
@@ -3667,10 +3683,15 @@
                 return;
             }
 
-            users[username] = { password: password, trips: [] };
+            users[username] = { name: name, password: password, trips: [] };
             localStorage.setItem('users', JSON.stringify(users));
             
             alert(currentLanguage === 'en' ? 'Registration successful! Please login.' : '¡Registro exitoso! Por favor inicie sesión.');
+            
+            // Clear form fields after successful registration
+            document.getElementById('name').value = '';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
         }
 
         function logout() {
@@ -3678,6 +3699,7 @@
             localStorage.removeItem('currentUser');
             document.getElementById('authScreen').classList.remove('hidden');
             document.getElementById('mainApp').classList.add('hidden');
+            document.getElementById('name').value = '';
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
         }
@@ -3687,12 +3709,16 @@
             document.getElementById('mainApp').classList.remove('hidden');
             document.getElementById('currentUser').textContent = currentUser;
             
-            // Set profile pictures with user initials
-            const initials = currentUser.substring(0, 2).toUpperCase();
+            // Get user's stored name
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
+            const userName = users[currentUser]?.name || currentUser;
+            
+            // Set profile pictures with user initials from name
+            const initials = userName.substring(0, 2).toUpperCase();
             document.getElementById('sidebarProfilePic').textContent = initials;
             
             // Set first name in greeting
-            const firstName = currentUser.split(' ')[0] || currentUser;
+            const firstName = userName.split(' ')[0] || userName;
             document.getElementById('userFirstName').textContent = firstName;
             
             initCalendar();
@@ -4016,7 +4042,7 @@
             
             // Update all text elements
             const elements = [
-                'authTitle', 'usernameLabel', 'passwordLabel', 'loginBtn', 'registerBtn',
+                'authTitle', 'nameLabel', 'usernameLabel', 'passwordLabel', 'loginBtn', 'registerBtn',
                 'createTripTitle', 'destinationLabel',
                 'dateRangeLabel', 'createTripBtn', 'upcomingTripsTitle',
                 'pastTripsTitle', 'backBtnText', 'startLabel', 'endLabel', 'durationLabel',
@@ -4056,6 +4082,21 @@
             }
 
             // Update placeholders
+            const nameInput = document.getElementById('name');
+            if (nameInput) {
+                nameInput.placeholder = t.namePlaceholder;
+            }
+            
+            const usernameInput = document.getElementById('username');
+            if (usernameInput) {
+                usernameInput.placeholder = t.usernamePlaceholder;
+            }
+            
+            const passwordInput = document.getElementById('password');
+            if (passwordInput) {
+                passwordInput.placeholder = t.passwordPlaceholder;
+            }
+            
             const destInput = document.getElementById('destination');
             if (destInput) {
                 destInput.placeholder = currentLanguage === 'en' ? 'Where are you going?' : '¿A dónde vas?';
