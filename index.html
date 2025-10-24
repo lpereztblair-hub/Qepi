@@ -4259,7 +4259,8 @@
                 isSelectingRange = true;
             } else if (selectedStartDate && !selectedEndDate) {
                 // Complete the selection
-                if (new Date(dateStr) < new Date(selectedStartDate)) {
+                // Compare dates as strings (YYYY-MM-DD format) to avoid timezone issues
+                if (dateStr < selectedStartDate) {
                     // If selected date is before start date, swap them
                     selectedEndDate = selectedStartDate;
                     selectedStartDate = dateStr;
@@ -5297,12 +5298,18 @@
             const container = document.getElementById('outfitPlannerContent');
             container.innerHTML = '';
 
+            // Calculate total number of days (inclusive)
             const startDate = new Date(trip.startDate);
             const endDate = new Date(trip.endDate);
+            const totalDays = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
+            
             const days = [];
 
-            for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-                days.push(new Date(d));
+            // Generate days array by adding days one by one
+            for (let i = 0; i < totalDays; i++) {
+                const day = new Date(trip.startDate);
+                day.setDate(day.getDate() + i);
+                days.push(day);
             }
 
             // Group by weeks
@@ -5872,7 +5879,8 @@
                 editTripEndDate = null;
             } else if (editTripStartDate && !editTripEndDate) {
                 // Complete selection
-                if (new Date(dateStr) < new Date(editTripStartDate)) {
+                // Compare dates as strings (YYYY-MM-DD format) to avoid timezone issues
+                if (dateStr < editTripStartDate) {
                     editTripEndDate = editTripStartDate;
                     editTripStartDate = dateStr;
                 } else {
