@@ -1326,6 +1326,19 @@
             gap: var(--spacing-14);
         }
 
+        .no-trips-message {
+            text-align: center;
+            color: var(--color-gray-600);
+            font-size: var(--text-sm);
+            padding: var(--spacing-24) var(--spacing-14);
+            background: var(--color-gray-50);
+            border-radius: var(--radius-lg);
+            border: 2px dashed var(--color-gray-400);
+            width: 100%;
+            font-weight: 500;
+            margin-top: var(--spacing-8);
+        }
+
         /* Trip Detail Page */
         .trip-detail {
             background: var(--color-white);
@@ -4146,7 +4159,6 @@
                 clickToSelectDates: "Haga clic para seleccionar fechas",
                 calendarDoneBtn: "Listo",
                 subheadingText: "Planifica tu itinerario con nosotros",
-                viewDetailsLink: "Detalles",
                 notesTitle: "Notas",
                 deleteTripText: "Eliminar",
                 noActivitiesText: "No hay actividades aún.",
@@ -5050,7 +5062,7 @@
             });
 
             if (past.length === 0) {
-                pastContainer.innerHTML = `<p style="color: #999; font-size: 12px; padding: 10px;">${currentLanguage === 'en' ? 'No past trips' : 'No hay viajes pasados'}</p>`;
+                pastContainer.innerHTML = `<p class="no-trips-message">${currentLanguage === 'en' ? 'No past trips yet' : 'No hay viajes pasados aún'}</p>`;
             }
         }
 
@@ -5311,7 +5323,7 @@
                 'citiesTitle', 'addCityText', 'noCitiesText', 'addCityModalTitle',
                 'cityDestinationLabel', 'cityDatesLabel', 'saveCityText', 'cancelCityText',
                 'citySelectedDatesText',
-                'outfitPlannerTitle', 'calendarDoneBtn', 'subheadingText', 'viewDetailsLink',
+                'outfitPlannerTitle', 'calendarDoneBtn', 'subheadingText',
                 'notesTitle', 'deleteTripText', 'apiBannerTitle',
                 'upcomingTripsSidebarTitle', 'pastTripsSidebarTitle', 'newTripCtaText',
                 'langBtnText', 'logoutBtnText', 'itineraryTabLabel', 'packingTabLabel',
@@ -5689,7 +5701,24 @@
                 // Get emoji for icon (use saved emoji or generate from destination)
                 const tripEmoji = trip.emoji || (trip.cities && trip.cities.length > 0 ? trip.cities[0].emoji : '🌍');
                 const tripDestination = trip.destination || (trip.cities && trip.cities.length > 0 ? trip.cities.map(c => c.name).join(', ') : '');
-                const tripSocketInfo = trip.socketType ? `<p class="trip-card-socket">${trip.socketIcon || getSocketSVG(trip.socketType)}${trip.socketType}</p>` : '';
+                
+                // Collect socket info from all cities
+                let tripSocketInfo = '';
+                if (trip.cities && trip.cities.length > 0) {
+                    const uniqueSockets = new Map();
+                    trip.cities.forEach(city => {
+                        if (city.socketType && !uniqueSockets.has(city.socketType)) {
+                            uniqueSockets.set(city.socketType, city.socketIcon);
+                        }
+                    });
+                    
+                    if (uniqueSockets.size > 0) {
+                        const socketElements = Array.from(uniqueSockets.entries())
+                            .map(([type, icon]) => `${icon}${type}`)
+                            .join(' • ');
+                        tripSocketInfo = `<p class="trip-card-socket">${socketElements}</p>`;
+                    }
+                }
                 
                 // Create countdown badge HTML if trip is in the future
                 let countdownBadge = '';
@@ -5763,7 +5792,7 @@
             });
 
             if (trips.length === 0) {
-                container.innerHTML = `<p style="color: #999; text-align: center; width: 100%;">${currentLanguage === 'en' ? 'No past trips' : 'No hay viajes pasados'}</p>`;
+                container.innerHTML = `<p class="no-trips-message">${currentLanguage === 'en' ? 'No past trips yet' : 'No hay viajes pasados aún'}</p>`;
             }
         }
 
