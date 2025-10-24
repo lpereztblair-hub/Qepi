@@ -3809,7 +3809,9 @@
         }
 
         function selectCity(name, region, country) {
-            const fullName = region ? `${name}, ${region}, ${country}` : `${name}, ${country}`;
+            // Don't include region if it's the same as the city name (e.g., Lima, Lima, Peru)
+            const includeRegion = region && region !== name;
+            const fullName = includeRegion ? `${name}, ${region}, ${country}` : `${name}, ${country}`;
             document.getElementById('destination').value = fullName;
             hideAutocompleteSuggestions();
         }
@@ -4040,20 +4042,24 @@
             const users = JSON.parse(localStorage.getItem('users') || '{}');
             const trips = users[currentUser]?.trips || [];
             
+            // Get today as YYYY-MM-DD string for comparison
             const today = new Date();
-            today.setHours(0, 0, 0, 0);
+            const todayStr = dateToString(today);
 
             // Load upcoming trips (trips that haven't ended yet)
             const upcomingContainer = document.getElementById('sidebarTripsList');
             upcomingContainer.innerHTML = '';
             
-            const upcoming = trips.filter(t => new Date(t.endDate) >= today)
-                .sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
+            // Compare date strings directly to avoid timezone issues
+            const upcoming = trips.filter(t => t.endDate >= todayStr)
+                .sort((a, b) => a.startDate.localeCompare(b.startDate))
                 .slice(0, 4);
 
             upcoming.forEach(trip => {
                 const duration = Math.ceil((new Date(trip.endDate) - new Date(trip.startDate)) / (1000 * 60 * 60 * 24)) + 1;
-                const startDate = new Date(trip.startDate);
+                // Parse date in local time to avoid timezone shift
+                const [year, month, day] = trip.startDate.split('-').map(Number);
+                const startDate = new Date(year, month - 1, day);
                 const dateStr = `${duration} ${translations[currentLanguage].days}, ${startDate.getDate()} ${startDate.toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { month: 'short', year: 'numeric' })}`;
                 
                 const tripEmoji = trip.emoji || getCountryFlagEmoji(trip.destination);
@@ -4079,12 +4085,15 @@
             const pastContainer = document.getElementById('sidebarPastTripsList');
             pastContainer.innerHTML = '';
             
-            const past = trips.filter(t => new Date(t.endDate) < today)
-                .sort((a, b) => new Date(b.endDate) - new Date(a.endDate))
+            // Compare date strings directly to avoid timezone issues
+            const past = trips.filter(t => t.endDate < todayStr)
+                .sort((a, b) => b.endDate.localeCompare(a.endDate))
                 .slice(0, 4);
 
             past.forEach(trip => {
-                const startDate = new Date(trip.startDate);
+                // Parse date in local time to avoid timezone shift
+                const [year, month, day] = trip.startDate.split('-').map(Number);
+                const startDate = new Date(year, month - 1, day);
                 const dateStr = startDate.toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { month: 'short', year: 'numeric' });
                 
                 const tripEmoji = trip.emoji || getCountryFlagEmoji(trip.destination);
@@ -4235,13 +4244,9 @@
                 div.classList.add('selected-end');
             }
 
-            // Check if it's in range
+            // Check if it's in range (compare date strings to avoid timezone issues)
             if (selectedStartDate && selectedEndDate) {
-                const startTime = new Date(selectedStartDate).getTime();
-                const endTime = new Date(selectedEndDate).getTime();
-                const currentTime = date.getTime();
-                
-                if (currentTime > startTime && currentTime < endTime) {
+                if (dateStr > selectedStartDate && dateStr < selectedEndDate) {
                     div.classList.add('in-range');
                 }
             }
@@ -4681,19 +4686,21 @@
             const users = JSON.parse(localStorage.getItem('users') || '{}');
             const trips = users[currentUser]?.trips || [];
 
+            // Get today as YYYY-MM-DD string for comparison
             const today = new Date();
-            today.setHours(0, 0, 0, 0);
+            const todayStr = dateToString(today);
 
             // Update greeting based on time of day
             updateGreeting();
 
             // Upcoming trips: trips that haven't ended yet (endDate >= today)
-            const upcoming = trips.filter(t => new Date(t.endDate) >= today)
-                .sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+            // Compare date strings directly to avoid timezone issues
+            const upcoming = trips.filter(t => t.endDate >= todayStr)
+                .sort((a, b) => a.startDate.localeCompare(b.startDate));
             
             // Past trips: trips where the end date has passed (endDate < today)
-            const past = trips.filter(t => new Date(t.endDate) < today)
-                .sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
+            const past = trips.filter(t => t.endDate < todayStr)
+                .sort((a, b) => b.endDate.localeCompare(a.endDate));
 
             renderUpcomingTrips(upcoming);
             renderPastTrips(past);
@@ -4705,8 +4712,11 @@
 
             trips.forEach(trip => {
                 const duration = Math.ceil((new Date(trip.endDate) - new Date(trip.startDate)) / (1000 * 60 * 60 * 24)) + 1;
-                const startDate = new Date(trip.startDate);
-                const endDate = new Date(trip.endDate);
+                // Parse dates in local time to avoid timezone shift
+                const [startYear, startMonth, startDay] = trip.startDate.split('-').map(Number);
+                const [endYear, endMonth, endDay] = trip.endDate.split('-').map(Number);
+                const startDate = new Date(startYear, startMonth - 1, startDay);
+                const endDate = new Date(endYear, endMonth - 1, endDay);
                 
                 // Format dates
                 const startFormatted = startDate.toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { month: 'short', day: 'numeric' });
@@ -4747,8 +4757,11 @@
 
             trips.forEach(trip => {
                 const duration = Math.ceil((new Date(trip.endDate) - new Date(trip.startDate)) / (1000 * 60 * 60 * 24)) + 1;
-                const startDate = new Date(trip.startDate);
-                const endDate = new Date(trip.endDate);
+                // Parse dates in local time to avoid timezone shift
+                const [startYear, startMonth, startDay] = trip.startDate.split('-').map(Number);
+                const [endYear, endMonth, endDay] = trip.endDate.split('-').map(Number);
+                const startDate = new Date(startYear, startMonth - 1, startDay);
+                const endDate = new Date(endYear, endMonth - 1, endDay);
                 
                 // Format dates
                 const startFormatted = startDate.toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { month: 'short', day: 'numeric' });
@@ -4779,7 +4792,9 @@
         }
 
         function formatDate(dateString) {
-            const date = new Date(dateString);
+            // Parse YYYY-MM-DD as local date, not UTC (to avoid timezone shift)
+            const [year, month, day] = dateString.split('-').map(Number);
+            const date = new Date(year, month - 1, day);
             return date.toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { 
                 month: 'short', 
                 day: 'numeric', 
@@ -4841,8 +4856,11 @@
             // Set subtitle with location, dates, and duration
             const startDate = formatDate(trip.startDate);
             const endDate = formatDate(trip.endDate);
-            const monthStart = new Date(trip.startDate).toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { month: 'short', day: 'numeric' });
-            const monthEnd = new Date(trip.endDate).toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { month: 'short', day: 'numeric' });
+            // Parse dates in local time to avoid timezone shift
+            const [startYear, startMonth, startDay] = trip.startDate.split('-').map(Number);
+            const [endYear, endMonth, endDay] = trip.endDate.split('-').map(Number);
+            const monthStart = new Date(startYear, startMonth - 1, startDay).toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { month: 'short', day: 'numeric' });
+            const monthEnd = new Date(endYear, endMonth - 1, endDay).toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { month: 'short', day: 'numeric' });
             document.getElementById('tripSubtitleInline').textContent = `${trip.destination} • ${monthStart} – ${monthEnd} • ${duration} ${translations[currentLanguage].days}`;
 
             // Set notes
@@ -4881,12 +4899,17 @@
                 if (!activity.name) activity.name = '';
                 if (activity.isEditing === undefined) activity.isEditing = false;
                 
-                // Format date for display
-                const dateDisplay = activity.date ? new Date(activity.date).toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { 
-                    month: 'short', 
-                    day: 'numeric', 
-                    year: 'numeric' 
-                }) : '';
+                // Format date for display (parse as local time to avoid timezone shift)
+                let dateDisplay = '';
+                if (activity.date) {
+                    const [year, month, day] = activity.date.split('-').map(Number);
+                    const date = new Date(year, month - 1, day);
+                    dateDisplay = date.toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { 
+                        month: 'short', 
+                        day: 'numeric', 
+                        year: 'numeric' 
+                    });
+                }
                 
                 const typeIcon = activity.type === 'day' ? '☀️' : '🌙';
                 const typeText = activity.type === 'day' ? translations[currentLanguage].dayActivity : translations[currentLanguage].nightActivity;
@@ -5091,11 +5114,13 @@
             const activity = currentTrip.activities[activityIndex];
             selectedActivityDateValue = activity.date;
             
-            // Initialize the month to show the activity's current date or trip start date
+            // Initialize the month to show the activity's current date or trip start date (parse as local time)
             if (activity.date) {
-                activityDatePickerMonth = new Date(activity.date);
+                const [year, month, day] = activity.date.split('-').map(Number);
+                activityDatePickerMonth = new Date(year, month - 1, day);
             } else {
-                activityDatePickerMonth = new Date(currentTrip.startDate);
+                const [year, month, day] = currentTrip.startDate.split('-').map(Number);
+                activityDatePickerMonth = new Date(year, month - 1, day);
             }
             
             // Update title based on language
@@ -5141,9 +5166,11 @@
             const calendarDays = document.getElementById('activityCalendarDays');
             calendarDays.innerHTML = '';
             
-            // Get trip date range for validation
-            const tripStart = new Date(currentTrip.startDate);
-            const tripEnd = new Date(currentTrip.endDate);
+            // Get trip date range for validation (parse as local time to avoid timezone shift)
+            const [startYear, startMonth, startDay] = currentTrip.startDate.split('-').map(Number);
+            const [endYear, endMonth, endDay] = currentTrip.endDate.split('-').map(Number);
+            const tripStart = new Date(startYear, startMonth - 1, startDay);
+            const tripEnd = new Date(endYear, endMonth - 1, endDay);
             const today = new Date();
             today.setHours(0, 0, 0, 0);
             
@@ -5305,10 +5332,10 @@
             
             const days = [];
 
-            // Generate days array by adding days one by one
+            // Generate days array by adding days one by one (parse as local time to avoid timezone shift)
+            const [startYear, startMonth, startDay] = trip.startDate.split('-').map(Number);
             for (let i = 0; i < totalDays; i++) {
-                const day = new Date(trip.startDate);
-                day.setDate(day.getDate() + i);
+                const day = new Date(startYear, startMonth - 1, startDay + i);
                 days.push(day);
             }
 
@@ -5856,13 +5883,9 @@
                 div.classList.add('selected-end');
             }
             
-            // Check if in range
+            // Check if in range (compare date strings to avoid timezone issues)
             if (editTripStartDate && editTripEndDate) {
-                const startTime = new Date(editTripStartDate).getTime();
-                const endTime = new Date(editTripEndDate).getTime();
-                const currentTime = date.getTime();
-                
-                if (currentTime > startTime && currentTime < endTime) {
+                if (dateStr > editTripStartDate && dateStr < editTripEndDate) {
                     div.classList.add('in-range');
                 }
             }
@@ -5988,10 +6011,8 @@
             // Adjust activities to be within new date range
             if (datesChanged && currentTrip.activities) {
                 currentTrip.activities = currentTrip.activities.filter(activity => {
-                    const actDate = new Date(activity.date);
-                    const start = new Date(editTripStartDate);
-                    const end = new Date(editTripEndDate);
-                    return actDate >= start && actDate <= end;
+                    // Compare date strings directly (YYYY-MM-DD format) to avoid timezone issues
+                    return activity.date >= editTripStartDate && activity.date <= editTripEndDate;
                 });
             }
             
