@@ -465,7 +465,7 @@
 
         /* API Setup Banner */
         .api-banner {
-            background: linear-gradient(135deg, var(--color-info) 0%, #764ba2 100%);
+            background: var(--accent-secondary);
             color: var(--color-white);
             padding: var(--spacing-12) var(--spacing-16);
             border-radius: var(--radius-lg);
@@ -473,7 +473,7 @@
             display: flex;
             align-items: center;
             gap: var(--spacing-8);
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-accent-md);
         }
 
         .api-banner-icon {
@@ -1255,7 +1255,7 @@
             width: 48px;
             height: 48px;
             min-width: 48px;
-            background: #E3F2FD;
+            background: var(--accent-quaternary);
             border-radius: var(--radius-full);
             display: flex;
             align-items: center;
@@ -1285,7 +1285,7 @@
         }
 
         .trip-card-dates {
-            color: #888;
+            color: var(--color-gray-600);
             font-size: var(--text-xs);
             margin: var(--spacing-0) var(--spacing-0) var(--spacing-10) var(--spacing-0);
             line-height: 1.5;
@@ -1387,11 +1387,11 @@
             width: clamp(50px, 12vw, 60px);
             height: clamp(50px, 12vw, 60px);
             border-radius: var(--spacing-15);
-            background: #E3F2FD;
+            background: var(--accent-quaternary);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #333;
+            color: var(--color-gray-800);
             font-size: var(--text-xl);
             font-weight: 700;
             flex-shrink: 0;
@@ -1401,7 +1401,7 @@
 
         .trip-icon:hover {
             transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(100, 181, 246, 0.4);
+            box-shadow: var(--shadow-accent-md);
         }
 
         .trip-icon:active {
@@ -1481,7 +1481,7 @@
 
         .trip-tab:hover {
             color: var(--accent-primary);
-            background: rgba(102, 126, 234, 0.05);
+            background: var(--accent-light);
         }
 
         .trip-tab.active {
@@ -1518,7 +1518,7 @@
         }
 
         .itinerary-header-row:last-of-type .itinerary-header-cell {
-            border-bottom: 2px solid var(--color-info);
+            border-bottom: 2px solid var(--accent-primary);
         }
 
         .itinerary-header-cell {
@@ -1530,7 +1530,7 @@
             text-align: center;
             font-size: var(--text-fixed-13);
             font-weight: 600;
-            color: #333;
+            color: var(--color-gray-800);
             min-width: 150px;
             vertical-align: middle;
             position: sticky;
@@ -1539,26 +1539,29 @@
         }
 
         .itinerary-header-cell.time-column {
-            background: linear-gradient(135deg, var(--color-info) 0%, #764ba2 100%);
-            color: var(--color-white);
+            background: var(--color-gray-50);
+            color: var(--color-gray-700);
             position: sticky;
             left: 0;
             z-index: 25;
             min-width: 100px;
             max-width: 100px;
             width: 100px;
+            font-weight: 700;
         }
 
         .itinerary-header-cell.month-row {
             font-size: var(--text-fixed-14);
             font-weight: 700;
-            background: #e3f2fd;
+            background: var(--color-white);
+            border-bottom: 2px solid var(--accent-primary);
             top: 0;
         }
 
         .itinerary-header-cell.date-row {
-            font-size: var(--text-fixed-16);
+            font-size: var(--text-fixed-18);
             font-weight: 700;
+            color: var(--color-black);
             top: 41px;
         }
 
@@ -1578,7 +1581,7 @@
         .itinerary-header-cell.city-row {
             font-size: var(--text-fixed-12);
             font-weight: 500;
-            color: #555;
+            color: var(--color-gray-700);
             top: 164px;
         }
 
@@ -1587,17 +1590,17 @@
         }
 
         .itinerary-body-row:hover {
-            background: rgba(102, 126, 234, 0.02);
+            background: var(--color-gray-50);
         }
 
         .time-label {
             display: table-cell;
-            background: var(--color-gray-50);
+            background: var(--color-white);
             padding: var(--spacing-8);
-            border-right: 1px solid var(--color-gray-400);
+            border-right: 2px solid var(--color-gray-300);
             border-bottom: 1px solid var(--color-gray-400);
             font-size: var(--text-fixed-13);
-            font-weight: 500;
+            font-weight: 600;
             color: var(--color-gray-700);
             text-align: right;
             position: sticky;
@@ -1622,33 +1625,42 @@
         }
 
         .time-slot:hover {
-            background: rgba(102, 126, 234, 0.05);
+            background: var(--color-gray-50);
         }
 
         .time-slot.has-activity {
-            background: rgba(102, 126, 234, 0.15);
+            background: var(--accent-secondary-light);
         }
 
         .time-slot.has-transport {
-            background: rgba(255, 152, 0, 0.15);
+            background: var(--accent-tertiary-light);
         }
 
         .time-slot-item {
-            background: linear-gradient(135deg, var(--color-info) 0%, #764ba2 100%);
+            background: var(--accent-secondary);
             color: var(--color-white);
             padding: var(--spacing-3) var(--spacing-6);
             border-radius: var(--radius-sm);
             font-size: var(--text-fixed-12);
             margin-bottom: var(--spacing-2);
-            font-weight: 500;
+            font-weight: 600;
             display: flex;
             align-items: center;
             gap: var(--spacing-3);
             cursor: pointer;
+            transition: background var(--duration-normal) var(--easing-smooth);
+        }
+
+        .time-slot-item:hover {
+            background: var(--accent-secondary-hover);
         }
 
         .time-slot-item.transport {
-            background: linear-gradient(135deg, var(--color-warning) 0%, #F57C00 100%);
+            background: var(--accent-tertiary);
+        }
+
+        .time-slot-item.transport:hover {
+            background: var(--accent-tertiary-hover);
         }
 
         .time-slot-item-emoji {
@@ -1703,7 +1715,7 @@
 
         .itinerary-type-btn:hover {
             border-color: var(--accent-primary);
-            background: rgba(102, 126, 234, 0.05);
+            background: var(--accent-light);
         }
 
         .itinerary-type-btn.active {
@@ -1832,8 +1844,8 @@
         }
 
         .add-city-link:hover {
-            background: rgba(102, 126, 234, 0.1);
-            color: #5566d6;
+            background: var(--accent-light);
+            color: var(--accent-primary);
         }
 
         .cities-list {
@@ -1843,7 +1855,7 @@
         }
 
         .city-card {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: var(--accent-quaternary);
             border-radius: var(--radius-lg);
             padding: var(--spacing-10) var(--spacing-12);
             display: flex;
@@ -1856,7 +1868,7 @@
         .city-card:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
-            border-color: var(--color-info);
+            border-color: var(--accent-primary);
         }
 
         .city-card-emoji {
@@ -1886,7 +1898,7 @@
 
         .city-card-socket {
             font-size: var(--text-fixed-12);
-            color: #888;
+            color: var(--color-gray-600);
             margin-top: var(--spacing-3);
         }
 
@@ -1916,14 +1928,14 @@
             color: var(--color-gray-600);
             font-size: var(--text-sm);
             padding: var(--spacing-32) var(--spacing-14);
-            background: #f9f9f9;
+            background: var(--color-gray-50);
             border-radius: var(--radius-lg);
             border: 2px dashed var(--color-gray-400);
         }
 
         /* City Tag in Outfit Planner */
         .city-tag {
-            background: linear-gradient(135deg, var(--color-info) 0%, #764ba2 100%);
+            background: var(--accent-secondary);
             color: var(--color-white);
             padding: var(--spacing-2) var(--spacing-4);
             border-radius: var(--radius-lg);
@@ -1933,12 +1945,12 @@
             display: inline-flex;
             align-items: center;
             gap: var(--spacing-2);
-            box-shadow: 0 1px 4px rgba(102, 126, 234, 0.25);
+            box-shadow: var(--shadow-accent-sm);
         }
 
         .city-tag.travel-tag {
-            background: linear-gradient(135deg, var(--color-warning) 0%, #F57C00 100%);
-            box-shadow: 0 1px 4px rgba(255, 152, 0, 0.25);
+            background: var(--accent-tertiary);
+            box-shadow: var(--shadow-accent-sm);
         }
 
         .city-tag-emoji {
