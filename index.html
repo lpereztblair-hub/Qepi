@@ -626,6 +626,42 @@
             background: var(--accent-light);
         }
 
+        /* Password Reset Links */
+        .reset-password-link {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 14px;
+        }
+
+        .reset-password-link a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .reset-password-link a:hover {
+            text-decoration: underline;
+        }
+
+        .back-to-login {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .back-to-login a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .back-to-login a:hover {
+            text-decoration: underline;
+        }
+
         /* Landing Page Heading - Removed, using page-header instead */
 
         /* Trip Form */
@@ -2670,8 +2706,40 @@
         </div>
         <button class="btn" id="loginBtn">Login</button>
         <button class="btn btn-secondary" id="registerBtn">Register</button>
+        <div class="reset-password-link">
+            <a href="#" id="forgotPasswordLink">Forgot Password?</a>
+        </div>
         <div style="text-align: center; margin-top: 20px;">
             <button class="lang-selector" onclick="toggleLanguage()">ES/EN</button>
+        </div>
+    </div>
+
+    <!-- Reset Password Screen -->
+    <div id="resetPasswordScreen" class="auth-screen hidden">
+        <div class="auth-logo" onclick="window.location.reload()">
+            <svg width="180" height="60" viewBox="0 0 180 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <text x="0" y="48" font-family="'Nunito', 'Arial Rounded MT Bold', sans-serif" 
+                      font-size="54" font-weight="800" fill="#A8D05F" letter-spacing="-1.5">
+                    qepi.
+                </text>
+            </svg>
+        </div>
+        <h2 id="resetPasswordTitle">Reset Password</h2>
+        <div class="form-group">
+            <label id="resetUsernameLabel" for="resetUsername">Username</label>
+            <input type="text" id="resetUsername" placeholder="Enter your username">
+        </div>
+        <div class="form-group">
+            <label id="resetNameLabel" for="resetName">Name</label>
+            <input type="text" id="resetName" placeholder="Enter your name">
+        </div>
+        <div class="form-group">
+            <label id="newPasswordLabel" for="newPassword">New Password</label>
+            <input type="password" id="newPassword" placeholder="Enter new password">
+        </div>
+        <button class="btn" id="resetPasswordBtn">Reset Password</button>
+        <div class="back-to-login">
+            <a href="#" id="backToLoginLink">Back to Login</a>
         </div>
     </div>
 
@@ -2999,6 +3067,13 @@
                 passwordPlaceholder: "Enter password",
                 loginBtn: "Login",
                 registerBtn: "Register",
+                forgotPasswordLink: "Forgot Password?",
+                resetPasswordTitle: "Reset Password",
+                resetUsernameLabel: "Username",
+                resetNameLabel: "Name",
+                newPasswordLabel: "New Password",
+                resetPasswordBtn: "Reset Password",
+                backToLoginLink: "Back to Login",
                 logoutBtn: "Logout",
                 appTitle: "🧳 Packing Planner",
                 createTripTitle: "Create New Trip",
@@ -3063,6 +3138,13 @@
                 passwordPlaceholder: "Ingresa tu contraseña",
                 loginBtn: "Iniciar Sesión",
                 registerBtn: "Registrarse",
+                forgotPasswordLink: "¿Olvidaste tu Contraseña?",
+                resetPasswordTitle: "Restablecer Contraseña",
+                resetUsernameLabel: "Usuario",
+                resetNameLabel: "Nombre",
+                newPasswordLabel: "Nueva Contraseña",
+                resetPasswordBtn: "Restablecer Contraseña",
+                backToLoginLink: "Volver al Inicio de Sesión",
                 logoutBtn: "Cerrar Sesión",
                 appTitle: "🧳 Planificador de Maletas",
                 createTripTitle: "Crear Nuevo Viaje",
@@ -3663,6 +3745,9 @@
             document.getElementById('loginBtn').addEventListener('click', login);
             document.getElementById('registerBtn').addEventListener('click', register);
             document.getElementById('logoutBtn').addEventListener('click', logout);
+            document.getElementById('forgotPasswordLink').addEventListener('click', showResetPasswordScreen);
+            document.getElementById('resetPasswordBtn').addEventListener('click', resetPassword);
+            document.getElementById('backToLoginLink').addEventListener('click', showLoginScreen);
             document.getElementById('createTripBtn').addEventListener('click', createTrip);
             document.getElementById('tripName').addEventListener('input', saveCurrentTrip);
             
@@ -3751,6 +3836,70 @@
             
             // Restart background animation
             startAuthBackgroundAnimation();
+        }
+
+        function showResetPasswordScreen(e) {
+            e.preventDefault();
+            document.getElementById('authScreen').classList.add('hidden');
+            document.getElementById('resetPasswordScreen').classList.remove('hidden');
+            
+            // Clear form fields
+            document.getElementById('resetUsername').value = '';
+            document.getElementById('resetName').value = '';
+            document.getElementById('newPassword').value = '';
+        }
+
+        function showLoginScreen(e) {
+            e.preventDefault();
+            document.getElementById('resetPasswordScreen').classList.add('hidden');
+            document.getElementById('authScreen').classList.remove('hidden');
+            
+            // Clear form fields
+            document.getElementById('resetUsername').value = '';
+            document.getElementById('resetName').value = '';
+            document.getElementById('newPassword').value = '';
+        }
+
+        function resetPassword() {
+            const username = document.getElementById('resetUsername').value.trim();
+            const name = document.getElementById('resetName').value.trim();
+            const newPassword = document.getElementById('newPassword').value;
+
+            if (!username || !name || !newPassword) {
+                alert(currentLanguage === 'en' 
+                    ? 'Please fill in all fields' 
+                    : 'Por favor completa todos los campos');
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
+            
+            // Check if user exists
+            if (!users[username]) {
+                alert(currentLanguage === 'en' 
+                    ? 'Username not found' 
+                    : 'Usuario no encontrado');
+                return;
+            }
+
+            // Verify name matches
+            if (users[username].name !== name) {
+                alert(currentLanguage === 'en' 
+                    ? 'Name does not match our records' 
+                    : 'El nombre no coincide con nuestros registros');
+                return;
+            }
+
+            // Update password
+            users[username].password = newPassword;
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            alert(currentLanguage === 'en' 
+                ? 'Password reset successful! You can now login with your new password.' 
+                : '¡Contraseña restablecida exitosamente! Ahora puedes iniciar sesión con tu nueva contraseña.');
+            
+            // Go back to login screen
+            showLoginScreen({ preventDefault: () => {} });
         }
 
         function showMainApp() {
@@ -4095,6 +4244,8 @@
             // Update all text elements
             const elements = [
                 'authTitle', 'nameLabel', 'usernameLabel', 'passwordLabel', 'loginBtn', 'registerBtn',
+                'forgotPasswordLink', 'resetPasswordTitle', 'resetUsernameLabel', 'resetNameLabel', 
+                'newPasswordLabel', 'resetPasswordBtn', 'backToLoginLink',
                 'createTripTitle', 'destinationLabel',
                 'dateRangeLabel', 'createTripBtn', 'upcomingTripsTitle',
                 'pastTripsTitle', 'backBtnText', 'startLabel', 'endLabel', 'durationLabel',
@@ -4147,6 +4298,22 @@
             const passwordInput = document.getElementById('password');
             if (passwordInput) {
                 passwordInput.placeholder = t.passwordPlaceholder;
+            }
+            
+            // Reset password form placeholders
+            const resetUsernameInput = document.getElementById('resetUsername');
+            if (resetUsernameInput) {
+                resetUsernameInput.placeholder = t.usernamePlaceholder;
+            }
+            
+            const resetNameInput = document.getElementById('resetName');
+            if (resetNameInput) {
+                resetNameInput.placeholder = t.namePlaceholder;
+            }
+            
+            const newPasswordInput = document.getElementById('newPassword');
+            if (newPasswordInput) {
+                newPasswordInput.placeholder = currentLanguage === 'en' ? 'Enter new password' : 'Ingresa nueva contraseña';
             }
             
             const destInput = document.getElementById('destination');
@@ -4722,13 +4889,14 @@
             
             saveCurrentTrip();
             
-            // Re-render activities if type changed to update toggle visual state
-            // or if name changed to update save button state
-            if (field === 'type' || field === 'name') {
+            // Re-render activities only if type changed to update toggle visual state
+            // DON'T re-render for name changes to prevent losing focus while typing
+            if (field === 'type') {
                 renderActivities(currentTrip);
             }
             
-            if (field === 'date' || field === 'type' || field === 'name') {
+            // Update outfit planner for date and type changes
+            if (field === 'date' || field === 'type') {
                 renderOutfitPlanner(currentTrip);
             }
         }
