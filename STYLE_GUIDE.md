@@ -280,6 +280,7 @@ body {
 4. Use Imperial red for errors, warnings, and delete actions
 5. Use Lavender blush for countdown badges and subtle accent highlights
 6. Maintain proper contrast ratios for accessibility
+7. **NO GRADIENTS** - Always use solid colors
 
 **Usage Examples:**
 ```css
@@ -290,7 +291,38 @@ body {
 ❌ background: #CCE51D;
 ❌ color: #0E6BA8;
 ❌ border-color: #f0f0f0;
+❌ background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);  /* NO GRADIENTS! */
 ```
+
+### 🚫 NO GRADIENTS ALLOWED
+
+**CRITICAL RULE**: This design system uses **solid colors only**. No gradients, no matter how subtle.
+
+**Why?**
+- Modern, clean aesthetic
+- Better consistency across the app
+- Gradients often clash with Material Design 3 principles
+- Easier to maintain and update
+
+**Wrong:**
+```css
+❌ background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+❌ background: linear-gradient(135deg, var(--color-info) 0%, #764ba2 100%);
+❌ background: radial-gradient(circle, #fff 0%, #f0f0f0 100%);
+```
+
+**Correct:**
+```css
+✅ background: var(--accent-quaternary);
+✅ background: var(--accent-secondary);
+✅ background: var(--color-gray-50);
+```
+
+**If you need visual depth:**
+- Use `box-shadow` with shadow variables
+- Use subtle borders
+- Use hover states with slightly darker colors
+- Layer elements with different background colors
 
 ---
 
@@ -360,6 +392,7 @@ Before adding new styles, ask:
 - [ ] Am I using shadow variables? (not `0 2px 8px...`)
 - [ ] Am I using text variables? (not `14px`)
 - [ ] Am I using duration variables? (not `0.3s`)
+- [ ] Am I using solid colors? (NO gradients!)
 - [ ] Is this a button? Use `--radius-xl` (16px)
 - [ ] Is this a badge/pill/tag? Use `--radius-round` (9999px)
 - [ ] Am I using consistent font-weight? (600 for UI, 700 for buttons, 800 for logo)
