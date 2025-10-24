@@ -1024,7 +1024,7 @@
             width: 48px;
             height: 48px;
             min-width: 48px;
-            background: #f5f5f5;
+            background: #E3F2FD;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -1141,11 +1141,11 @@
             width: clamp(50px, 12vw, 60px);
             height: clamp(50px, 12vw, 60px);
             border-radius: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #E3F2FD;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: #333;
             font-size: var(--text-xl);
             font-weight: 700;
             flex-shrink: 0;
@@ -1155,7 +1155,7 @@
 
         .trip-icon:hover {
             transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 4px 15px rgba(100, 181, 246, 0.4);
         }
 
         .trip-icon:active {
@@ -1261,23 +1261,23 @@
 
         /* Notes Section */
         .notes-section {
-            margin-bottom: 35px;
+            margin-bottom: 20px;
         }
 
         .notes-section h3 {
-            color: #1a1a1a;
-            font-size: var(--text-lg);
-            font-weight: 700;
-            margin-bottom: 15px;
+            color: #666;
+            font-size: var(--text-base);
+            font-weight: 600;
+            margin-bottom: 10px;
         }
 
         .trip-notes {
             width: 100%;
-            min-height: 120px;
-            padding: 16px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: var(--text-sm);
+            min-height: 80px;
+            padding: 12px;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 13px;
             font-family: inherit;
             color: #1a1a1a;
             background: #f8f9fa;
@@ -1339,24 +1339,24 @@
 
         .city-card {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            border-radius: 16px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 14px 16px;
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
             transition: all 0.3s ease;
             border: 2px solid transparent;
         }
 
         .city-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
             border-color: #667eea;
         }
 
         .city-card-emoji {
-            font-size: 40px;
-            min-width: 50px;
+            font-size: 28px;
+            min-width: 40px;
             text-align: center;
         }
 
@@ -1365,39 +1365,40 @@
         }
 
         .city-card-name {
-            font-size: 18px;
-            font-weight: 700;
+            font-size: 16px;
+            font-weight: 600;
             color: #1a1a1a;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .city-card-dates {
-            font-size: 14px;
+            font-size: 13px;
             color: #666;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .city-card-socket {
-            font-size: 13px;
+            font-size: 12px;
             color: #888;
-            margin-top: 4px;
+            margin-top: 3px;
         }
 
         .city-card-actions {
             display: flex;
-            gap: 8px;
+            gap: 6px;
         }
 
         .city-card-actions button {
             background: rgba(255, 255, 255, 0.8);
             border: none;
-            padding: 8px 12px;
-            border-radius: 8px;
+            padding: 6px 10px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 12px;
             transition: all 0.2s ease;
+            font-weight: 500;
         }
 
         .city-card-actions button:hover {
@@ -2978,12 +2979,6 @@
                         <div class="trip-subtitle-inline" id="tripSubtitleInline"></div>
                     </div>
 
-                    <!-- Notes Section -->
-                    <div class="notes-section">
-                        <h3 id="notesTitle">Notes</h3>
-                        <textarea class="trip-notes" id="tripNotes" placeholder="Quick trip notes..." oninput="saveCurrentTrip()"></textarea>
-                    </div>
-
                     <!-- Cities Section -->
                     <div class="cities-section">
                         <div class="cities-header">
@@ -3004,6 +2999,12 @@
                         <div class="activities-list" id="activitiesList">
                             <p class="no-activities" id="noActivitiesText">No activities yet.</p>
                         </div>
+                    </div>
+
+                    <!-- Notes Section -->
+                    <div class="notes-section">
+                        <h3 id="notesTitle">Notes</h3>
+                        <textarea class="trip-notes" id="tripNotes" placeholder="Quick trip notes..." oninput="saveCurrentTrip()"></textarea>
                     </div>
                 </div>
 
@@ -3069,23 +3070,23 @@
 
         <!-- Edit Trip Modal -->
         <div id="editTripModal" class="date-range-picker hidden">
-            <h3 id="editTripModalTitle" style="margin-bottom: 20px; font-size: 24px;">Edit Trip</h3>
-            <div class="form-group" style="margin-bottom: 20px;">
-                <label id="editDestinationLabel">Destination</label>
+            <h3 id="editTripModalTitle" style="margin-bottom: 16px; font-size: 20px; font-weight: 700;">Edit Trip</h3>
+            <div class="form-group" style="margin-bottom: 16px;">
+                <label id="editDestinationLabel" style="font-size: 14px; font-weight: 500; color: #666; margin-bottom: 8px; display: block;">Destination</label>
                 <input type="text" id="editDestination" placeholder="Enter destination" style="width: 100%; padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 10px; font-size: 15px;">
             </div>
-            <div class="form-group" style="margin-bottom: 20px;">
-                <label id="editDatesLabel">Travel Dates</label>
+            <div class="form-group" style="margin-bottom: 16px;">
+                <label id="editDatesLabel" style="font-size: 14px; font-weight: 500; color: #666; margin-bottom: 8px; display: block;">Travel Dates</label>
                 <button type="button" class="date-picker-button" id="editDatePickerButton" onclick="openEditTripCalendar()" style="width: 100%;">
                     <span id="editDatePickerButtonText">Click to select dates</span>
                     <span>📅</span>
                 </button>
             </div>
-            <div style="display: flex; gap: 10px;">
-                <button class="btn" onclick="saveEditedTrip()" style="flex: 1;">
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button class="btn" onclick="saveEditedTrip()" style="flex: 1; padding: 12px 16px; font-size: 15px;">
                     <span id="saveEditTripText">Save Changes</span>
                 </button>
-                <button class="btn btn-secondary" onclick="closeEditTripModal()" style="flex: 1;">
+                <button class="btn btn-secondary" onclick="closeEditTripModal()" style="flex: 1; padding: 12px 16px; font-size: 15px; margin-top: 0;">
                     <span id="cancelEditTripText">Cancel</span>
                 </button>
             </div>
@@ -3109,26 +3110,26 @@
 
         <!-- Add City Modal -->
         <div id="addCityModal" class="date-range-picker hidden">
-            <h3 id="addCityModalTitle" style="margin-bottom: 20px; font-size: 24px;">Add City</h3>
-            <div class="form-group" style="margin-bottom: 20px;">
-                <label id="cityDestinationLabel">City</label>
+            <h3 id="addCityModalTitle" style="margin-bottom: 16px; font-size: 20px; font-weight: 700;">Add City</h3>
+            <div class="form-group" style="margin-bottom: 16px;">
+                <label id="cityDestinationLabel" style="font-size: 14px; font-weight: 500; color: #666; margin-bottom: 8px; display: block;">City</label>
                 <div class="autocomplete-container">
                     <input type="text" id="cityDestination" placeholder="e.g., Paris, France" autocomplete="off" style="width: 100%; padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 10px; font-size: 15px;">
                     <div id="citySuggestions" class="autocomplete-suggestions"></div>
                 </div>
             </div>
-            <div class="form-group" style="margin-bottom: 20px;">
-                <label id="cityDatesLabel">Dates in this city</label>
+            <div class="form-group" style="margin-bottom: 16px;">
+                <label id="cityDatesLabel" style="font-size: 14px; font-weight: 500; color: #666; margin-bottom: 8px; display: block;">Dates in this city</label>
                 <button type="button" class="date-picker-button" id="cityDatePickerButton" onclick="openCityCalendar()" style="width: 100%;">
                     <span id="cityDatePickerButtonText">Click to select dates</span>
                     <span>📅</span>
                 </button>
             </div>
-            <div style="display: flex; gap: 10px;">
-                <button class="btn" onclick="saveCityToTrip()" style="flex: 1;">
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button class="btn" onclick="saveCityToTrip()" style="flex: 1; padding: 12px 16px; font-size: 15px;">
                     <span id="saveCityText">Add City</span>
                 </button>
-                <button class="btn btn-secondary" onclick="closeAddCityModal()" style="flex: 1;">
+                <button class="btn btn-secondary" onclick="closeAddCityModal()" style="flex: 1; padding: 12px 16px; font-size: 15px; margin-top: 0;">
                     <span id="cancelCityText">Cancel</span>
                 </button>
             </div>
@@ -4222,7 +4223,8 @@
                 const startDate = new Date(year, month - 1, day);
                 const dateStr = `${duration} ${translations[currentLanguage].days}, ${startDate.getDate()} ${startDate.toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { month: 'short', year: 'numeric' })}`;
                 
-                const tripEmoji = trip.emoji || getCountryFlagEmoji(trip.destination);
+                const tripEmoji = trip.emoji || (trip.cities && trip.cities.length > 0 ? trip.cities[0].emoji : '🌍');
+                const tripName = trip.name || trip.destination || 'Untitled Trip';
                 
                 const div = document.createElement('div');
                 div.className = 'sidebar-trip-item';
@@ -4230,7 +4232,7 @@
                 div.innerHTML = `
                     <div class="trip-flag">${tripEmoji}</div>
                     <div class="trip-info">
-                        <h4>${trip.destination}</h4>
+                        <h4>${tripName}</h4>
                         <p>${dateStr}</p>
                     </div>
                 `;
@@ -4256,7 +4258,8 @@
                 const startDate = new Date(year, month - 1, day);
                 const dateStr = startDate.toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { month: 'short', year: 'numeric' });
                 
-                const tripEmoji = trip.emoji || getCountryFlagEmoji(trip.destination);
+                const tripEmoji = trip.emoji || (trip.cities && trip.cities.length > 0 ? trip.cities[0].emoji : '🌍');
+                const tripName = trip.name || trip.destination || 'Untitled Trip';
                 
                 const div = document.createElement('div');
                 div.className = 'sidebar-trip-item';
@@ -4264,7 +4267,7 @@
                 div.innerHTML = `
                     <div class="trip-flag" style="opacity: 0.5;">${tripEmoji}</div>
                     <div class="trip-info">
-                        <h4>${trip.destination}</h4>
+                        <h4>${tripName}</h4>
                         <p>${dateStr}</p>
                     </div>
                 `;
@@ -4872,7 +4875,9 @@
                 const updatedDate = new Date(trip.id).toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { month: 'numeric', day: 'numeric', year: 'numeric' });
                 
                 // Get emoji for icon (use saved emoji or generate from destination)
-                const tripEmoji = trip.emoji || getCountryFlagEmoji(trip.destination);
+                const tripEmoji = trip.emoji || (trip.cities && trip.cities.length > 0 ? trip.cities[0].emoji : '🌍');
+                const tripDestination = trip.destination || (trip.cities && trip.cities.length > 0 ? trip.cities.map(c => c.name).join(', ') : '');
+                const tripSocketInfo = trip.socketType ? `<p class="trip-card-socket">${trip.socketIcon || getSocketSVG(trip.socketType)}${trip.socketType}</p>` : '';
                 
                 const card = document.createElement('div');
                 card.className = 'trip-card';
@@ -4882,9 +4887,9 @@
                         <div class="trip-card-icon">${tripEmoji}</div>
                         <div class="trip-card-main">
                             <h3>${trip.name}</h3>
-                            <p class="trip-card-subtitle">${trip.destination}</p>
+                            ${tripDestination ? `<p class="trip-card-subtitle">${tripDestination}</p>` : ''}
                             <p class="trip-card-dates">${startFormatted} - ${endFormatted} · ${duration} ${translations[currentLanguage].days} · ${currentLanguage === 'en' ? 'Updated' : 'Actualizado'} ${updatedDate}</p>
-                            <p class="trip-card-socket">${trip.socketIcon || getSocketSVG(trip.socketType)}${trip.socketType}</p>
+                            ${tripSocketInfo}
                         </div>
                         <div class="trip-duration-badge-card">${duration} ${translations[currentLanguage].days}</div>
                     </div>
@@ -4914,7 +4919,9 @@
                 const endFormatted = endDate.toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { month: 'short', day: 'numeric' });
                 
                 // Get emoji for icon (use saved emoji or generate from destination)
-                const tripEmoji = trip.emoji || getCountryFlagEmoji(trip.destination);
+                const tripEmoji = trip.emoji || (trip.cities && trip.cities.length > 0 ? trip.cities[0].emoji : '🌍');
+                const tripDestination = trip.destination || (trip.cities && trip.cities.length > 0 ? trip.cities.map(c => c.name).join(', ') : '');
+                const subtitleText = tripDestination ? `${tripDestination} · ${startFormatted} - ${endFormatted}` : `${startFormatted} - ${endFormatted}`;
                 
                 const card = document.createElement('div');
                 card.className = 'trip-card';
@@ -4924,7 +4931,7 @@
                         <div class="trip-card-icon">${tripEmoji}</div>
                         <div class="trip-card-main">
                             <h3>${trip.name}</h3>
-                            <p class="trip-card-subtitle">${trip.destination} · ${startFormatted} - ${endFormatted}</p>
+                            <p class="trip-card-subtitle">${subtitleText}</p>
                         </div>
                         <div class="trip-duration-badge-card">${duration} ${translations[currentLanguage].days}</div>
                     </div>
