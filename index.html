@@ -205,6 +205,17 @@
             display: block;
         }
 
+        .sidebar-greeting {
+            font-size: var(--text-sm);
+            color: var(--color-gray-600);
+            margin-bottom: var(--spacing-8);
+            font-weight: 600;
+        }
+
+        .sidebar-greeting-wave {
+            display: inline-block;
+        }
+
         .sidebar-profile {
             display: flex;
             align-items: center;
@@ -3427,7 +3438,10 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-logo" onclick="showLandingPage()">
-                qepi.
+                        qepi.
+            </div>
+            <div class="sidebar-greeting">
+                <span id="sidebarGreetingText">Good Morning</span>, <span id="sidebarUserName">Traveler</span> <span class="sidebar-greeting-wave">👋</span>
             </div>
             <div class="sidebar-profile">
                 <div class="sidebar-profile-pic" id="sidebarProfilePic">👤</div>
@@ -3455,7 +3469,7 @@
                     <button class="lang-option" data-lang="es" onclick="setLanguage('es')">
                         <span class="flag">🇪🇸</span>
                         <span class="lang-code">ES</span>
-                    </button>
+                </button>
                 </div>
             </div>
 
@@ -3474,7 +3488,7 @@
                 <div id="landingPage">
                     <!-- Page Header -->
                     <div class="page-header">
-                        <h1 class="greeting"><span id="greetingText">Good Morning</span>, <span id="userFirstName">Traveler</span> <span class="greeting-wave">👋</span></h1>
+                        <h1 class="greeting"><span id="pageHeadingText">Your Trip Starts Here</span></h1>
                     </div>
 
                     <!-- API Setup Banner -->
@@ -3492,12 +3506,12 @@
                     <button class="new-trip-cta-btn" onclick="toggleNewTripForm()">
                         <span id="newTripCtaText">New Trip</span>
                     </button>
-                </div>
+                    </div>
 
                 <!-- New Trip Form -->
                 <div class="trip-form hidden" id="tripForm">
                     <div class="trip-form-header">
-                        <h2 id="createTripTitle">Create New Trip</h2>
+                    <h2 id="createTripTitle">Create New Trip</h2>
                         <button type="button" class="trip-form-close" onclick="hideNewTripForm()" aria-label="Close">×</button>
                     </div>
                     <div class="form-row">
@@ -4065,7 +4079,8 @@
                 transportToLabel: "To",
                 transportCostLabel: "Cost (Optional)",
                 saveItineraryText: "Save",
-                cancelItineraryText: "Cancel"
+                cancelItineraryText: "Cancel",
+                pageHeadingText: "Your Trip Starts Here"
             },
             es: {
                 authTitle: "Empaca Mejor.",
@@ -4172,7 +4187,8 @@
                 transportToLabel: "Hasta",
                 transportCostLabel: "Costo (Opcional)",
                 saveItineraryText: "Guardar",
-                cancelItineraryText: "Cancelar"
+                cancelItineraryText: "Cancelar",
+                pageHeadingText: "Tu Viaje Comienza Aquí"
             }
         };
 
@@ -4866,19 +4882,20 @@
         function showMainApp() {
             document.getElementById('authScreen').classList.add('hidden');
             document.getElementById('mainApp').classList.remove('hidden');
-            document.getElementById('currentUser').textContent = currentUser;
             
             // Get user's stored name
             const users = JSON.parse(localStorage.getItem('users') || '{}');
             const userName = users[currentUser]?.name || currentUser;
             
+            // Set username in profile
+            document.getElementById('currentUser').textContent = currentUser;
+            
             // Set profile pictures with user initials from name
             const initials = userName.substring(0, 2).toUpperCase();
             document.getElementById('sidebarProfilePic').textContent = initials;
             
-            // Set first name in greeting
-            const firstName = userName.split(' ')[0] || userName;
-            document.getElementById('userFirstName').textContent = firstName;
+            // Set full name in sidebar greeting
+            document.getElementById('sidebarUserName').textContent = userName;
             
             // Setup event listeners for main app elements (now that they're visible)
             setupMainAppEventListeners();
@@ -5302,7 +5319,7 @@
                 'activityTypeText', 'transportTypeText', 'activityNameLabel', 'activityStartTimeLabel',
                 'activityEndTimeLabel', 'transportTypeLabel', 'transportStartTimeLabel', 'transportEndTimeLabel',
                 'transportNameLabel', 'transportFromLabel', 'transportToLabel', 'transportCostLabel',
-                'saveItineraryText', 'cancelItineraryText'
+                'saveItineraryText', 'cancelItineraryText', 'pageHeadingText'
             ];
 
             elements.forEach(id => {
@@ -5593,7 +5610,7 @@
 
         function updateGreeting() {
             const hour = new Date().getHours();
-            const greetingElement = document.getElementById('greetingText');
+            const greetingElement = document.getElementById('sidebarGreetingText');
             
             if (!greetingElement) return;
             
