@@ -1244,7 +1244,7 @@
             width: 48px;
             height: 48px;
             min-width: 48px;
-            background: var(--accent-quaternary);
+            background: var(--accent-secondary-light);
             border-radius: var(--radius-full);
             display: flex;
             align-items: center;
@@ -1294,29 +1294,34 @@
         }
 
         .trip-duration-badge-card {
-            padding: var(--spacing-3) var(--spacing-10);
+            padding: var(--spacing-3) var(--spacing-12);
             background: var(--accent-primary);
             color: var(--color-white);
             border-radius: var(--radius-round);
             font-size: var(--text-xs);
             font-weight: 600;
             white-space: nowrap;
-            letter-spacing: 0.3px;
+            letter-spacing: 0;
+            line-height: 1.2;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .trip-countdown-badge {
-            padding: var(--spacing-3) var(--spacing-10);
+            padding: var(--spacing-3) var(--spacing-12);
             background: var(--accent-quaternary);
             color: var(--accent-quaternary-text);
             border-radius: var(--radius-round);
             font-size: var(--text-xs);
             font-weight: 600;
             white-space: nowrap;
-            letter-spacing: 0.3px;
+            letter-spacing: 0;
             line-height: 1.2;
             display: inline-flex;
             align-items: center;
-            margin-bottom: var(--spacing-4);
+            justify-content: center;
+            vertical-align: middle;
         }
 
         /* Past Trips */
@@ -1372,24 +1377,24 @@
 
         /* Trip Header Compact */
         .trip-header-compact {
-            margin-bottom: var(--spacing-28);
-            padding-bottom: var(--spacing-24);
+            margin-bottom: var(--spacing-24);
+            padding-bottom: var(--spacing-20);
             border-bottom: 1px solid var(--color-gray-200);
         }
 
         .trip-header-top {
             display: flex;
             align-items: center;
-            gap: var(--spacing-12);
-            margin-bottom: var(--spacing-8);
+            gap: var(--spacing-8);
+            margin-bottom: 0;
             flex-wrap: wrap;
         }
 
         .trip-icon {
             width: clamp(50px, 12vw, 60px);
             height: clamp(50px, 12vw, 60px);
-            border-radius: var(--spacing-15);
-            background: var(--accent-quaternary);
+            border-radius: var(--radius-full);
+            background: var(--accent-secondary-light);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1419,6 +1424,7 @@
             font-weight: 700;
             flex: 1;
             min-width: 200px;
+            line-height: 1.2;
         }
 
         .trip-name-inline:focus {
@@ -1434,25 +1440,29 @@
             font-size: var(--text-xs);
             font-weight: 600;
             white-space: nowrap;
-            letter-spacing: 0.3px;
+            letter-spacing: 0;
             line-height: 1.2;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
+            vertical-align: middle;
         }
 
         .trip-socket-inline {
-            padding: clamp(6px, 2vw, 8px) clamp(14px, 4vw, 18px);
+            padding: var(--spacing-3) var(--spacing-12);
             background: var(--color-gray-50);
             color: var(--color-gray-700);
             border-radius: var(--radius-round);
-            font-size: var(--text-sm);
+            font-size: var(--text-xs);
             font-weight: 600;
             border: 1px solid var(--color-gray-400);
             line-height: 1.2;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
+            vertical-align: middle;
             gap: var(--spacing-2);
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
         }
 
         .trip-socket-inline svg {
@@ -1569,14 +1579,14 @@
 
         .itinerary-header-cell.day-row {
             font-size: var(--text-fixed-12);
-            text-transform: uppercase;
             color: var(--color-gray-700);
             top: 82px;
         }
 
         .itinerary-header-cell.flag-row {
             font-size: var(--text-fixed-24);
-            padding: var(--spacing-3);
+            padding: var(--spacing-2) var(--spacing-8);
+            line-height: 1;
             top: 123px;
         }
 
@@ -1730,52 +1740,59 @@
             display: flex;
             gap: var(--spacing-6);
             margin-left: auto;
+            align-items: center;
         }
 
         .edit-trip-btn {
-            padding: var(--spacing-4) var(--spacing-12);
+            width: 40px;
+            height: 40px;
+            padding: 0;
             background: var(--color-white);
             color: var(--accent-primary);
             border: 1px solid var(--accent-primary);
             border-radius: var(--radius-md);
             cursor: pointer;
-            font-size: var(--text-fixed-14);
-            font-weight: 500;
+            font-size: var(--text-fixed-18);
             transition: all var(--duration-medium) var(--easing-standard);
             display: flex;
             align-items: center;
-            gap: var(--spacing-3);
+            justify-content: center;
         }
 
         .edit-trip-btn:hover {
             background: var(--accent-light);
+            transform: scale(1.05);
         }
 
         .delete-trip-btn {
-            padding: var(--spacing-4) var(--spacing-12);
+            width: 40px;
+            height: 40px;
+            padding: 0;
             background: var(--color-white);
             color: var(--color-gray-700);
             border: 1px solid var(--color-gray-400);
             border-radius: var(--radius-md);
             cursor: pointer;
-            font-size: var(--text-fixed-14);
-            font-weight: 500;
+            font-size: var(--text-fixed-18);
             transition: all var(--duration-medium) var(--easing-standard);
             display: flex;
             align-items: center;
-            gap: var(--spacing-3);
+            justify-content: center;
         }
 
         .delete-trip-btn:hover {
             border-color: var(--color-error);
             color: var(--color-error);
             background: var(--color-error-bg);
+            transform: scale(1.05);
         }
 
         .trip-subtitle-inline {
             color: var(--color-gray-600);
-            font-size: var(--text-base);
-            margin-left: clamp(0px, 10vw, 80px);
+            font-size: var(--text-sm);
+            margin-left: 72px;
+            margin-top: var(--spacing-2);
+            line-height: 1.4;
         }
 
         /* Notes Section */
@@ -3246,8 +3263,8 @@
             }
             
             .edit-trip-btn, .delete-trip-btn {
-                width: 100%;
-                justify-content: center;
+                width: 40px;
+                height: 40px;
             }
 
             .activity-item {
@@ -3578,8 +3595,8 @@
                             <div class="trip-duration-badge" id="tripDurationBadge">4 days</div>
                             <div class="trip-socket-inline" id="tripSocketInline">Type C/I • 220V</div>
                             <div class="trip-action-buttons">
-                                <button class="edit-trip-btn" onclick="openEditTripModal()">✏️ <span id="editTripText">Edit</span></button>
-                                <button class="delete-trip-btn" onclick="deleteTrip()">🗑️ <span id="deleteTripText">Delete</span></button>
+                                <button class="edit-trip-btn" onclick="openEditTripModal()" title="Edit">✏️</button>
+                                <button class="delete-trip-btn" onclick="deleteTrip()" title="Delete">🗑️</button>
                             </div>
                         </div>
                         <div class="trip-subtitle-inline" id="tripSubtitleInline"></div>
@@ -7669,7 +7686,7 @@
                 
                 days.push({
                     date: dateStr,
-                    dayName: date.toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { weekday: 'short' }),
+                    dayName: date.toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { weekday: 'long' }),
                     dayNum: date.getDate(),
                     monthName: date.toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { month: 'short' }),
                     cityName: cityName,
