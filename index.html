@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>qepi. - Packing Planner</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23A8D05F'/%3E%3Ctext x='50' y='72' font-family='Arial, sans-serif' font-size='65' font-weight='700' fill='white' text-anchor='middle'%3Eq%3C/text%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23CCE51D'/%3E%3Ctext x='50' y='72' font-family='Arial, sans-serif' font-size='65' font-weight='700' fill='white' text-anchor='middle'%3Eq%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/sugo-pro-display" rel="stylesheet">
     <style>
         :root {
-            /* Fluid Typography Scale - Sleeker & Smaller */
+            /* ===== MATERIAL DESIGN 3 TOKENS ===== */
+            
+            /* Typography Scale - Fluid & Responsive */
             --text-xs: clamp(0.625rem, 0.6rem + 0.15vw, 0.6875rem);   /* 10-11px */
             --text-sm: clamp(0.75rem, 0.72rem + 0.2vw, 0.8125rem);    /* 12-13px */
             --text-base: clamp(0.8125rem, 0.78rem + 0.2vw, 0.875rem); /* 13-14px */
@@ -19,11 +22,126 @@
             --text-2xl: clamp(1.5rem, 1.35rem + 0.75vw, 2rem);        /* 24-32px */
             --text-3xl: clamp(2rem, 1.75rem + 1.25vw, 2.75rem);       /* 32-44px */
             
-            /* Accent Colors - Fresh Lime Green */
-            --accent-primary: #A8D05F;
-            --accent-hover: #96BE4F;
-            --accent-light: #F0F7E6;
-            --accent-shadow: rgba(168, 208, 95, 0.3);
+            /* Fixed Typography for Specific Cases */
+            --text-fixed-9: 9px;
+            --text-fixed-10: 10px;
+            --text-fixed-11: 11px;
+            --text-fixed-12: 12px;
+            --text-fixed-13: 13px;
+            --text-fixed-14: 14px;
+            --text-fixed-15: 15px;
+            --text-fixed-16: 16px;
+            --text-fixed-18: 18px;
+            --text-fixed-20: 20px;
+            --text-fixed-22: 22px;
+            --text-fixed-24: 24px;
+            --text-fixed-28: 28px;
+            --text-fixed-32: 32px;
+            --text-fixed-36: 36px;
+            
+            /* Spacing Scale (4px Grid System) */
+            --spacing-0: 0;
+            --spacing-1: 2px;
+            --spacing-2: 4px;
+            --spacing-3: 6px;
+            --spacing-4: 8px;
+            --spacing-6: 10px;
+            --spacing-8: 12px;
+            --spacing-10: 14px;
+            --spacing-12: 16px;
+            --spacing-14: 20px;
+            --spacing-15: 22px;
+            --spacing-16: 24px;
+            --spacing-20: 25px;
+            --spacing-24: 30px;
+            --spacing-25: 32px;
+            --spacing-28: 35px;
+            --spacing-32: 40px;
+            --spacing-40: 50px;
+            --spacing-48: 55px;
+            --spacing-56: 60px;
+            
+            /* Border Radius (Shape Scale) */
+            --radius-none: 0;
+            --radius-xs: 4px;
+            --radius-sm: 8px;
+            --radius-md: 10px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-2xl: 20px;
+            --radius-3xl: 24px;
+            --radius-full: 50%;
+            --radius-round: 9999px;
+            
+            /* Elevation (Box Shadows) */
+            --shadow-none: none;
+            --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 10px 40px rgba(0, 0, 0, 0.15);
+            --shadow-2xl: 0 10px 40px rgba(0, 0, 0, 0.1);
+            --shadow-sidebar: 2px 0 10px rgba(0, 0, 0, 0.05);
+            
+            /* Accent-specific Shadows */
+            --shadow-accent-sm: 0 3px 12px var(--accent-shadow);
+            --shadow-accent-md: 0 4px 16px var(--accent-shadow);
+            --shadow-accent-focus: 0 0 0 3px var(--accent-light);
+            
+            /* Motion & Transitions */
+            --duration-instant: 0s;
+            --duration-fast: 0.15s;
+            --duration-normal: 0.2s;
+            --duration-medium: 0.3s;
+            --duration-slow: 0.3s;
+            --easing-standard: ease;
+            --easing-smooth: cubic-bezier(0.2, 0, 0, 1);
+            
+            /* Colors - Brand & Semantic */
+            --accent-primary: #CCE51D;           /* Pear - primary accent */
+            --accent-hover: #B8CC1A;             /* Pear darker (hover state) */
+            --accent-light: #F5FADB;             /* Pear tint (light backgrounds) */
+            --accent-shadow: rgba(204, 229, 29, 0.3);
+            
+            --accent-secondary: #0E6BA8;         /* Bice blue - secondary accent */
+            --accent-secondary-hover: #0C5A8E;   /* Bice blue darker */
+            --accent-secondary-light: #E6F1F8;   /* Bice blue tint */
+            --accent-secondary-shadow: rgba(14, 107, 168, 0.3);
+            
+            --accent-tertiary: #FB4B4E;          /* Imperial red - tertiary/error */
+            --accent-tertiary-hover: #E03D40;    /* Imperial red darker */
+            --accent-tertiary-light: #FEECED;    /* Imperial red tint */
+            --accent-tertiary-shadow: rgba(251, 75, 78, 0.3);
+            
+            --accent-quaternary: #EEE5E9;        /* Lavender blush - quaternary accent */
+            --accent-quaternary-hover: #DDD0D5;  /* Lavender darker */
+            --accent-quaternary-text: #8B6B7A;   /* Lavender text color */
+            --accent-quaternary-shadow: rgba(238, 229, 233, 0.4);
+            
+            /* Neutral Colors */
+            --color-white: #FFFFFF;
+            --color-black: #000000;              /* Pure black for specific elements */
+            --color-gray-50: #f8f9fa;
+            --color-gray-100: #f5f7fa;           /* Subtle backgrounds */
+            --color-gray-200: #f0f0f0;
+            --color-gray-300: #e8e8e8;
+            --color-gray-400: #e0e0e0;
+            --color-gray-500: #ccc;
+            --color-gray-600: #999;
+            --color-gray-700: #666;
+            --color-gray-800: #1a1a1a;           /* Keep for text */
+            
+            /* Semantic Colors */
+            --color-error: #FB4B4E;              /* Imperial red */
+            --color-error-bg: #FEECED;           /* Imperial red tint */
+            --color-success: #CCE51D;            /* Pear */
+            --color-info: #0E6BA8;               /* Bice blue */
+            --color-warning: #FB4B4E;            /* Imperial red */
+            
+            /* Opacity Levels */
+            --opacity-disabled: 0.4;
+            --opacity-hover: 0.8;
+            --opacity-overlay: 0.95;
         }
 
         * {
@@ -33,10 +151,10 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #f5f7fa;
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--color-gray-100);
             min-height: 100vh;
-            padding: 0;
+            padding: var(--spacing-0);
             display: flex;
             font-size: var(--text-base);
         }
@@ -50,29 +168,37 @@
         /* Sidebar */
         .sidebar {
             width: 260px;
-            background: white;
-            padding: 30px 20px;
+            background: var(--color-white);
+            padding: var(--spacing-24) var(--spacing-14);
             display: flex;
             flex-direction: column;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-lg);
             position: fixed;
-            height: 100vh;
+            height: calc(100vh - var(--spacing-32));
             overflow-y: auto;
+            margin: var(--spacing-12);
+            border-radius: var(--radius-2xl);
         }
 
         .sidebar-logo {
-            padding: 0 0 20px 0;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #f0f0f0;
+            padding: var(--spacing-0) var(--spacing-0) var(--spacing-14) var(--spacing-0);
+            margin-bottom: var(--spacing-14);
+            border-bottom: 1px solid var(--color-gray-200);
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            transition: opacity 0.3s;
+            transition: opacity var(--duration-medium) var(--easing-standard);
+            font-family: 'Sugo Pro Display', sans-serif;
+            font-size: 40px;
+            font-weight: 900;
+            color: var(--accent-primary);
+            letter-spacing: -3px;
+            text-transform: lowercase;
         }
 
         .sidebar-logo:hover {
-            opacity: 0.8;
+            opacity: var(--opacity-hover);
         }
 
         .sidebar-logo svg {
@@ -82,89 +208,68 @@
         .sidebar-profile {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #f0f0f0;
+            gap: var(--spacing-8);
+            margin-bottom: var(--spacing-20);
+            padding-bottom: var(--spacing-14);
+            border-bottom: 1px solid var(--color-gray-200);
         }
 
         .sidebar-profile-pic {
             width: clamp(40px, 10vw, 48px);
             height: clamp(40px, 10vw, 48px);
-            border-radius: 12px;
+            border-radius: var(--radius-lg);
             overflow: hidden;
             background: var(--accent-primary);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--color-white);
             font-weight: 600;
             font-size: var(--text-lg);
         }
 
         .sidebar-profile-info h3 {
             font-size: var(--text-base);
-            color: #1a1a1a;
-            margin-bottom: 2px;
+            color: var(--color-black);
+            margin-bottom: var(--spacing-1);
         }
 
         .sidebar-profile-info p {
             font-size: var(--text-xs);
-            color: #999;
-        }
-
-        .new-trip-btn {
-            width: 100%;
-            padding: clamp(10px, 3vw, 12px);
-            background: var(--accent-primary);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: var(--text-sm);
-            font-weight: 600;
-            cursor: pointer;
-            margin-bottom: 25px;
-            transition: all 0.3s;
-            box-shadow: 0 3px 12px var(--accent-shadow);
-        }
-
-        .new-trip-btn:hover {
-            background: var(--accent-hover);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 16px var(--accent-shadow);
+            color: var(--color-gray-600);
         }
 
         .sidebar-section {
-            margin-bottom: 25px;
+            margin-bottom: var(--spacing-20);
         }
 
         .sidebar-section-title {
             font-size: var(--text-xs);
-            color: #999;
+            color: var(--color-gray-600);
             text-transform: uppercase;
             font-weight: 600;
             letter-spacing: 0.5px;
-            margin-bottom: 12px;
+            margin-bottom: var(--spacing-8);
         }
 
         .sidebar-trips-list {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: var(--spacing-4);
         }
 
         .sidebar-trip-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 10px 12px;
-            border-radius: 10px;
+            gap: var(--spacing-8);
+            padding: var(--spacing-6) var(--spacing-8);
+            border-radius: var(--radius-md);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all var(--duration-normal) var(--easing-standard);
         }
 
         .sidebar-trip-item:hover {
-            background: #f8f9fa;
+            background: var(--color-gray-50);
         }
 
         .sidebar-trip-item.active {
@@ -178,38 +283,38 @@
 
         .trip-info h4 {
             font-size: var(--text-sm);
-            color: #1a1a1a;
-            margin-bottom: 2px;
+            color: var(--color-black);
+            margin-bottom: var(--spacing-1);
         }
 
         .trip-info p {
             font-size: var(--text-xs);
-            color: #999;
+            color: var(--color-gray-600);
         }
 
         .sidebar-nav {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: var(--spacing-2);
             flex: 1;
         }
 
         .sidebar-nav-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px 14px;
-            border-radius: 10px;
+            gap: var(--spacing-8);
+            padding: var(--spacing-8) var(--spacing-10);
+            border-radius: var(--radius-md);
             cursor: pointer;
-            transition: all 0.2s;
-            color: #666;
+            transition: all var(--duration-normal) var(--easing-standard);
+            color: var(--color-gray-700);
             font-size: var(--text-sm);
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .sidebar-nav-item:hover {
-            background: #f8f9fa;
-            color: #1a1a1a;
+            background: var(--color-gray-50);
+            color: var(--color-black);
         }
 
         .sidebar-nav-item.active {
@@ -218,17 +323,17 @@
         }
 
         .sidebar-nav-item .icon {
-            width: 20px;
+            width: var(--spacing-14);
             text-align: center;
-            font-size: 18px;
+            font-size: var(--text-fixed-18);
         }
 
         .badge-new {
-            background: #667eea;
-            color: white;
-            font-size: 9px;
-            padding: 3px 8px;
-            border-radius: 10px;
+            background: var(--color-info);
+            color: var(--color-white);
+            font-size: var(--text-fixed-9);
+            padding: var(--spacing-3) var(--spacing-4);
+            border-radius: var(--radius-round);
             font-weight: 700;
             text-transform: uppercase;
             margin-left: auto;
@@ -236,66 +341,88 @@
 
         .sidebar-language {
             margin-top: auto;
-            padding-top: 15px;
+            padding-top: var(--spacing-15);
         }
 
-        .lang-btn {
+        .lang-toggle {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px 14px;
+            background: var(--color-gray-100);
+            border-radius: var(--radius-round);
+            padding: var(--spacing-2);
+            gap: var(--spacing-2);
+            border: 1px solid var(--color-gray-300);
+        }
+
+        .lang-option {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-1);
+            padding: var(--spacing-2) var(--spacing-4);
             background: transparent;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
+            border: none;
+            border-radius: var(--radius-round);
             cursor: pointer;
-            color: #666;
-            font-size: 14px;
-            font-weight: 500;
-            width: 100%;
-            transition: all 0.2s;
+            font-size: var(--text-fixed-10);
+            font-weight: 600;
+            color: var(--color-gray-600);
+            transition: all var(--duration-normal) var(--easing-standard);
+            position: relative;
         }
 
-        .lang-btn:hover {
-            background: #f8f9fa;
-            border-color: var(--accent-primary);
+        .lang-option .flag {
+            font-size: var(--text-fixed-14);
+        }
+
+        .lang-option .lang-code {
+            font-size: var(--text-fixed-10);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .lang-option:hover {
+            color: var(--color-gray-800);
+        }
+
+        .lang-option.active {
+            background: var(--color-white);
             color: var(--accent-primary);
-        }
-
-        .lang-btn .icon {
-            font-size: 16px;
+            box-shadow: var(--shadow-sm);
         }
 
         .sidebar-logout {
-            padding-top: 15px;
-            border-top: 1px solid #f0f0f0;
-            margin-top: 15px;
+            padding-top: var(--spacing-15);
+            border-top: 1px solid var(--color-gray-200);
+            margin-top: var(--spacing-15);
         }
 
         .logout-btn {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px 14px;
+            gap: var(--spacing-8);
+            padding: var(--spacing-8) var(--spacing-10);
             background: transparent;
             border: none;
-            border-radius: 10px;
+            border-radius: var(--radius-md);
             cursor: pointer;
-            color: #ff5252;
-            font-size: 14px;
-            font-weight: 500;
+            color: var(--color-error);
+            font-size: var(--text-sm);
+            font-weight: 600;
             width: 100%;
-            transition: all 0.2s;
+            transition: all var(--duration-normal) var(--easing-standard);
         }
 
         .logout-btn:hover {
-            background: #fff0f0;
+            background: var(--color-error-bg);
         }
 
         /* Main Content */
         .main-content {
-            margin-left: 260px;
+            margin-left: 292px;
             flex: 1;
-            padding: 40px 50px;
+            padding: var(--spacing-32) var(--spacing-40);
             overflow-y: auto;
         }
 
@@ -305,14 +432,14 @@
 
         /* Page Header */
         .page-header {
-            margin-bottom: 32px;
+            margin-bottom: var(--spacing-25);
         }
 
         .greeting {
             font-size: var(--text-2xl);
             font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 6px;
+            color: var(--color-black);
+            margin-bottom: var(--spacing-3);
             letter-spacing: -0.5px;
         }
 
@@ -322,24 +449,24 @@
 
         .subheading {
             font-size: var(--text-base);
-            color: #999;
+            color: var(--color-gray-600);
         }
 
         /* API Setup Banner */
         .api-banner {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 16px 24px;
-            border-radius: 12px;
-            margin-bottom: 25px;
+            background: linear-gradient(135deg, var(--color-info) 0%, #764ba2 100%);
+            color: var(--color-white);
+            padding: var(--spacing-12) var(--spacing-16);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-20);
             display: flex;
             align-items: center;
-            gap: 12px;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+            gap: var(--spacing-8);
+            box-shadow: var(--shadow-lg);
         }
 
         .api-banner-icon {
-            font-size: 24px;
+            font-size: var(--text-fixed-24);
             flex-shrink: 0;
         }
 
@@ -348,40 +475,40 @@
         }
 
         .api-banner-content h4 {
-            margin: 0 0 6px 0;
+            margin: var(--spacing-0) var(--spacing-0) var(--spacing-3) var(--spacing-0);
             font-size: var(--text-base);
             font-weight: 600;
         }
 
         .api-banner-content p {
-            margin: 0;
+            margin: var(--spacing-0);
             font-size: var(--text-sm);
-            opacity: 0.95;
+            opacity: var(--opacity-overlay);
             line-height: 1.5;
         }
 
         .api-banner-link {
-            color: white;
+            color: var(--color-white);
             text-decoration: underline;
             font-weight: 600;
         }
 
         .api-banner-link:hover {
-            opacity: 0.8;
+            opacity: var(--opacity-hover);
         }
 
         .api-banner-close {
             background: rgba(255, 255, 255, 0.2);
             border: none;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
+            color: var(--color-white);
+            width: var(--spacing-24);
+            height: var(--spacing-24);
+            border-radius: var(--radius-full);
             cursor: pointer;
-            font-size: 18px;
+            font-size: var(--text-fixed-18);
             line-height: 1;
             flex-shrink: 0;
-            transition: all 0.3s;
+            transition: all var(--duration-medium) var(--easing-standard);
         }
 
         .api-banner-close:hover {
@@ -392,44 +519,44 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: var(--spacing-24);
         }
 
         .action-buttons {
             display: flex;
-            gap: 12px;
+            gap: var(--spacing-8);
         }
 
         .icon-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: white;
-            border: 1px solid #e0e0e0;
+            width: var(--spacing-32);
+            height: var(--spacing-32);
+            border-radius: var(--radius-full);
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-400);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s;
-            font-size: 16px;
+            transition: all var(--duration-medium) var(--easing-standard);
+            font-size: var(--text-fixed-16);
         }
 
         .icon-btn:hover {
-            background: #f8f9fa;
+            background: var(--color-gray-50);
             border-color: var(--accent-primary);
             transform: scale(1.05);
         }
 
         .lang-selector {
-            padding: 8px 16px;
-            border: 1px solid #e0e0e0;
-            border-radius: 20px;
-            background: white;
-            color: #666;
+            padding: var(--spacing-4) var(--spacing-12);
+            border: 1px solid var(--color-gray-400);
+            border-radius: var(--radius-2xl);
+            background: var(--color-white);
+            color: var(--color-gray-700);
             cursor: pointer;
-            font-size: 13px;
+            font-size: var(--text-fixed-13);
             font-weight: 500;
-            transition: all 0.3s;
+            transition: all var(--duration-medium) var(--easing-standard);
         }
 
         .lang-selector:hover {
@@ -444,24 +571,24 @@
         /* Auth Screen */
         .auth-screen {
             max-width: 520px;
-            margin: 60px auto;
-            background: white;
-            padding: 60px 55px;
-            border-radius: 24px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin: var(--spacing-56) auto;
+            background: var(--color-white);
+            padding: var(--spacing-56) var(--spacing-48);
+            border-radius: var(--radius-3xl);
+            box-shadow: var(--shadow-2xl);
             position: relative;
             z-index: 10;
         }
 
         .auth-logo {
             text-align: center;
-            margin-bottom: 35px;
+            margin-bottom: var(--spacing-28);
             cursor: pointer;
-            transition: opacity 0.3s;
+            transition: opacity var(--duration-medium) var(--easing-standard);
         }
 
         .auth-logo:hover {
-            opacity: 0.8;
+            opacity: var(--opacity-hover);
         }
 
         .auth-logo svg {
@@ -469,40 +596,40 @@
         }
 
         .auth-screen h2 {
-            color: #1a1a1a;
-            margin-bottom: 35px;
+            color: var(--color-black);
+            margin-bottom: var(--spacing-28);
             text-align: center;
-            font-size: 36px;
+            font-size: var(--text-fixed-36);
             font-weight: 700;
         }
 
         .form-group {
-            margin-bottom: 22px;
+            margin-bottom: var(--spacing-15);
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 10px;
-            color: #666;
+            margin-bottom: var(--spacing-6);
+            color: var(--color-gray-700);
             font-weight: 500;
-            font-size: 14px;
+            font-size: var(--text-fixed-14);
         }
 
         .form-group input {
             width: 100%;
-            padding: 14px 16px;
-            border: 1.5px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: 15px;
-            transition: all 0.3s;
-            background: white;
-            color: #1a1a1a;
+            padding: var(--spacing-10) var(--spacing-12);
+            border: 1.5px solid var(--color-gray-400);
+            border-radius: var(--radius-lg);
+            font-size: var(--text-fixed-15);
+            transition: all var(--duration-medium) var(--easing-standard);
+            background: var(--color-white);
+            color: var(--color-black);
         }
 
         .form-group input:focus {
             outline: none;
             border-color: var(--accent-primary);
-            box-shadow: 0 0 0 3px var(--accent-light);
+            box-shadow: var(--shadow-accent-focus);
         }
 
         .form-group input::placeholder {
@@ -519,14 +646,14 @@
             top: 100%;
             left: 0;
             right: 0;
-            background: white;
-            border: 2px solid #e0e0e0;
+            background: var(--color-white);
+            border: 2px solid var(--color-gray-400);
             border-top: none;
-            border-radius: 0 0 12px 12px;
+            border-radius: var(--radius-none) var(--radius-none) var(--radius-lg) var(--radius-lg);
             max-height: 250px;
             overflow-y: auto;
             z-index: 1000;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-lg);
             display: none;
         }
 
@@ -535,13 +662,13 @@
         }
 
         .autocomplete-item {
-            padding: 12px 16px;
+            padding: var(--spacing-8) var(--spacing-12);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all var(--duration-normal) var(--easing-standard);
             border-bottom: 1px solid #f5f5f5;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: var(--spacing-6);
         }
 
         .autocomplete-item:last-child {
@@ -549,11 +676,11 @@
         }
 
         .autocomplete-item:hover {
-            background: #f8f9fa;
+            background: var(--color-gray-50);
         }
 
         .autocomplete-item-icon {
-            font-size: 16px;
+            font-size: var(--text-fixed-16);
             opacity: 0.6;
         }
 
@@ -562,57 +689,57 @@
         }
 
         .autocomplete-item-name {
-            color: #1a1a1a;
+            color: var(--color-black);
             font-weight: 500;
-            font-size: 14px;
+            font-size: var(--text-fixed-14);
         }
 
         .autocomplete-item-region {
-            color: #999;
-            font-size: 12px;
-            margin-top: 2px;
+            color: var(--color-gray-600);
+            font-size: var(--text-fixed-12);
+            margin-top: var(--spacing-1);
         }
 
         .autocomplete-loading {
-            padding: 12px 16px;
+            padding: var(--spacing-8) var(--spacing-12);
             text-align: center;
-            color: #999;
-            font-size: 13px;
+            color: var(--color-gray-600);
+            font-size: var(--text-fixed-13);
         }
 
         .autocomplete-no-results {
-            padding: 12px 16px;
+            padding: var(--spacing-8) var(--spacing-12);
             text-align: center;
-            color: #999;
-            font-size: 13px;
+            color: var(--color-gray-600);
+            font-size: var(--text-fixed-13);
         }
 
         .btn {
             width: 100%;
-            padding: 15px 20px;
+            padding: var(--spacing-15) var(--spacing-14);
             background: var(--accent-primary);
-            color: white;
+            color: var(--color-white);
             border: none;
-            border-radius: 12px;
+            border-radius: var(--radius-lg);
             cursor: pointer;
-            font-size: 16px;
+            font-size: var(--text-fixed-16);
             font-weight: 600;
-            transition: all 0.3s;
-            box-shadow: 0 2px 8px var(--accent-shadow);
+            transition: all var(--duration-medium) var(--easing-standard);
+            box-shadow: var(--shadow-md);
         }
 
         .btn:hover {
             background: var(--accent-hover);
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px var(--accent-shadow);
+            box-shadow: var(--shadow-accent-md);
         }
 
         .btn-secondary {
-            background: white;
+            background: var(--color-white);
             color: var(--accent-primary);
             border: 2px solid var(--accent-primary);
-            margin-top: 12px;
-            box-shadow: none;
+            margin-top: var(--spacing-8);
+            box-shadow: var(--shadow-none);
         }
 
         .btn-secondary:hover {
@@ -622,8 +749,8 @@
         /* Password Reset Links */
         .reset-password-link {
             text-align: center;
-            margin-top: 18px;
-            font-size: 14px;
+            margin-top: var(--spacing-12);
+            font-size: var(--text-fixed-14);
         }
 
         .reset-password-link a {
@@ -639,9 +766,9 @@
 
         .back-to-login {
             text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #666;
+            margin-top: var(--spacing-14);
+            font-size: var(--text-fixed-14);
+            color: var(--color-gray-700);
         }
 
         .back-to-login a {
@@ -657,27 +784,109 @@
 
         /* Landing Page Heading - Removed, using page-header instead */
 
+        /* New Trip CTA Button */
+        .new-trip-cta {
+            margin-bottom: var(--spacing-16);
+            position: relative;
+        }
+
+        .new-trip-cta-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-12) var(--spacing-24);
+            background: var(--accent-primary);
+            color: var(--color-white);
+            border: none;
+            border-radius: var(--radius-xl);
+            font-size: var(--text-fixed-16);
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: var(--shadow-accent-md);
+            transition: all var(--duration-normal) var(--easing-standard);
+            width: 100%;
+        }
+
+        .new-trip-cta-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-accent-sm);
+        }
+
+        .new-trip-cta-btn.active {
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+            box-shadow: none;
+        }
+
         /* Trip Form */
         .trip-form {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
-            margin-bottom: 40px;
+            background: var(--color-white);
+            padding: var(--spacing-24);
+            border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
+            box-shadow: var(--shadow-md);
+            margin-bottom: var(--spacing-32);
+            margin-top: calc(-1 * var(--spacing-16));
+            overflow: hidden;
+            max-height: 800px;
+            transform: translateY(0);
+            transition: max-height var(--duration-slow) var(--easing-smooth), 
+                        opacity var(--duration-slow) var(--easing-smooth),
+                        transform var(--duration-slow) var(--easing-smooth),
+                        margin var(--duration-slow) var(--easing-smooth);
+            opacity: 1;
+        }
+
+        .trip-form.hidden {
+            max-height: 0;
+            opacity: 0;
+            transform: translateY(-20px);
+            margin-bottom: 0;
+            margin-top: calc(-1 * var(--spacing-16));
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .trip-form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-20);
+        }
+
+        .trip-form-close {
+            background: transparent;
+            border: none;
+            font-size: var(--text-fixed-32);
+            color: var(--color-gray-600);
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            transition: all var(--duration-normal) var(--easing-standard);
+            line-height: 1;
+            padding: 0;
+        }
+
+        .trip-form-close:hover {
+            background: var(--color-gray-50);
+            color: var(--color-gray-800);
         }
 
         .trip-form h2 {
-            color: #1a1a1a;
-            margin-bottom: 25px;
-            font-size: 20px;
+            color: var(--color-black);
+            margin-bottom: 0;
+            font-size: var(--text-fixed-20);
             font-weight: 700;
         }
 
         .form-row {
             display: grid;
             grid-template-columns: 80px 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: var(--spacing-15);
+            margin-bottom: var(--spacing-14);
         }
 
         .form-group-emoji {
@@ -695,15 +904,15 @@
         /* Date Range Picker Button */
         .date-picker-button {
             width: 100%;
-            padding: 14px 16px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            background: white;
+            padding: var(--spacing-10) var(--spacing-12);
+            border: 2px solid var(--color-gray-400);
+            border-radius: var(--radius-lg);
+            background: var(--color-white);
             cursor: pointer;
             text-align: left;
-            font-size: 14px;
+            font-size: var(--text-fixed-14);
             color: #bbb;
-            transition: all 0.3s;
+            transition: all var(--duration-medium) var(--easing-standard);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -714,23 +923,23 @@
         }
 
         .date-picker-button.has-dates {
-            color: #1a1a1a;
+            color: var(--color-black);
             font-weight: 500;
         }
 
         /* Trip Creation Emoji Picker Button */
         .trip-emoji-button {
             width: 100%;
-            padding: 10px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            background: #f8f9fa;
-            font-size: 24px;
+            padding: var(--spacing-6);
+            border: 2px solid var(--color-gray-400);
+            border-radius: var(--radius-lg);
+            background: var(--color-gray-50);
+            font-size: var(--text-fixed-24);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s;
+            transition: all var(--duration-medium) var(--easing-standard);
             line-height: 1;
         }
 
@@ -746,10 +955,10 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: white;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            background: var(--color-white);
+            padding: var(--spacing-20);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-xl);
             z-index: 1000;
             max-width: 400px;
             width: 90%;
@@ -759,18 +968,18 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: var(--spacing-15);
         }
 
         .calendar-header button {
             background: var(--accent-primary);
-            color: white;
+            color: var(--color-white);
             border: none;
-            border-radius: 8px;
-            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            padding: var(--spacing-4) var(--spacing-8);
             cursor: pointer;
             font-weight: 600;
-            font-size: 16px;
+            font-size: var(--text-fixed-16);
         }
 
         .calendar-header button:hover {
@@ -778,32 +987,32 @@
         }
 
         .calendar-header h4 {
-            color: #1a1a1a;
-            font-size: 16px;
-            margin: 0;
+            color: var(--color-black);
+            font-size: var(--text-fixed-16);
+            margin: var(--spacing-0);
             font-weight: 700;
         }
 
         .calendar-weekdays {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
-            margin-bottom: 8px;
+            gap: var(--spacing-2);
+            margin-bottom: var(--spacing-4);
         }
 
         .calendar-weekday {
             text-align: center;
-            font-size: 11px;
+            font-size: var(--text-fixed-11);
             font-weight: 600;
-            color: #999;
-            padding: 4px;
+            color: var(--color-gray-600);
+            padding: var(--spacing-2);
         }
 
         .calendar-days {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
-            margin-bottom: 15px;
+            gap: var(--spacing-2);
+            margin-bottom: var(--spacing-15);
         }
 
         .calendar-day {
@@ -811,12 +1020,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 8px;
+            border-radius: var(--radius-sm);
             cursor: pointer;
-            font-size: 13px;
-            transition: all 0.2s;
+            font-size: var(--text-fixed-13);
+            transition: all var(--duration-normal) var(--easing-standard);
             border: 2px solid transparent;
-            color: #1a1a1a;
+            color: var(--color-black);
         }
 
         .calendar-day:hover {
@@ -835,13 +1044,13 @@
         }
 
         .calendar-day.other-month {
-            color: #ccc;
+            color: var(--color-gray-500);
         }
 
         .calendar-day.selected-start,
         .calendar-day.selected-end {
             background: var(--accent-primary);
-            color: white;
+            color: var(--color-white);
             font-weight: bold;
         }
 
@@ -855,28 +1064,28 @@
         }
 
         .selected-dates-display {
-            margin-top: 10px;
-            padding: 12px;
-            background: #f8f9fa;
-            border-radius: 12px;
+            margin-top: var(--spacing-6);
+            padding: var(--spacing-8);
+            background: var(--color-gray-50);
+            border-radius: var(--radius-lg);
             text-align: center;
         }
 
         .selected-dates-display p {
-            margin: 5px 0;
-            color: #1a1a1a;
+            margin: var(--spacing-2) var(--spacing-0);
+            color: var(--color-black);
             font-weight: 600;
             font-size: var(--text-sm);
         }
 
         .selected-dates-display .date-range {
             font-size: var(--text-sm);
-            color: #666;
+            color: var(--color-gray-700);
         }
 
         .calendar-close-btn {
             width: 100%;
-            margin-top: 15px;
+            margin-top: var(--spacing-15);
         }
 
         /* Activity Date Picker Modal */
@@ -885,10 +1094,10 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: white;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            background: var(--color-white);
+            padding: var(--spacing-20);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-xl);
             z-index: 1000;
             max-width: 380px;
             width: 90%;
@@ -898,54 +1107,54 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: var(--spacing-14);
         }
 
         .activity-date-picker .calendar-header h4 {
-            color: #1a1a1a;
+            color: var(--color-black);
             font-size: var(--text-lg);
-            margin: 0;
+            margin: var(--spacing-0);
             font-weight: 700;
         }
 
         .activity-date-picker .calendar-close-icon {
             background: none;
             border: none;
-            font-size: 28px;
-            color: #999;
+            font-size: var(--text-fixed-28);
+            color: var(--color-gray-600);
             cursor: pointer;
-            padding: 0;
-            width: 32px;
-            height: 32px;
+            padding: var(--spacing-0);
+            width: var(--spacing-25);
+            height: var(--spacing-25);
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            transition: all 0.2s;
+            border-radius: var(--radius-full);
+            transition: all var(--duration-normal) var(--easing-standard);
         }
 
         .activity-date-picker .calendar-close-icon:hover {
-            background: #f0f0f0;
-            color: #666;
+            background: var(--color-gray-200);
+            color: var(--color-gray-700);
         }
 
         .activity-date-picker .calendar-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: var(--spacing-15);
         }
 
         .activity-date-picker .calendar-nav button {
             background: var(--accent-primary);
-            color: white;
+            color: var(--color-white);
             border: none;
-            border-radius: 8px;
-            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            padding: var(--spacing-4) var(--spacing-12);
             cursor: pointer;
             font-weight: 600;
-            font-size: 16px;
-            transition: all 0.2s;
+            font-size: var(--text-fixed-16);
+            transition: all var(--duration-normal) var(--easing-standard);
         }
 
         .activity-date-picker .calendar-nav button:hover {
@@ -956,25 +1165,25 @@
         .activity-date-picker .calendar-nav span {
             font-size: var(--text-base);
             font-weight: 700;
-            color: #1a1a1a;
+            color: var(--color-black);
         }
 
         .activity-date-picker .calendar-day.selected {
             background: var(--accent-primary);
-            color: white;
+            color: var(--color-white);
             font-weight: bold;
         }
 
         /* Trips Grid */
         .trips-section {
-            margin-bottom: 40px;
+            margin-bottom: var(--spacing-32);
         }
 
         .trips-section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: var(--spacing-14);
         }
 
         .trips-section h2 {
@@ -1000,18 +1209,18 @@
         .trips-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 20px;
+            gap: var(--spacing-14);
         }
 
         .trip-card {
-            background: white;
-            padding: 32px 28px;
-            border-radius: 20px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+            background: var(--color-white);
+            padding: var(--spacing-25) var(--spacing-24);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-sm);
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all var(--duration-medium) var(--easing-standard);
             position: relative;
-            border: 1px solid #f0f0f0;
+            border: 1px solid var(--color-gray-200);
             min-height: 180px;
             display: flex;
             flex-direction: column;
@@ -1020,13 +1229,13 @@
 
         .trip-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-            border-color: #e0e0e0;
+            box-shadow: var(--shadow-lg);
+            border-color: var(--color-gray-400);
         }
 
         .trip-card-header {
             display: flex;
-            gap: 16px;
+            gap: var(--spacing-12);
             align-items: flex-start;
             position: relative;
         }
@@ -1036,13 +1245,13 @@
             height: 48px;
             min-width: 48px;
             background: #E3F2FD;
-            border-radius: 50%;
+            border-radius: var(--radius-full);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: var(--text-fixed-24);
             font-weight: 400;
-            color: #666;
+            color: var(--color-gray-700);
             line-height: 1;
         }
 
@@ -1051,33 +1260,33 @@
         }
 
         .trip-card h3 {
-            color: #1a1a1a;
-            margin: 0 0 6px 0;
+            color: var(--color-black);
+            margin: var(--spacing-0) var(--spacing-0) var(--spacing-3) var(--spacing-0);
             font-size: var(--text-base);
             font-weight: 600;
             letter-spacing: -0.3px;
         }
 
         .trip-card-subtitle {
-            color: #999;
+            color: var(--color-gray-600);
             font-size: var(--text-xs);
-            margin: 0 0 10px 0;
+            margin: var(--spacing-0) var(--spacing-0) var(--spacing-6) var(--spacing-0);
         }
 
         .trip-card-dates {
             color: #888;
             font-size: var(--text-xs);
-            margin: 0 0 14px 0;
+            margin: var(--spacing-0) var(--spacing-0) var(--spacing-10) var(--spacing-0);
             line-height: 1.5;
         }
 
         .trip-card-socket {
-            color: #666;
+            color: var(--color-gray-700);
             font-size: var(--text-xs);
-            margin: 0;
+            margin: var(--spacing-0);
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: var(--spacing-2);
         }
 
         .trip-card-socket svg {
@@ -1085,10 +1294,10 @@
         }
 
         .trip-duration-badge-card {
-            padding: 6px 14px;
+            padding: var(--spacing-3) var(--spacing-10);
             background: var(--accent-primary);
-            color: white;
-            border-radius: 16px;
+            color: var(--color-white);
+            border-radius: var(--radius-round);
             font-size: var(--text-xs);
             font-weight: 600;
             white-space: nowrap;
@@ -1096,47 +1305,50 @@
         }
 
         .trip-countdown-badge {
-            padding: 6px 14px;
-            background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
-            color: white;
-            border-radius: 16px;
+            padding: var(--spacing-3) var(--spacing-10);
+            background: var(--accent-quaternary);
+            color: var(--accent-quaternary-text);
+            border-radius: var(--radius-round);
             font-size: var(--text-xs);
             font-weight: 600;
             white-space: nowrap;
             letter-spacing: 0.3px;
-            margin-top: 8px;
+            line-height: 1.2;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: var(--spacing-4);
         }
 
         /* Past Trips */
         .past-trips-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 20px;
+            gap: var(--spacing-14);
         }
 
         /* Trip Detail Page */
         .trip-detail {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
-            margin-bottom: 30px;
+            background: var(--color-white);
+            padding: var(--spacing-32);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-md);
+            margin-bottom: var(--spacing-24);
         }
 
         .back-btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            background: white;
-            color: #666;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
+            gap: var(--spacing-4);
+            padding: var(--spacing-6) var(--spacing-14);
+            background: var(--color-white);
+            color: var(--color-gray-700);
+            border: 1px solid var(--color-gray-400);
+            border-radius: var(--radius-md);
             cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 20px;
-            transition: all 0.3s;
+            font-size: var(--text-base);
+            font-weight: 600;
+            margin-bottom: var(--spacing-14);
+            transition: all var(--duration-medium) var(--easing-standard);
         }
 
         .back-btn:hover {
@@ -1147,23 +1359,23 @@
 
         /* Trip Header Compact */
         .trip-header-compact {
-            margin-bottom: 35px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid #f0f0f0;
+            margin-bottom: var(--spacing-28);
+            padding-bottom: var(--spacing-24);
+            border-bottom: 1px solid var(--color-gray-200);
         }
 
         .trip-header-top {
             display: flex;
             align-items: center;
-            gap: 20px;
-            margin-bottom: 12px;
+            gap: var(--spacing-12);
+            margin-bottom: var(--spacing-8);
             flex-wrap: wrap;
         }
 
         .trip-icon {
             width: clamp(50px, 12vw, 60px);
             height: clamp(50px, 12vw, 60px);
-            border-radius: 15px;
+            border-radius: var(--spacing-15);
             background: #E3F2FD;
             display: flex;
             align-items: center;
@@ -1172,7 +1384,7 @@
             font-size: var(--text-xl);
             font-weight: 700;
             flex-shrink: 0;
-            transition: all 0.3s ease;
+            transition: all var(--duration-medium) var(--easing-smooth);
             position: relative;
         }
 
@@ -1187,10 +1399,10 @@
 
         .trip-name-inline {
             font-size: var(--text-xl);
-            color: #1a1a1a;
+            color: var(--color-black);
             border: none;
             background: transparent;
-            padding: 0;
+            padding: var(--spacing-0);
             font-weight: 700;
             flex: 1;
             min-width: 200px;
@@ -1202,53 +1414,312 @@
         }
 
         .trip-duration-badge {
-            padding: 6px 16px;
+            padding: var(--spacing-3) var(--spacing-12);
             background: var(--accent-primary);
-            color: white;
-            border-radius: 16px;
+            color: var(--color-white);
+            border-radius: var(--radius-round);
             font-size: var(--text-xs);
             font-weight: 600;
             white-space: nowrap;
             letter-spacing: 0.3px;
+            line-height: 1.2;
+            display: inline-flex;
+            align-items: center;
         }
 
         .trip-socket-inline {
             padding: clamp(6px, 2vw, 8px) clamp(14px, 4vw, 18px);
-            background: #f8f9fa;
-            color: #666;
-            border-radius: 20px;
+            background: var(--color-gray-50);
+            color: var(--color-gray-700);
+            border-radius: var(--radius-round);
             font-size: var(--text-sm);
-            font-weight: 500;
-            white-space: nowrap;
-            border: 1px solid #e0e0e0;
+            font-weight: 600;
+            border: 1px solid var(--color-gray-400);
+            line-height: 1.2;
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: var(--spacing-2);
+            flex-wrap: wrap;
         }
 
         .trip-socket-inline svg {
             flex-shrink: 0;
         }
 
+        /* Tabs */
+        .trip-tabs {
+            display: flex;
+            gap: var(--spacing-0);
+            border-bottom: 2px solid var(--color-gray-400);
+            margin: var(--spacing-24) var(--spacing-0) var(--spacing-0) var(--spacing-0);
+        }
+
+        .trip-tab {
+            padding: var(--spacing-10) var(--spacing-24);
+            background: transparent;
+            border: none;
+            font-size: var(--text-base);
+            font-weight: 600;
+            color: var(--color-gray-700);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all var(--duration-medium) var(--easing-smooth);
+            position: relative;
+            bottom: -2px;
+        }
+
+        .trip-tab:hover {
+            color: var(--accent-primary);
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .trip-tab.active {
+            color: var(--accent-primary);
+            border-bottom-color: var(--accent-primary);
+        }
+
+        .trip-tab-content {
+            display: none;
+            padding-top: var(--spacing-24);
+        }
+
+        .trip-tab-content.active {
+            display: block;
+        }
+
+        /* Itinerary Timeline */
+        .itinerary-timeline {
+            overflow-x: auto;
+            margin: var(--spacing-14) var(--spacing-0);
+        }
+
+        .itinerary-grid {
+            display: table;
+            border: 1px solid var(--color-gray-400);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            min-width: 100%;
+            border-collapse: collapse;
+        }
+
+        .itinerary-header-row {
+            display: table-row;
+        }
+
+        .itinerary-header-row:last-of-type .itinerary-header-cell {
+            border-bottom: 2px solid var(--color-info);
+        }
+
+        .itinerary-header-cell {
+            display: table-cell;
+            background: var(--color-gray-50);
+            padding: var(--spacing-4) var(--spacing-8);
+            border-right: 1px solid var(--color-gray-400);
+            border-bottom: 1px solid var(--color-gray-400);
+            text-align: center;
+            font-size: var(--text-fixed-13);
+            font-weight: 600;
+            color: #333;
+            min-width: 150px;
+            vertical-align: middle;
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
+
+        .itinerary-header-cell.time-column {
+            background: linear-gradient(135deg, var(--color-info) 0%, #764ba2 100%);
+            color: var(--color-white);
+            position: sticky;
+            left: 0;
+            z-index: 25;
+            min-width: 100px;
+            max-width: 100px;
+            width: 100px;
+        }
+
+        .itinerary-header-cell.month-row {
+            font-size: var(--text-fixed-14);
+            font-weight: 700;
+            background: #e3f2fd;
+            top: 0;
+        }
+
+        .itinerary-header-cell.date-row {
+            font-size: var(--text-fixed-16);
+            font-weight: 700;
+            top: 41px;
+        }
+
+        .itinerary-header-cell.day-row {
+            font-size: var(--text-fixed-12);
+            text-transform: uppercase;
+            color: var(--color-gray-700);
+            top: 82px;
+        }
+
+        .itinerary-header-cell.flag-row {
+            font-size: var(--text-fixed-24);
+            padding: var(--spacing-3);
+            top: 123px;
+        }
+
+        .itinerary-header-cell.city-row {
+            font-size: var(--text-fixed-12);
+            font-weight: 500;
+            color: #555;
+            top: 164px;
+        }
+
+        .itinerary-body-row {
+            display: table-row;
+        }
+
+        .itinerary-body-row:hover {
+            background: rgba(102, 126, 234, 0.02);
+        }
+
+        .time-label {
+            display: table-cell;
+            background: var(--color-gray-50);
+            padding: var(--spacing-8);
+            border-right: 1px solid var(--color-gray-400);
+            border-bottom: 1px solid var(--color-gray-400);
+            font-size: var(--text-fixed-13);
+            font-weight: 500;
+            color: var(--color-gray-700);
+            text-align: right;
+            position: sticky;
+            left: 0;
+            z-index: 10;
+            min-width: 100px;
+            max-width: 100px;
+            width: 100px;
+            vertical-align: top;
+        }
+
+        .time-slot {
+            display: table-cell;
+            padding: var(--spacing-4);
+            border-right: 1px solid var(--color-gray-400);
+            border-bottom: 1px solid var(--color-gray-400);
+            min-height: 50px;
+            min-width: 150px;
+            cursor: pointer;
+            transition: background var(--duration-normal) var(--easing-standard);
+            vertical-align: top;
+        }
+
+        .time-slot:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .time-slot.has-activity {
+            background: rgba(102, 126, 234, 0.15);
+        }
+
+        .time-slot.has-transport {
+            background: rgba(255, 152, 0, 0.15);
+        }
+
+        .time-slot-item {
+            background: linear-gradient(135deg, var(--color-info) 0%, #764ba2 100%);
+            color: var(--color-white);
+            padding: var(--spacing-3) var(--spacing-6);
+            border-radius: var(--radius-sm);
+            font-size: var(--text-fixed-12);
+            margin-bottom: var(--spacing-2);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+            cursor: pointer;
+        }
+
+        .time-slot-item.transport {
+            background: linear-gradient(135deg, var(--color-warning) 0%, #F57C00 100%);
+        }
+
+        .time-slot-item-emoji {
+            font-size: var(--text-fixed-14);
+        }
+
+        /* Itinerary Modal */
+        .itinerary-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .itinerary-modal.hidden {
+            display: none;
+        }
+
+        .itinerary-modal-content {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-24);
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .itinerary-type-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-8);
+            margin-bottom: var(--spacing-16);
+        }
+
+        .itinerary-type-btn {
+            padding: var(--spacing-12);
+            border: 2px solid var(--color-gray-400);
+            border-radius: var(--radius-lg);
+            background: var(--color-white);
+            cursor: pointer;
+            transition: all var(--duration-medium) var(--easing-standard);
+            font-size: var(--text-fixed-15);
+            font-weight: 600;
+        }
+
+        .itinerary-type-btn:hover {
+            border-color: var(--accent-primary);
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .itinerary-type-btn.active {
+            border-color: var(--accent-primary);
+            background: var(--accent-primary);
+            color: var(--color-white);
+        }
+
         .trip-action-buttons {
             display: flex;
-            gap: 10px;
+            gap: var(--spacing-6);
             margin-left: auto;
         }
 
         .edit-trip-btn {
-            padding: 8px 18px;
-            background: white;
+            padding: var(--spacing-4) var(--spacing-12);
+            background: var(--color-white);
             color: var(--accent-primary);
             border: 1px solid var(--accent-primary);
-            border-radius: 10px;
+            border-radius: var(--radius-md);
             cursor: pointer;
-            font-size: 14px;
+            font-size: var(--text-fixed-14);
             font-weight: 500;
-            transition: all 0.3s;
+            transition: all var(--duration-medium) var(--easing-standard);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: var(--spacing-3);
         }
 
         .edit-trip-btn:hover {
@@ -1256,62 +1727,62 @@
         }
 
         .delete-trip-btn {
-            padding: 8px 18px;
-            background: white;
-            color: #666;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
+            padding: var(--spacing-4) var(--spacing-12);
+            background: var(--color-white);
+            color: var(--color-gray-700);
+            border: 1px solid var(--color-gray-400);
+            border-radius: var(--radius-md);
             cursor: pointer;
-            font-size: 14px;
+            font-size: var(--text-fixed-14);
             font-weight: 500;
-            transition: all 0.3s;
+            transition: all var(--duration-medium) var(--easing-standard);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: var(--spacing-3);
         }
 
         .delete-trip-btn:hover {
-            border-color: #ff5252;
-            color: #ff5252;
-            background: #fff5f5;
+            border-color: var(--color-error);
+            color: var(--color-error);
+            background: var(--color-error-bg);
         }
 
         .trip-subtitle-inline {
-            color: #999;
+            color: var(--color-gray-600);
             font-size: var(--text-base);
             margin-left: clamp(0px, 10vw, 80px);
         }
 
         /* Notes Section */
         .notes-section {
-            margin-bottom: 20px;
+            margin-bottom: var(--spacing-14);
         }
 
         .notes-section h3 {
-            color: #666;
+            color: var(--color-gray-700);
             font-size: var(--text-base);
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: var(--spacing-6);
         }
 
         .trip-notes {
             width: 100%;
             min-height: 80px;
-            padding: 12px;
-            border: 1.5px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 13px;
+            padding: var(--spacing-8);
+            border: 1.5px solid var(--color-gray-400);
+            border-radius: var(--radius-md);
+            font-size: var(--text-fixed-13);
             font-family: inherit;
-            color: #1a1a1a;
-            background: #f8f9fa;
+            color: var(--color-black);
+            background: var(--color-gray-50);
             resize: vertical;
-            transition: all 0.3s;
+            transition: all var(--duration-medium) var(--easing-standard);
         }
 
         .trip-notes:focus {
             outline: none;
             border-color: var(--accent-primary);
-            background: white;
+            background: var(--color-white);
         }
 
         .trip-notes::placeholder {
@@ -1320,21 +1791,21 @@
 
         /* Cities Section */
         .cities-section {
-            margin-bottom: 35px;
+            margin-bottom: var(--spacing-28);
         }
 
         .cities-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: var(--spacing-14);
         }
 
         .cities-section h3 {
-            color: #1a1a1a;
+            color: var(--color-black);
             font-size: var(--text-lg);
             font-weight: 700;
-            margin: 0;
+            margin: var(--spacing-0);
         }
 
         .add-city-link {
@@ -1344,9 +1815,9 @@
             cursor: pointer;
             font-size: var(--text-sm);
             font-weight: 600;
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: all 0.2s ease;
+            padding: var(--spacing-4) var(--spacing-12);
+            border-radius: var(--radius-sm);
+            transition: all var(--duration-normal) var(--easing-smooth);
         }
 
         .add-city-link:hover {
@@ -1357,28 +1828,28 @@
         .cities-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: var(--spacing-8);
         }
 
         .city-card {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            border-radius: 12px;
-            padding: 14px 16px;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-10) var(--spacing-12);
             display: flex;
             align-items: center;
-            gap: 12px;
-            transition: all 0.3s ease;
+            gap: var(--spacing-8);
+            transition: all var(--duration-medium) var(--easing-smooth);
             border: 2px solid transparent;
         }
 
         .city-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-            border-color: #667eea;
+            box-shadow: var(--shadow-lg);
+            border-color: var(--color-info);
         }
 
         .city-card-emoji {
-            font-size: 28px;
+            font-size: var(--text-fixed-28);
             min-width: 40px;
             text-align: center;
         }
@@ -1388,98 +1859,98 @@
         }
 
         .city-card-name {
-            font-size: 16px;
+            font-size: var(--text-fixed-16);
             font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 4px;
+            color: var(--color-black);
+            margin-bottom: var(--spacing-2);
         }
 
         .city-card-dates {
-            font-size: 13px;
-            color: #666;
+            font-size: var(--text-fixed-13);
+            color: var(--color-gray-700);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: var(--spacing-3);
         }
 
         .city-card-socket {
-            font-size: 12px;
+            font-size: var(--text-fixed-12);
             color: #888;
-            margin-top: 3px;
+            margin-top: var(--spacing-3);
         }
 
         .city-card-actions {
             display: flex;
-            gap: 6px;
+            gap: var(--spacing-3);
         }
 
         .city-card-actions button {
             background: rgba(255, 255, 255, 0.8);
             border: none;
-            padding: 6px 10px;
-            border-radius: 6px;
+            padding: var(--spacing-3) var(--spacing-6);
+            border-radius: var(--radius-xs);
             cursor: pointer;
-            font-size: 12px;
-            transition: all 0.2s ease;
+            font-size: var(--text-fixed-12);
+            transition: all var(--duration-normal) var(--easing-smooth);
             font-weight: 500;
         }
 
         .city-card-actions button:hover {
-            background: white;
+            background: var(--color-white);
             transform: scale(1.05);
         }
 
         .no-cities {
             text-align: center;
-            color: #999;
+            color: var(--color-gray-600);
             font-size: var(--text-sm);
-            padding: 40px 20px;
+            padding: var(--spacing-32) var(--spacing-14);
             background: #f9f9f9;
-            border-radius: 12px;
-            border: 2px dashed #e0e0e0;
+            border-radius: var(--radius-lg);
+            border: 2px dashed var(--color-gray-400);
         }
 
         /* City Tag in Outfit Planner */
         .city-tag {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 11px;
+            background: linear-gradient(135deg, var(--color-info) 0%, #764ba2 100%);
+            color: var(--color-white);
+            padding: var(--spacing-2) var(--spacing-4);
+            border-radius: var(--radius-lg);
+            font-size: var(--text-fixed-11);
             font-weight: 600;
             text-align: center;
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: var(--spacing-2);
             box-shadow: 0 1px 4px rgba(102, 126, 234, 0.25);
         }
 
         .city-tag.travel-tag {
-            background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+            background: linear-gradient(135deg, var(--color-warning) 0%, #F57C00 100%);
             box-shadow: 0 1px 4px rgba(255, 152, 0, 0.25);
         }
 
         .city-tag-emoji {
-            font-size: 13px;
+            font-size: var(--text-fixed-13);
         }
 
         /* Activities */
         .activities-section {
-            margin-bottom: 35px;
+            margin-bottom: var(--spacing-28);
         }
 
         .activities-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: var(--spacing-14);
         }
 
         .activities-section h3 {
-            color: #1a1a1a;
+            color: var(--color-black);
             font-size: var(--text-lg);
             font-weight: 700;
-            margin: 0;
+            margin: var(--spacing-0);
         }
 
         .add-activity-link {
@@ -1489,7 +1960,7 @@
             font-size: var(--text-sm);
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all var(--duration-medium) var(--easing-standard);
             text-decoration: none;
         }
 
@@ -1500,43 +1971,43 @@
 
         .activities-list {
             display: grid;
-            gap: 12px;
+            gap: var(--spacing-8);
         }
 
         .no-activities {
-            color: #999;
+            color: var(--color-gray-600);
             font-size: var(--text-sm);
-            padding: 20px;
+            padding: var(--spacing-14);
             text-align: center;
-            background: #f8f9fa;
-            border-radius: 12px;
-            border: 1px dashed #e0e0e0;
+            background: var(--color-gray-50);
+            border-radius: var(--radius-lg);
+            border: 1px dashed var(--color-gray-400);
         }
 
         .activity-item {
             display: grid;
             grid-template-columns: 50px 150px 1fr 190px 110px;
-            gap: 12px;
+            gap: var(--spacing-8);
             align-items: center;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 12px;
-            border: 1px solid #f0f0f0;
+            padding: var(--spacing-15);
+            background: var(--color-gray-50);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-gray-200);
         }
 
         .activity-emoji {
-            font-size: 24px;
+            font-size: var(--text-fixed-24);
             cursor: pointer;
             text-align: center;
-            transition: transform 0.2s;
+            transition: transform var(--duration-normal) var(--easing-standard);
             width: 50px;
             height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: white;
-            border-radius: 12px;
-            border: 2px solid #e0e0e0;
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            border: 2px solid var(--color-gray-400);
         }
 
         .activity-emoji:hover {
@@ -1545,34 +2016,34 @@
         }
 
         .activity-item input[type="text"] {
-            padding: 10px 14px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
+            padding: var(--spacing-6) var(--spacing-10);
+            border: 1px solid var(--color-gray-400);
+            border-radius: var(--radius-sm);
             font-size: var(--text-sm);
-            background: white;
-            color: #1a1a1a;
-            transition: all 0.3s;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            background: var(--color-white);
+            color: var(--color-black);
+            transition: all var(--duration-medium) var(--easing-standard);
+            box-shadow: var(--shadow-xs);
         }
 
         .activity-item input[type="text"]:hover {
-            border-color: #ccc;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            border-color: var(--color-gray-500);
+            box-shadow: var(--shadow-sm);
         }
 
         .activity-item input[readonly] {
-            background: white;
+            background: var(--color-white);
             cursor: pointer !important;
         }
 
         .activity-item input[readonly]:hover {
             border-color: var(--accent-primary);
-            box-shadow: 0 2px 8px rgba(168, 208, 95, 0.2);
+            box-shadow: 0 2px 8px var(--accent-shadow);
         }
 
         .activity-item input[readonly]:focus {
             border-color: var(--accent-primary);
-            box-shadow: 0 0 0 3px rgba(168, 208, 95, 0.1);
+            box-shadow: var(--shadow-accent-focus);
         }
 
         .activity-item input:focus {
@@ -1584,228 +2055,228 @@
         .activity-type-toggle {
             display: inline-flex;
             align-items: center;
-            background: white;
-            border-radius: 20px;
-            padding: 4px;
-            border: 1px solid #e0e0e0;
+            background: var(--color-white);
+            border-radius: var(--radius-2xl);
+            padding: var(--spacing-2);
+            border: 1px solid var(--color-gray-400);
             position: relative;
             height: 38px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s;
-            gap: 4px;
+            box-shadow: var(--shadow-xs);
+            transition: all var(--duration-medium) var(--easing-standard);
+            gap: var(--spacing-2);
             width: fit-content;
             min-width: 180px;
         }
 
         .activity-type-toggle:hover {
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            box-shadow: var(--shadow-sm);
         }
 
         .activity-type-option {
             flex: 1;
-            padding: 7px 16px;
-            border-radius: 16px;
+            padding: 7px var(--spacing-12);
+            border-radius: var(--radius-xl);
             font-size: var(--text-xs);
             font-weight: 600;
             text-align: center;
             cursor: pointer;
-            transition: all 0.2s;
-            color: #999;
+            transition: all var(--duration-normal) var(--easing-standard);
+            color: var(--color-gray-600);
             z-index: 1;
             white-space: nowrap;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 4px;
+            gap: var(--spacing-2);
             min-width: 80px;
         }
 
         .activity-type-option.active {
-            color: white;
+            color: var(--color-white);
             background: var(--accent-primary);
-            box-shadow: 0 2px 4px rgba(168, 208, 95, 0.3);
+            box-shadow: 0 2px 4px var(--accent-shadow);
         }
 
         .activity-type-option:not(.active):hover {
-            color: #666;
+            color: var(--color-gray-700);
             background: #f5f5f5;
         }
 
         /* Activity Saved/View State */
         .activity-item.saved {
-            background: white;
-            border: 1px solid #e8e8e8;
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-300);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 18px 20px;
+            padding: var(--spacing-12) var(--spacing-14);
         }
 
         .activity-saved-content {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: var(--spacing-8);
             flex: 1;
         }
 
         .activity-saved-emoji {
-            font-size: 24px;
+            font-size: var(--text-fixed-24);
             width: 50px;
             height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: var(--accent-light);
-            border-radius: 12px;
+            border-radius: var(--radius-lg);
         }
 
         .activity-saved-details {
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: var(--spacing-2);
         }
 
         .activity-saved-name {
             font-size: var(--text-base);
             font-weight: 600;
-            color: #1a1a1a;
+            color: var(--color-black);
         }
 
         .activity-saved-meta {
             display: flex;
-            gap: 12px;
+            gap: var(--spacing-8);
             align-items: center;
             font-size: var(--text-xs);
-            color: #666;
+            color: var(--color-gray-700);
         }
 
         .activity-saved-date {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: var(--spacing-2);
         }
 
         .activity-saved-type {
             display: flex;
             align-items: center;
-            gap: 4px;
-            padding: 3px 10px;
+            gap: var(--spacing-2);
+            padding: var(--spacing-3) var(--spacing-6);
             background: var(--accent-light);
             color: var(--accent-primary);
-            border-radius: 12px;
+            border-radius: var(--radius-lg);
             font-weight: 600;
         }
 
         .activity-actions {
             display: flex;
-            gap: 8px;
+            gap: var(--spacing-4);
             align-items: center;
         }
 
         .edit-btn {
-            background: white;
+            background: var(--color-white);
             color: var(--accent-primary);
             border: 1px solid var(--accent-primary);
-            border-radius: 8px;
-            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            padding: var(--spacing-4) var(--spacing-12);
             cursor: pointer;
             font-size: var(--text-xs);
             font-weight: 600;
-            transition: all 0.2s;
+            transition: all var(--duration-normal) var(--easing-standard);
         }
 
         .edit-btn:hover {
             background: var(--accent-primary);
-            color: white;
+            color: var(--color-white);
         }
 
         .save-btn {
             background: var(--accent-primary);
-            color: white;
+            color: var(--color-white);
             border: none;
-            border-radius: 8px;
-            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            padding: var(--spacing-4) var(--spacing-12);
             cursor: pointer;
             font-size: var(--text-xs);
             font-weight: 600;
-            transition: all 0.2s;
+            transition: all var(--duration-normal) var(--easing-standard);
         }
 
         .save-btn:hover {
             background: var(--accent-hover);
             transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(168, 208, 95, 0.3);
+            box-shadow: 0 4px 8px var(--accent-shadow);
         }
 
         .save-btn:disabled {
-            opacity: 0.5;
+            opacity: var(--opacity-disabled);
             cursor: not-allowed;
             transform: none;
         }
 
         .delete-btn {
-            background: white;
-            color: #ff5252;
-            border: 1px solid #ff5252;
-            border-radius: 8px;
-            padding: 8px;
+            background: var(--color-white);
+            color: var(--color-error);
+            border: 1px solid var(--color-error);
+            border-radius: var(--radius-sm);
+            padding: var(--spacing-4);
             cursor: pointer;
-            font-size: 12px;
-            transition: all 0.3s;
+            font-size: var(--text-fixed-12);
+            transition: all var(--duration-medium) var(--easing-standard);
         }
 
         .delete-btn:hover {
-            background: #ff5252;
-            color: white;
+            background: var(--color-error);
+            color: var(--color-white);
         }
 
         .add-btn {
             display: inline-flex;
             align-items: center;
-            gap: 5px;
-            padding: 10px 20px;
-            background: white;
+            gap: var(--spacing-2);
+            padding: var(--spacing-6) var(--spacing-14);
+            background: var(--color-white);
             color: var(--accent-primary);
             border: 2px solid var(--accent-primary);
-            border-radius: 10px;
+            border-radius: var(--radius-md);
             cursor: pointer;
-            font-size: 14px;
+            font-size: var(--text-fixed-14);
             font-weight: 600;
-            margin-top: 10px;
-            transition: all 0.3s;
+            margin-top: var(--spacing-6);
+            transition: all var(--duration-medium) var(--easing-standard);
         }
 
         .add-btn:hover {
             background: var(--accent-primary);
-            color: white;
+            color: var(--color-white);
         }
 
         /* Checklists */
         .checklists-header-section {
             display: flex;
             justify-content: flex-end;
-            margin-bottom: 15px;
+            margin-bottom: var(--spacing-15);
         }
 
         .add-list-btn {
             display: inline-flex;
             align-items: center;
-            gap: 5px;
-            padding: 10px 20px;
-            background: white;
-            border: 2px solid #8bc34a;
-            border-radius: 12px;
-            color: #8bc34a;
-            font-size: 14px;
+            gap: var(--spacing-2);
+            padding: var(--spacing-6) var(--spacing-14);
+            background: var(--color-white);
+            border: 2px solid var(--color-success);
+            border-radius: var(--radius-lg);
+            color: var(--color-success);
+            font-size: var(--text-fixed-14);
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all var(--duration-medium) var(--easing-standard);
         }
 
         .add-list-btn:hover {
-            background: #8bc34a;
-            color: white;
+            background: var(--color-success);
+            color: var(--color-white);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(139, 195, 74, 0.3);
         }
@@ -1813,9 +2284,9 @@
         .checklists-section {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 30px;
-            transition: grid-template-columns 0.3s ease;
+            gap: var(--spacing-14);
+            margin-bottom: var(--spacing-24);
+            transition: grid-template-columns var(--duration-medium) var(--easing-smooth);
         }
 
         .checklists-section:not(:has(#customListColumn[style*="display: none"])) {
@@ -1827,31 +2298,31 @@
         }
 
         .checklist-column {
-            background: white;
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
-            border: 1px solid #f0f0f0;
+            background: var(--color-white);
+            padding: var(--spacing-20);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--color-gray-200);
         }
 
         .checklist-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: var(--spacing-15);
         }
 
         .checklist-column h3 {
-            color: #1a1a1a;
+            color: var(--color-black);
             font-size: 17px;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: var(--spacing-15);
         }
 
         .checklist-column h3 input {
             border: none;
             background: transparent;
-            color: #1a1a1a;
+            color: var(--color-black);
             font-size: 17px;
             font-weight: 700;
             width: 100%;
@@ -1859,27 +2330,27 @@
 
         .checklist-column h3 input:focus {
             outline: 2px solid var(--accent-primary);
-            border-radius: 5px;
+            border-radius: var(--spacing-2);
         }
 
         .checklist-items {
             display: grid;
-            gap: 8px;
+            gap: var(--spacing-4);
         }
 
         .checklist-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 10px 12px;
-            background: #f8f9fa;
-            border-radius: 8px;
+            gap: var(--spacing-6);
+            padding: var(--spacing-6) var(--spacing-8);
+            background: var(--color-gray-50);
+            border-radius: var(--radius-sm);
             border: 1px solid transparent;
-            transition: all 0.3s;
+            transition: all var(--duration-medium) var(--easing-standard);
         }
 
         .checklist-item:hover {
-            border-color: #e0e0e0;
+            border-color: var(--color-gray-400);
         }
 
         .checklist-item input[type="checkbox"] {
@@ -1893,8 +2364,8 @@
             flex: 1;
             border: none;
             background: transparent;
-            font-size: 14px;
-            color: #1a1a1a;
+            font-size: var(--text-fixed-14);
+            color: var(--color-black);
         }
 
         .checklist-item input[type="text"]::placeholder {
@@ -1907,7 +2378,7 @@
 
         .checklist-item.checked input[type="text"] {
             text-decoration: line-through;
-            color: #999;
+            color: var(--color-gray-600);
         }
 
         /* Outfit Planner */
@@ -2005,21 +2476,21 @@
         }
 
         .add-day-activity-btn {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
+            width: var(--spacing-14);
+            height: var(--spacing-14);
+            border-radius: var(--radius-full);
             background: var(--accent-primary);
-            color: white;
+            color: var(--color-white);
             border: none;
-            font-size: 16px;
+            font-size: var(--text-fixed-16);
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             line-height: 1;
-            padding: 0;
-            transition: all 0.2s;
+            padding: var(--spacing-0);
+            transition: all var(--duration-normal) var(--easing-standard);
         }
 
         .add-day-activity-btn:hover {
@@ -2030,52 +2501,52 @@
         .day-activities-list {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: var(--spacing-3);
         }
 
         .day-activity-item {
             display: flex;
             align-items: center;
-            gap: 6px;
-            padding: 6px 8px;
+            gap: var(--spacing-3);
+            padding: var(--spacing-3) var(--spacing-4);
             background: var(--accent-light);
-            border-radius: 6px;
+            border-radius: var(--radius-xs);
             font-size: var(--text-xs);
         }
 
         .day-activity-icon {
-            font-size: 14px;
+            font-size: var(--text-fixed-14);
             flex-shrink: 0;
         }
 
         .day-activity-name {
             flex: 1;
-            color: #1a1a1a;
+            color: var(--color-black);
             font-weight: 500;
         }
 
         .remove-day-activity-btn {
             width: 18px;
             height: 18px;
-            border-radius: 50%;
+            border-radius: var(--radius-full);
             background: transparent;
-            color: #999;
+            color: var(--color-gray-600);
             border: none;
-            font-size: 18px;
+            font-size: var(--text-fixed-18);
             font-weight: 400;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             line-height: 1;
-            padding: 0;
-            transition: all 0.2s;
+            padding: var(--spacing-0);
+            transition: all var(--duration-normal) var(--easing-standard);
             flex-shrink: 0;
         }
 
         .remove-day-activity-btn:hover {
-            background: #fff;
-            color: #ff5252;
+            background: var(--color-white);
+            color: var(--color-error);
             transform: scale(1.1);
         }
 
@@ -2084,18 +2555,18 @@
             color: #bbb;
             font-style: italic;
             text-align: center;
-            padding: 10px;
+            padding: var(--spacing-6);
         }
 
         .activity-links {
-            font-size: 11px;
-            color: #999;
-            margin-bottom: 10px;
+            font-size: var(--text-fixed-11);
+            color: var(--color-gray-600);
+            margin-bottom: var(--spacing-6);
         }
 
         .outfit-section {
-            margin-bottom: 18px;
-            padding-bottom: 12px;
+            margin-bottom: var(--spacing-12);
+            padding-bottom: var(--spacing-8);
             width: 100%;
             max-width: 100%;
             overflow: hidden;
@@ -2106,9 +2577,9 @@
         }
 
         .outfit-section h5 {
-            font-size: 11px;
-            color: #999;
-            margin-bottom: 10px;
+            font-size: var(--text-fixed-11);
+            color: var(--color-gray-600);
+            margin-bottom: var(--spacing-6);
             text-transform: uppercase;
             font-weight: 600;
             letter-spacing: 0.5px;
@@ -2116,16 +2587,16 @@
 
         .outfit-items {
             display: grid;
-            gap: 6px;
+            gap: var(--spacing-3);
             width: 100%;
             max-width: 100%;
         }
 
         .outfit-item {
             display: flex;
-            gap: 8px;
-            font-size: 11px;
-            color: #666;
+            gap: var(--spacing-4);
+            font-size: var(--text-fixed-11);
+            color: var(--color-gray-700);
             align-items: center;
             width: 100%;
             max-width: 100%;
@@ -2137,17 +2608,17 @@
             height: 18px;
             cursor: pointer;
             flex-shrink: 0;
-            accent-color: #4a90e2;
+            accent-color: var(--color-info);
         }
 
         .outfit-item-content {
             display: flex;
-            gap: 8px;
+            gap: var(--spacing-4);
             flex: 1;
             min-width: 0;
             align-items: center;
             cursor: pointer;
-            transition: opacity 0.3s;
+            transition: opacity var(--duration-medium) var(--easing-standard);
         }
 
         .outfit-item-content.packed {
@@ -2168,13 +2639,13 @@
             flex: 1;
             min-width: 0;
             max-width: 100%;
-            padding: 6px 8px;
-            border: 1px solid #e0e0e0;
-            border-radius: 6px;
-            font-size: 12px;
-            background: white;
-            color: #1a1a1a;
-            transition: all 0.3s;
+            padding: var(--spacing-3) var(--spacing-4);
+            border: 1px solid var(--color-gray-400);
+            border-radius: var(--radius-xs);
+            font-size: var(--text-fixed-12);
+            background: var(--color-white);
+            color: var(--color-black);
+            transition: all var(--duration-medium) var(--easing-standard);
             box-sizing: border-box;
         }
 
@@ -2197,46 +2668,46 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: white;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            background: var(--color-white);
+            padding: var(--spacing-20);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-xl);
             z-index: 1000;
             max-width: 400px;
         }
 
         .emoji-picker h3 {
-            color: #1a1a1a;
+            color: var(--color-black);
             font-weight: 700;
         }
 
         .emoji-grid {
             display: grid;
             grid-template-columns: repeat(8, 1fr);
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: var(--spacing-6);
+            margin-bottom: var(--spacing-15);
         }
 
         .emoji-option {
-            font-size: 24px;
+            font-size: var(--text-fixed-24);
             cursor: pointer;
             text-align: center;
-            padding: 10px;
-            border-radius: 8px;
-            transition: all 0.2s;
+            padding: var(--spacing-6);
+            border-radius: var(--radius-sm);
+            transition: all var(--duration-normal) var(--easing-standard);
         }
 
         .emoji-option:hover {
-            background: #f0f0f0;
+            background: var(--color-gray-200);
             transform: scale(1.2);
         }
 
         .overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: var(--spacing-0);
+            left: var(--spacing-0);
+            right: var(--spacing-0);
+            bottom: var(--spacing-0);
             background: rgba(0, 0, 0, 0.5);
             z-index: 999;
         }
@@ -2244,8 +2715,8 @@
         /* Activity Modal */
         .activity-modal {
             position: fixed;
-            top: 0;
-            left: 0;
+            top: var(--spacing-0);
+            left: var(--spacing-0);
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
@@ -2253,7 +2724,7 @@
             align-items: center;
             justify-content: center;
             z-index: 1000;
-            padding: 20px;
+            padding: var(--spacing-14);
         }
 
         .activity-modal.hidden {
@@ -2261,9 +2732,9 @@
         }
 
         .activity-modal-content {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            background: var(--color-white);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-2xl);
             width: 100%;
             max-width: 500px;
             max-height: 80vh;
@@ -2276,41 +2747,41 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 25px;
-            border-bottom: 1px solid #f0f0f0;
+            padding: var(--spacing-14) var(--spacing-20);
+            border-bottom: 1px solid var(--color-gray-200);
         }
 
         .activity-modal-header h3 {
-            margin: 0;
+            margin: var(--spacing-0);
             font-size: var(--text-lg);
-            color: #1a1a1a;
+            color: var(--color-black);
             font-weight: 700;
         }
 
         .activity-modal-close {
             background: transparent;
             border: none;
-            font-size: 32px;
-            color: #999;
+            font-size: var(--text-fixed-32);
+            color: var(--color-gray-600);
             cursor: pointer;
             width: 36px;
             height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 8px;
-            transition: all 0.2s;
+            border-radius: var(--radius-sm);
+            transition: all var(--duration-normal) var(--easing-standard);
             line-height: 1;
-            padding: 0;
+            padding: var(--spacing-0);
         }
 
         .activity-modal-close:hover {
-            background: #f8f9fa;
-            color: #666;
+            background: var(--color-gray-50);
+            color: var(--color-gray-700);
         }
 
         .activity-modal-body {
-            padding: 25px;
+            padding: var(--spacing-20);
             overflow-y: auto;
             flex: 1;
         }
@@ -2318,15 +2789,15 @@
         .activity-emoji-button {
             width: 80px;
             height: 80px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            background: #f8f9fa;
-            font-size: 40px;
+            border: 2px solid var(--color-gray-400);
+            border-radius: var(--radius-lg);
+            background: var(--color-gray-50);
+            font-size: var(--text-fixed-36);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s;
+            transition: all var(--duration-medium) var(--easing-standard);
         }
 
         .activity-emoji-button:hover {
@@ -2337,17 +2808,17 @@
 
         .activity-date-button {
             width: 100%;
-            padding: 11px 14px;
-            border: 1.5px solid #e0e0e0;
-            border-radius: 10px;
-            background: white;
+            padding: 11px var(--spacing-10);
+            border: 1.5px solid var(--color-gray-400);
+            border-radius: var(--radius-md);
+            background: var(--color-white);
             font-size: var(--text-sm);
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.3s;
-            color: #1a1a1a;
+            transition: all var(--duration-medium) var(--easing-standard);
+            color: var(--color-black);
         }
 
         .activity-date-button:hover {
@@ -2357,27 +2828,27 @@
         .activity-date-button:focus {
             outline: none;
             border-color: var(--accent-primary);
-            box-shadow: 0 0 0 3px var(--accent-light);
+            box-shadow: var(--shadow-accent-focus);
         }
 
         .activity-toggle {
             display: flex;
-            gap: 10px;
+            gap: var(--spacing-6);
         }
 
         .activity-toggle-btn {
             flex: 1;
-            padding: 12px 16px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            background: white;
+            padding: var(--spacing-8) var(--spacing-12);
+            border: 2px solid var(--color-gray-400);
+            border-radius: var(--radius-md);
+            background: var(--color-white);
             font-size: var(--text-sm);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            transition: all 0.3s;
+            gap: var(--spacing-4);
+            transition: all var(--duration-medium) var(--easing-standard);
             font-weight: 500;
         }
 
@@ -2389,18 +2860,18 @@
         .activity-toggle-btn.active {
             border-color: var(--accent-primary);
             background: var(--accent-primary);
-            color: white;
+            color: var(--color-white);
         }
 
         .activity-toggle-btn span:first-child {
-            font-size: 18px;
+            font-size: var(--text-fixed-18);
         }
 
         .activity-modal-footer {
-            padding: 20px 25px;
-            border-top: 1px solid #f0f0f0;
+            padding: var(--spacing-14) var(--spacing-20);
+            border-top: 1px solid var(--color-gray-200);
             display: flex;
-            gap: 12px;
+            gap: var(--spacing-8);
             justify-content: flex-end;
         }
 
@@ -2412,8 +2883,8 @@
         /* Emoji Picker Modal */
         .emoji-picker-modal {
             position: fixed;
-            top: 0;
-            left: 0;
+            top: var(--spacing-0);
+            left: var(--spacing-0);
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
@@ -2421,7 +2892,7 @@
             align-items: center;
             justify-content: center;
             z-index: 1001;
-            padding: 20px;
+            padding: var(--spacing-14);
         }
 
         .emoji-picker-modal.hidden {
@@ -2429,9 +2900,9 @@
         }
 
         .emoji-picker-content {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            background: var(--color-white);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-2xl);
             width: 100%;
             max-width: 500px;
             max-height: 80vh;
@@ -2444,37 +2915,37 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 25px;
-            border-bottom: 1px solid #f0f0f0;
+            padding: var(--spacing-14) var(--spacing-20);
+            border-bottom: 1px solid var(--color-gray-200);
         }
 
         .emoji-picker-header h3 {
-            margin: 0;
+            margin: var(--spacing-0);
             font-size: var(--text-lg);
-            color: #1a1a1a;
+            color: var(--color-black);
             font-weight: 700;
         }
 
         .emoji-picker-close {
             background: transparent;
             border: none;
-            font-size: 32px;
-            color: #999;
+            font-size: var(--text-fixed-32);
+            color: var(--color-gray-600);
             cursor: pointer;
             width: 36px;
             height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 8px;
-            transition: all 0.2s;
+            border-radius: var(--radius-sm);
+            transition: all var(--duration-normal) var(--easing-standard);
             line-height: 1;
-            padding: 0;
+            padding: var(--spacing-0);
         }
 
         .emoji-picker-close:hover {
-            background: #f8f9fa;
-            color: #666;
+            background: var(--color-gray-50);
+            color: var(--color-gray-700);
         }
 
         .emoji-picker-search {
@@ -2522,16 +2993,16 @@
         }
 
         .emoji-category-btn {
-            padding: 8px 14px;
-            border: 2px solid #e0e0e0;
-            background: white;
-            border-radius: 20px;
+            padding: var(--spacing-4) var(--spacing-10);
+            border: 2px solid var(--color-gray-400);
+            background: var(--color-white);
+            border-radius: var(--radius-2xl);
             font-size: var(--text-xs);
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all var(--duration-medium) var(--easing-standard);
             white-space: nowrap;
-            color: #666;
+            color: var(--color-gray-700);
         }
 
         .emoji-category-btn:hover {
@@ -2543,35 +3014,35 @@
         .emoji-category-btn.active {
             border-color: var(--accent-primary);
             background: var(--accent-primary);
-            color: white;
+            color: var(--color-white);
         }
 
         .emoji-picker-grid {
-            padding: 20px 25px;
+            padding: var(--spacing-14) var(--spacing-20);
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
-            gap: 8px;
+            gap: var(--spacing-4);
             overflow-y: auto;
             flex: 1;
             max-height: 400px;
         }
 
         .emoji-picker-grid::-webkit-scrollbar {
-            width: 8px;
+            width: var(--spacing-4);
         }
 
         .emoji-picker-grid::-webkit-scrollbar-track {
-            background: #f0f0f0;
-            border-radius: 4px;
+            background: var(--color-gray-200);
+            border-radius: var(--spacing-2);
         }
 
         .emoji-picker-grid::-webkit-scrollbar-thumb {
-            background: #ccc;
-            border-radius: 4px;
+            background: var(--color-gray-500);
+            border-radius: var(--spacing-2);
         }
 
         .emoji-picker-grid::-webkit-scrollbar-thumb:hover {
-            background: #999;
+            background: var(--color-gray-600);
         }
 
         .emoji-item {
@@ -2579,10 +3050,10 @@
             aspect-ratio: 1;
             border: none;
             background: transparent;
-            font-size: 28px;
+            font-size: var(--text-fixed-28);
             cursor: pointer;
-            border-radius: 8px;
-            transition: all 0.2s;
+            border-radius: var(--radius-sm);
+            transition: all var(--duration-normal) var(--easing-standard);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -2590,7 +3061,7 @@
         }
 
         .emoji-item:hover {
-            background: #f8f9fa;
+            background: var(--color-gray-50);
             transform: scale(1.15);
         }
 
@@ -2601,24 +3072,24 @@
         .emoji-picker-empty {
             grid-column: 1 / -1;
             text-align: center;
-            padding: 40px 20px;
-            color: #999;
+            padding: var(--spacing-32) var(--spacing-14);
+            color: var(--color-gray-600);
             font-size: var(--text-sm);
         }
 
         @media (max-width: 768px) {
             .emoji-picker-modal {
-                padding: 10px;
+                padding: var(--spacing-6);
             }
 
             .emoji-picker-content {
                 max-width: 100%;
                 max-height: 85vh;
-                border-radius: 16px;
+                border-radius: var(--radius-xl);
             }
 
             .emoji-picker-header {
-                padding: 16px 20px;
+                padding: var(--spacing-12) var(--spacing-14);
             }
 
             .emoji-picker-header h3 {
@@ -2626,21 +3097,21 @@
             }
 
             .emoji-picker-search {
-                padding: 12px 20px;
+                padding: var(--spacing-8) var(--spacing-14);
             }
 
             .emoji-picker-categories {
-                padding: 12px 20px;
+                padding: var(--spacing-8) var(--spacing-14);
             }
 
             .emoji-picker-grid {
-                padding: 15px 20px;
+                padding: var(--spacing-15) var(--spacing-14);
                 grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
-                gap: 6px;
+                gap: var(--spacing-3);
             }
 
             .emoji-item {
-                font-size: 24px;
+                font-size: var(--text-fixed-24);
             }
         }
 
@@ -2653,17 +3124,19 @@
         @media (max-width: 1024px) {
             .sidebar {
                 position: fixed;
-                left: -260px;
-                transition: left 0.3s;
+                left: -292px;
+                transition: left var(--duration-medium) var(--easing-standard);
                 z-index: 100;
+                margin: var(--spacing-12);
             }
 
             .sidebar.open {
-                left: 0;
+                left: var(--spacing-0);
+                margin-left: var(--spacing-12);
             }
 
             .main-content {
-                margin-left: 0;
+                margin-left: var(--spacing-0);
             }
         }
 
@@ -2693,7 +3166,7 @@
             }
 
             .trip-card {
-                padding: 24px 20px;
+                padding: var(--spacing-16) var(--spacing-14);
                 min-height: 160px;
             }
 
@@ -2701,49 +3174,48 @@
                 width: 48px;
                 height: 48px;
                 min-width: 48px;
-                font-size: 24px;
+                font-size: var(--text-fixed-24);
             }
 
             .trip-duration-badge-card {
-                font-size: 12px;
-                padding: 5px 12px;
+                font-size: var(--text-fixed-12);
+                padding: var(--spacing-2) var(--spacing-8);
             }
 
             .trip-countdown-badge {
-                font-size: 11px;
-                padding: 4px 10px;
-                margin-top: 6px;
+                font-size: var(--text-fixed-11);
+                padding: var(--spacing-2) var(--spacing-6);
             }
 
             .main-content {
-                padding: 20px;
+                padding: var(--spacing-14);
             }
 
             .greeting {
-                font-size: 24px;
+                font-size: var(--text-fixed-24);
             }
 
             .calendar-day {
-                font-size: 12px;
+                font-size: var(--text-fixed-12);
             }
 
             .trip-header-top {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 15px;
+                gap: var(--spacing-15);
             }
 
             .trip-name-inline {
-                font-size: 24px;
+                font-size: var(--text-fixed-24);
                 width: 100%;
             }
 
             .trip-subtitle-inline {
-                margin-left: 0;
+                margin-left: var(--spacing-0);
             }
 
             .trip-action-buttons {
-                margin-left: 0;
+                margin-left: var(--spacing-0);
                 width: 100%;
                 flex-direction: column;
             }
@@ -2755,14 +3227,14 @@
 
             .activity-item {
                 grid-template-columns: 1fr;
-                gap: 10px;
-                padding: 12px;
+                gap: var(--spacing-6);
+                padding: var(--spacing-8);
             }
 
             .activity-emoji {
                 width: 45px;
                 height: 45px;
-                font-size: 22px;
+                font-size: var(--text-fixed-22);
             }
 
             .activity-item input[type="text"],
@@ -2777,17 +3249,17 @@
             }
             
             .activity-type-option {
-                font-size: 10px;
-                padding: 6px 12px;
+                font-size: var(--text-fixed-10);
+                padding: var(--spacing-3) var(--spacing-8);
                 min-width: 70px;
-                gap: 3px;
+                gap: var(--spacing-3);
             }
 
             .activity-item.saved {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 15px;
-                padding: 15px;
+                gap: var(--spacing-15);
+                padding: var(--spacing-15);
             }
 
             .activity-saved-content {
@@ -2797,7 +3269,7 @@
             .activity-saved-emoji {
                 width: 45px;
                 height: 45px;
-                font-size: 22px;
+                font-size: var(--text-fixed-22);
             }
 
             .activity-saved-name {
@@ -2807,7 +3279,7 @@
             .activity-saved-meta {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 6px;
+                gap: var(--spacing-3);
             }
 
             .activity-actions {
@@ -2816,9 +3288,74 @@
             }
 
             .edit-btn, .save-btn {
-                font-size: 11px;
-                padding: 6px 12px;
+                font-size: var(--text-fixed-11);
+                padding: var(--spacing-3) var(--spacing-8);
             }
+        }
+
+        /* Utility Classes for Modal Forms */
+        .modal-input, .modal-select {
+            width: 100%;
+            padding: var(--spacing-8);
+            border: 1.5px solid var(--color-gray-400);
+            border-radius: var(--radius-md);
+            font-size: var(--text-fixed-15);
+        }
+
+        .modal-input:focus, .modal-select:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: var(--shadow-accent-focus);
+        }
+
+        .modal-emoji-button {
+            width: 80px;
+            height: 80px;
+            font-size: var(--text-fixed-36);
+        }
+
+        .modal-footer-buttons {
+            display: flex;
+            gap: var(--spacing-8);
+            margin-top: var(--spacing-16);
+        }
+
+        .modal-footer-buttons .btn {
+            flex: 1;
+        }
+
+        .modal-form-group-inline {
+            margin-bottom: var(--spacing-12);
+        }
+
+        .modal-label-inline {
+            font-size: var(--text-fixed-14);
+            font-weight: 500;
+            color: var(--color-gray-700);
+            margin-bottom: var(--spacing-4);
+            display: block;
+        }
+
+        .modal-title-inline {
+            margin-bottom: var(--spacing-12);
+            font-size: var(--text-fixed-20);
+            font-weight: 700;
+        }
+
+        .modal-edit-btn-inline {
+            flex: 1;
+            padding: var(--spacing-8) var(--spacing-12);
+            font-size: var(--text-fixed-15);
+        }
+
+        .modal-edit-btn-inline.btn-secondary {
+            margin-top: var(--spacing-0);
+        }
+
+        .modal-actions-wrapper {
+            display: flex;
+            gap: var(--spacing-6);
+            margin-top: var(--spacing-14);
         }
     </style>
 </head>
@@ -2827,8 +3364,8 @@
     <div id="authScreen" class="auth-screen">
         <div class="auth-logo" onclick="window.location.reload()">
             <svg width="180" height="60" viewBox="0 0 180 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <text x="0" y="48" font-family="'Nunito', 'Arial Rounded MT Bold', sans-serif" 
-                      font-size="54" font-weight="800" fill="#A8D05F" letter-spacing="-1.5">
+                <text x="0" y="48" font-family="'Sugo Pro Display', sans-serif" 
+                      font-size="54" font-weight="900" fill="#CCE51D" letter-spacing="-3">
                     qepi.
                 </text>
             </svg>
@@ -2851,7 +3388,7 @@
         <div class="reset-password-link">
             <a href="#" id="forgotPasswordLink">Forgot Password?</a>
         </div>
-        <div style="text-align: center; margin-top: 20px;">
+        <div class="auth-lang-wrapper">
             <button class="lang-selector" onclick="toggleLanguage()">ES/EN</button>
         </div>
     </div>
@@ -2860,8 +3397,8 @@
     <div id="resetPasswordScreen" class="auth-screen hidden">
         <div class="auth-logo" onclick="window.location.reload()">
             <svg width="180" height="60" viewBox="0 0 180 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <text x="0" y="48" font-family="'Nunito', 'Arial Rounded MT Bold', sans-serif" 
-                      font-size="54" font-weight="800" fill="#A8D05F" letter-spacing="-1.5">
+                <text x="0" y="48" font-family="'Sugo Pro Display', sans-serif" 
+                      font-size="54" font-weight="900" fill="#CCE51D" letter-spacing="-3">
                     qepi.
                 </text>
             </svg>
@@ -2890,12 +3427,7 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-logo" onclick="showLandingPage()">
-                <svg width="95" height="35" viewBox="0 0 95 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <text x="0" y="28" font-family="'Nunito', 'Arial Rounded MT Bold', sans-serif" 
-                          font-size="32" font-weight="800" fill="#A8D05F" letter-spacing="-1">
-                        qepi.
-                    </text>
-                </svg>
+                qepi.
             </div>
             <div class="sidebar-profile">
                 <div class="sidebar-profile-pic" id="sidebarProfilePic">👤</div>
@@ -2903,8 +3435,6 @@
                     <h3 id="currentUser"></h3>
                 </div>
             </div>
-
-            <button class="new-trip-btn" onclick="showNewTripForm()">+ <span id="newTripBtnText">New Trip</span></button>
 
             <div class="sidebar-section">
                 <div class="sidebar-section-title" id="upcomingTripsSidebarTitle">UPCOMING TRIPS</div>
@@ -2917,10 +3447,16 @@
             </div>
 
             <div class="sidebar-language">
-                <button class="lang-btn" onclick="toggleLanguage()">
-                    <span class="icon">🌐</span>
-                    <span id="langBtnText">ES / EN</span>
-                </button>
+                <div class="lang-toggle">
+                    <button class="lang-option" data-lang="en" onclick="setLanguage('en')">
+                        <span class="flag">🇺🇸</span>
+                        <span class="lang-code">EN</span>
+                    </button>
+                    <button class="lang-option" data-lang="es" onclick="setLanguage('es')">
+                        <span class="flag">🇪🇸</span>
+                        <span class="lang-code">ES</span>
+                    </button>
+                </div>
             </div>
 
             <div class="sidebar-logout">
@@ -2942,7 +3478,7 @@
                     </div>
 
                     <!-- API Setup Banner -->
-                    <div id="apiBanner" class="api-banner" style="display: none;">
+                    <div id="apiBanner" class="api-banner hidden">
                         <div class="api-banner-icon">🌤️</div>
                         <div class="api-banner-content">
                             <h4 id="apiBannerTitle">Enable Real Weather Data</h4>
@@ -2951,9 +3487,19 @@
                         <button class="api-banner-close" onclick="closeApiBanner()" title="Dismiss">×</button>
                     </div>
 
+                <!-- New Trip CTA Button -->
+                <div class="new-trip-cta">
+                    <button class="new-trip-cta-btn" onclick="toggleNewTripForm()">
+                        <span id="newTripCtaText">New Trip</span>
+                    </button>
+                </div>
+
                 <!-- New Trip Form -->
-                <div class="trip-form">
-                    <h2 id="createTripTitle">Create New Trip</h2>
+                <div class="trip-form hidden" id="tripForm">
+                    <div class="trip-form-header">
+                        <h2 id="createTripTitle">Create New Trip</h2>
+                        <button type="button" class="trip-form-close" onclick="hideNewTripForm()" aria-label="Close">×</button>
+                    </div>
                     <div class="form-row">
                         <div class="form-group form-group-emoji">
                             <label id="tripEmojiLabel">Emoji</label>
@@ -3041,9 +3587,31 @@
                     </div>
                 </div>
 
+                <!-- Tabs -->
+                <div class="trip-tabs">
+                    <button class="trip-tab active" onclick="switchTripTab('itinerary')" id="itineraryTab">
+                        <span id="itineraryTabLabel">Itinerary</span>
+                    </button>
+                    <button class="trip-tab" onclick="switchTripTab('packing')" id="packingTab">
+                        <span id="packingTabLabel">Packing</span>
+                    </button>
+                </div>
+
+                <!-- Tab Content: Itinerary -->
+                <div class="trip-tab-content active" id="itineraryTabContent">
+                    <div class="itinerary-timeline">
+                        <div class="itinerary-grid" id="itineraryGrid">
+                            <!-- Generated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Packing -->
+                <div class="trip-tab-content" id="packingTabContent">
+
                 <!-- Checklists -->
                 <div class="checklists-header-section">
-                    <button class="add-list-btn" id="addCustomListBtn" onclick="toggleCustomList()" style="display: inline-flex;">
+                    <button class="add-list-btn" id="addCustomListBtn" onclick="toggleCustomList()">
                         + <span id="addListBtnText">Add List</span>
                     </button>
                 </div>
@@ -3064,7 +3632,7 @@
                         <button class="add-btn" onclick="addChecklistItem('toiletries')">+ <span id="addItemText2">Add Item</span></button>
                     </div>
 
-                    <div class="checklist-column" id="customListColumn" style="display: none;">
+                    <div class="checklist-column hidden" id="customListColumn">
                         <div class="checklist-header">
                             <h3><input type="text" id="customListName" placeholder="Custom List" oninput="saveCurrentTrip()"></h3>
                         </div>
@@ -3078,11 +3646,104 @@
                     <h3 id="outfitPlannerTitle">Outfit Planner</h3>
                     <div id="outfitPlannerContent"></div>
                 </div>
+
+                </div> <!-- End packingTabContent -->
             </div>
         </div>
 
                 </div>
             </main>
+        </div>
+
+        <!-- Itinerary Add/Edit Modal -->
+        <div id="itineraryModal" class="itinerary-modal hidden">
+            <div class="itinerary-modal-content">
+                <h3 id="itineraryModalTitle">Add to Itinerary</h3>
+                
+                <!-- Type Selector -->
+                <div class="itinerary-type-selector">
+                    <button class="itinerary-type-btn active" onclick="selectItineraryType('activity')" id="activityTypeBtn">
+                        🎯 <span id="activityTypeText">Activity</span>
+                    </button>
+                    <button class="itinerary-type-btn" onclick="selectItineraryType('transport')" id="transportTypeBtn">
+                        ✈️ <span id="transportTypeText">Transport</span>
+                    </button>
+                </div>
+
+                <!-- Activity Form -->
+                <div id="activityForm">
+                    <div class="form-group">
+                        <label id="activityNameLabel">Activity Name</label>
+                        <input type="text" id="itineraryActivityName" placeholder="What are you doing?" class="modal-input">
+                    </div>
+                    <div class="form-group">
+                        <label id="activityEmojiLabel">Emoji</label>
+                        <button type="button" class="trip-emoji-button modal-emoji-button" id="itineraryActivityEmoji" onclick="openItineraryEmojiPicker()">🎯</button>
+                    </div>
+                    <div class="form-group">
+                        <label id="activityStartTimeLabel">Start Time</label>
+                        <input type="time" id="itineraryActivityStartTime" class="modal-input">
+                    </div>
+                    <div class="form-group">
+                        <label id="activityEndTimeLabel">End Time</label>
+                        <input type="time" id="itineraryActivityEndTime" class="modal-input">
+                    </div>
+                    <div class="form-group">
+                        <label id="activityTypeLabel">Time of Day</label>
+                        <select id="itineraryActivityType" class="modal-select">
+                            <option value="day">☀️ Day</option>
+                            <option value="night">🌙 Night</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Transport Form -->
+                <div id="transportForm" class="hidden">
+                    <div class="form-group">
+                        <label id="transportTypeLabel">Transport Type</label>
+                        <select id="itineraryTransportType" class="modal-select">
+                            <option value="flight">✈️ Flight</option>
+                            <option value="train">🚄 Train</option>
+                            <option value="bus">🚌 Bus</option>
+                            <option value="car">🚗 Car</option>
+                            <option value="ferry">⛴️ Ferry</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label id="transportStartTimeLabel">Departure Time</label>
+                        <input type="time" id="itineraryTransportStartTime" class="modal-input">
+                    </div>
+                    <div class="form-group">
+                        <label id="transportEndTimeLabel">Arrival Time</label>
+                        <input type="time" id="itineraryTransportEndTime" class="modal-input">
+                    </div>
+                    <div class="form-group">
+                        <label id="transportNameLabel">Details</label>
+                        <input type="text" id="itineraryTransportName" placeholder="Flight number / Route" class="modal-input">
+                    </div>
+                    <div class="form-group">
+                        <label id="transportFromLabel">From</label>
+                        <input type="text" id="itineraryTransportFrom" placeholder="Departure city" class="modal-input">
+                    </div>
+                    <div class="form-group">
+                        <label id="transportToLabel">To</label>
+                        <input type="text" id="itineraryTransportTo" placeholder="Arrival city" class="modal-input">
+                    </div>
+                    <div class="form-group">
+                        <label id="transportCostLabel">Cost (Optional)</label>
+                        <input type="number" id="itineraryTransportCost" placeholder="0.00" class="modal-input">
+                    </div>
+                </div>
+
+                <div class="modal-footer-buttons">
+                    <button class="btn" onclick="saveItineraryItem()">
+                        <span id="saveItineraryText">Save</span>
+                    </button>
+                    <button class="btn btn-secondary" onclick="closeItineraryModal()">
+                        <span id="cancelItineraryText">Cancel</span>
+                    </button>
+                </div>
+            </div>
         </div>
 
         <!-- Date Range Picker Modal -->
@@ -3103,23 +3764,23 @@
 
         <!-- Edit Trip Modal -->
         <div id="editTripModal" class="date-range-picker hidden">
-            <h3 id="editTripModalTitle" style="margin-bottom: 16px; font-size: 20px; font-weight: 700;">Edit Trip</h3>
-            <div class="form-group" style="margin-bottom: 16px;">
-                <label id="editDestinationLabel" style="font-size: 14px; font-weight: 500; color: #666; margin-bottom: 8px; display: block;">Destination</label>
-                <input type="text" id="editDestination" placeholder="Enter destination" style="width: 100%; padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 10px; font-size: 15px;">
+            <h3 id="editTripModalTitle" class="modal-title-inline">Edit Trip</h3>
+            <div class="form-group modal-form-group-inline">
+                <label id="editDestinationLabel" class="modal-label-inline">Destination</label>
+                <input type="text" id="editDestination" placeholder="Enter destination" class="modal-input">
             </div>
-            <div class="form-group" style="margin-bottom: 16px;">
-                <label id="editDatesLabel" style="font-size: 14px; font-weight: 500; color: #666; margin-bottom: 8px; display: block;">Travel Dates</label>
-                <button type="button" class="date-picker-button" id="editDatePickerButton" onclick="openEditTripCalendar()" style="width: 100%;">
+            <div class="form-group modal-form-group-inline">
+                <label id="editDatesLabel" class="modal-label-inline">Travel Dates</label>
+                <button type="button" class="date-picker-button" id="editDatePickerButton" onclick="openEditTripCalendar()">
                     <span id="editDatePickerButtonText">Click to select dates</span>
                     <span>📅</span>
                 </button>
             </div>
-            <div style="display: flex; gap: 10px; margin-top: 20px;">
-                <button class="btn" onclick="saveEditedTrip()" style="flex: 1; padding: 12px 16px; font-size: 15px;">
+            <div class="modal-actions-wrapper">
+                <button class="btn modal-edit-btn-inline" onclick="saveEditedTrip()">
                     <span id="saveEditTripText">Save Changes</span>
                 </button>
-                <button class="btn btn-secondary" onclick="closeEditTripModal()" style="flex: 1; padding: 12px 16px; font-size: 15px; margin-top: 0;">
+                <button class="btn btn-secondary modal-edit-btn-inline" onclick="closeEditTripModal()">
                     <span id="cancelEditTripText">Cancel</span>
                 </button>
             </div>
@@ -3143,26 +3804,26 @@
 
         <!-- Add City Modal -->
         <div id="addCityModal" class="date-range-picker hidden">
-            <h3 id="addCityModalTitle" style="margin-bottom: 16px; font-size: 20px; font-weight: 700;">Add City</h3>
-            <div class="form-group" style="margin-bottom: 16px;">
-                <label id="cityDestinationLabel" style="font-size: 14px; font-weight: 500; color: #666; margin-bottom: 8px; display: block;">City</label>
+            <h3 id="addCityModalTitle" class="modal-title-inline">Add City</h3>
+            <div class="form-group modal-form-group-inline">
+                <label id="cityDestinationLabel" class="modal-label-inline">City</label>
                 <div class="autocomplete-container">
-                    <input type="text" id="cityDestination" placeholder="e.g., Paris, France" autocomplete="off" style="width: 100%; padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 10px; font-size: 15px;">
+                    <input type="text" id="cityDestination" placeholder="e.g., Paris, France" autocomplete="off" class="modal-input">
                     <div id="citySuggestions" class="autocomplete-suggestions"></div>
                 </div>
             </div>
-            <div class="form-group" style="margin-bottom: 16px;">
-                <label id="cityDatesLabel" style="font-size: 14px; font-weight: 500; color: #666; margin-bottom: 8px; display: block;">Dates in this city</label>
-                <button type="button" class="date-picker-button" id="cityDatePickerButton" onclick="openCityCalendar()" style="width: 100%;">
+            <div class="form-group modal-form-group-inline">
+                <label id="cityDatesLabel" class="modal-label-inline">Dates in this city</label>
+                <button type="button" class="date-picker-button" id="cityDatePickerButton" onclick="openCityCalendar()">
                     <span id="cityDatePickerButtonText">Click to select dates</span>
                     <span>📅</span>
                 </button>
             </div>
-            <div style="display: flex; gap: 10px; margin-top: 20px;">
-                <button class="btn" onclick="saveCityToTrip()" style="flex: 1; padding: 12px 16px; font-size: 15px;">
+            <div class="modal-actions-wrapper">
+                <button class="btn modal-edit-btn-inline" onclick="saveCityToTrip()">
                     <span id="saveCityText">Add City</span>
                 </button>
-                <button class="btn btn-secondary" onclick="closeAddCityModal()" style="flex: 1; padding: 12px 16px; font-size: 15px; margin-top: 0;">
+                <button class="btn btn-secondary modal-edit-btn-inline" onclick="closeAddCityModal()">
                     <span id="cancelCityText">Cancel</span>
                 </button>
             </div>
@@ -3386,9 +4047,25 @@
                 apiBannerText: "Get a free API key from WeatherAPI.com and add it to line 1731 of the code to see real weather forecasts for your trips!",
                 upcomingTripsSidebarTitle: "UPCOMING TRIPS",
                 pastTripsSidebarTitle: "PAST TRIPS",
-                newTripBtnText: "New Trip",
+                newTripCtaText: "New Trip",
                 langBtnText: "ES / EN",
-                logoutBtnText: "Logout"
+                logoutBtnText: "Logout",
+                itineraryTabLabel: "Itinerary",
+                packingTabLabel: "Packing",
+                activityTypeText: "Activity",
+                transportTypeText: "Transport",
+                activityNameLabel: "Activity Name",
+                activityStartTimeLabel: "Start Time",
+                activityEndTimeLabel: "End Time",
+                transportTypeLabel: "Transport Type",
+                transportStartTimeLabel: "Departure Time",
+                transportEndTimeLabel: "Arrival Time",
+                transportNameLabel: "Details",
+                transportFromLabel: "From",
+                transportToLabel: "To",
+                transportCostLabel: "Cost (Optional)",
+                saveItineraryText: "Save",
+                cancelItineraryText: "Cancel"
             },
             es: {
                 authTitle: "Empaca Mejor.",
@@ -3477,9 +4154,25 @@
                 apiBannerText: "Obtenga una clave API gratuita de WeatherAPI.com y agréguela en la línea 1731 del código para ver pronósticos meteorológicos reales para sus viajes!",
                 upcomingTripsSidebarTitle: "PRÓXIMOS VIAJES",
                 pastTripsSidebarTitle: "VIAJES PASADOS",
-                newTripBtnText: "Nuevo Viaje",
+                newTripCtaText: "Nuevo Viaje",
                 langBtnText: "ES / EN",
-                logoutBtnText: "Cerrar Sesión"
+                logoutBtnText: "Cerrar Sesión",
+                itineraryTabLabel: "Itinerario",
+                packingTabLabel: "Empaque",
+                activityTypeText: "Actividad",
+                transportTypeText: "Transporte",
+                activityNameLabel: "Nombre de Actividad",
+                activityStartTimeLabel: "Hora de Inicio",
+                activityEndTimeLabel: "Hora de Fin",
+                transportTypeLabel: "Tipo de Transporte",
+                transportStartTimeLabel: "Hora de Salida",
+                transportEndTimeLabel: "Hora de Llegada",
+                transportNameLabel: "Detalles",
+                transportFromLabel: "Desde",
+                transportToLabel: "Hasta",
+                transportCostLabel: "Costo (Opcional)",
+                saveItineraryText: "Guardar",
+                cancelItineraryText: "Cancelar"
             }
         };
 
@@ -4194,6 +4887,7 @@
             loadTrips();
             loadSidebarTrips();
             checkApiSetup();
+            initLanguageToggle();
         }
 
         function setupMainAppEventListeners() {
@@ -4228,8 +4922,40 @@
 
         function showNewTripForm() {
             showLandingPage();
-            // Scroll to trip form
-            document.querySelector('.trip-form').scrollIntoView({ behavior: 'smooth' });
+            const tripForm = document.getElementById('tripForm');
+            const ctaBtn = document.querySelector('.new-trip-cta-btn');
+            if (tripForm) {
+                tripForm.classList.remove('hidden');
+                if (ctaBtn) {
+                    ctaBtn.classList.add('active');
+                }
+                // Smooth scroll to form
+                setTimeout(() => {
+                    tripForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+        }
+
+        function hideNewTripForm() {
+            const tripForm = document.getElementById('tripForm');
+            const ctaBtn = document.querySelector('.new-trip-cta-btn');
+            if (tripForm) {
+                tripForm.classList.add('hidden');
+                if (ctaBtn) {
+                    ctaBtn.classList.remove('active');
+                }
+            }
+        }
+
+        function toggleNewTripForm() {
+            const tripForm = document.getElementById('tripForm');
+            if (tripForm) {
+                if (tripForm.classList.contains('hidden')) {
+                    showNewTripForm();
+                } else {
+                    hideNewTripForm();
+                }
+            }
         }
 
         function loadSidebarTrips() {
@@ -4501,11 +5227,20 @@
             renderCalendar();
         }
 
-        function toggleLanguage() {
-            currentLanguage = currentLanguage === 'en' ? 'es' : 'en';
+        function setLanguage(lang) {
+            currentLanguage = lang;
             localStorage.setItem('language', currentLanguage);
             updateLanguage();
-            updateGreeting(); // Update greeting when language changes
+            updateGreeting();
+            
+            // Update active state on toggle buttons
+            document.querySelectorAll('.lang-option').forEach(btn => {
+                if (btn.dataset.lang === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
             
             // Re-render calendar with new language
             if (document.getElementById('calendarWeekdays')) {
@@ -4524,6 +5259,21 @@
             } else if (document.getElementById('upcomingTrips')) {
                 loadTrips();
             }
+        }
+
+        function toggleLanguage() {
+            // Keep for backward compatibility
+            const newLang = currentLanguage === 'en' ? 'es' : 'en';
+            setLanguage(newLang);
+        }
+
+        function initLanguageToggle() {
+            const langButtons = document.querySelectorAll('.lang-option');
+            langButtons.forEach(btn => {
+                if (btn.dataset.lang === currentLanguage) {
+                    btn.classList.add('active');
+                }
+            });
         }
 
         function updateLanguage() {
@@ -4547,8 +5297,12 @@
                 'citySelectedDatesText',
                 'outfitPlannerTitle', 'calendarDoneBtn', 'subheadingText', 'viewDetailsLink',
                 'notesTitle', 'deleteTripText', 'apiBannerTitle',
-                'upcomingTripsSidebarTitle', 'pastTripsSidebarTitle', 'newTripBtnText',
-                'langBtnText', 'logoutBtnText'
+                'upcomingTripsSidebarTitle', 'pastTripsSidebarTitle', 'newTripCtaText',
+                'langBtnText', 'logoutBtnText', 'itineraryTabLabel', 'packingTabLabel',
+                'activityTypeText', 'transportTypeText', 'activityNameLabel', 'activityStartTimeLabel',
+                'activityEndTimeLabel', 'transportTypeLabel', 'transportStartTimeLabel', 'transportEndTimeLabel',
+                'transportNameLabel', 'transportFromLabel', 'transportToLabel', 'transportCostLabel',
+                'saveItineraryText', 'cancelItineraryText'
             ];
 
             elements.forEach(id => {
@@ -4662,6 +5416,7 @@
                 cities: [],
                 notes: '',
                 activities: [],
+                transport: [],
                 checklists: {
                     essentials: getDefaultEssentials(),
                     toiletries: getDefaultToiletries(),
@@ -4941,8 +5696,8 @@
                             ${tripSocketInfo}
                         </div>
                         <div style="display: flex; flex-direction: column; align-items: flex-end;">
-                            <div class="trip-duration-badge-card">${duration} ${translations[currentLanguage].days}</div>
                             ${countdownBadge}
+                            <div class="trip-duration-badge-card">${duration} ${translations[currentLanguage].days}</div>
                         </div>
                     </div>
                 `;
@@ -5078,7 +5833,6 @@
                 const countdownBadge = document.createElement('div');
                 countdownBadge.id = 'tripCountdownBadge';
                 countdownBadge.className = 'trip-countdown-badge';
-                countdownBadge.style.marginLeft = '8px';
                 
                 if (daysUntilTrip > 0) {
                     countdownBadge.textContent = currentLanguage === 'en' 
@@ -5089,15 +5843,31 @@
                 }
                 
                 const durationBadge = document.getElementById('tripDurationBadge');
-                durationBadge.parentNode.insertBefore(countdownBadge, durationBadge.nextSibling);
+                durationBadge.parentNode.insertBefore(countdownBadge, durationBadge);
             }
 
-            // Set socket info - show first city's socket or hide if no cities
+            // Set socket info - collect all unique socket types from all cities
             const socketInfo = document.getElementById('tripSocketInline');
             if (trip.cities.length > 0) {
-                const firstCity = trip.cities[0];
-                socketInfo.innerHTML = `${firstCity.socketIcon}${firstCity.socketType}`;
-                socketInfo.style.display = 'flex';
+                // Get unique socket types from all cities
+                const uniqueSockets = new Map();
+                trip.cities.forEach(city => {
+                    if (city.socketType && !uniqueSockets.has(city.socketType)) {
+                        uniqueSockets.set(city.socketType, city.socketIcon);
+                    }
+                });
+                
+                if (uniqueSockets.size > 0) {
+                    // Create HTML for all unique socket types
+                    const socketElements = Array.from(uniqueSockets.entries())
+                        .map(([type, icon]) => `${icon}${type}`)
+                        .join(' • ');
+                    
+                    socketInfo.innerHTML = socketElements;
+                    socketInfo.style.display = 'inline-flex';
+                } else {
+                    socketInfo.style.display = 'none';
+                }
             } else {
                 socketInfo.style.display = 'none';
             }
@@ -5123,6 +5893,7 @@
             renderActivities(trip);
             renderChecklists(trip);
             renderOutfitPlanner(trip);
+            renderItineraryTimeline(trip);
         }
 
         function renderActivities(trip) {
@@ -5244,6 +6015,8 @@
                 id: Date.now(),
                 name: '',
                 date: currentTrip.startDate,
+                startTime: null,
+                endTime: null,
                 type: 'day',
                 emoji: '🎯',
                 isEditing: true
@@ -5990,6 +6763,14 @@
             if (emojiPickerContext === 'activityModal') {
                 selectedActivityEmoji = emoji;
                 document.getElementById('activityEmojiDisplay').textContent = emoji;
+                closeEmojiPicker();
+                return;
+            }
+            
+            // Check if we're selecting emoji for itinerary modal
+            if (emojiPickerContext === 'itinerary') {
+                currentItineraryEmoji = emoji;
+                document.getElementById('itineraryActivityEmoji').textContent = emoji;
                 closeEmojiPicker();
                 return;
             }
@@ -6788,6 +7569,337 @@
             return cities.filter(city => {
                 return dateStr >= city.startDate && dateStr <= city.endDate;
             });
+        }
+
+        function switchTripTab(tabName) {
+            // Remove active class from all tabs
+            document.querySelectorAll('.trip-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.trip-tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Add active class to selected tab
+            if (tabName === 'itinerary') {
+                document.getElementById('itineraryTab').classList.add('active');
+                document.getElementById('itineraryTabContent').classList.add('active');
+            } else if (tabName === 'packing') {
+                document.getElementById('packingTab').classList.add('active');
+                document.getElementById('packingTabContent').classList.add('active');
+            }
+        }
+
+        // Itinerary Timeline
+        let selectedItineraryDate = null;
+        let selectedItineraryTime = null;
+        let selectedItineraryType = 'activity';
+        let currentItineraryEmoji = '🎯';
+
+        function renderItineraryTimeline(trip) {
+            if (!trip) return;
+            
+            const grid = document.getElementById('itineraryGrid');
+            if (!grid) return;
+            
+            grid.innerHTML = '';
+            
+            // Ensure transport array exists
+            if (!trip.transport) trip.transport = [];
+            if (!trip.activities) trip.activities = [];
+            
+            // Generate days array
+            const [startYear, startMonth, startDay] = trip.startDate.split('-').map(Number);
+            const [endYear, endMonth, endDay] = trip.endDate.split('-').map(Number);
+            const startDate = new Date(startYear, startMonth - 1, startDay);
+            const endDate = new Date(endYear, endMonth - 1, endDay);
+            const totalDays = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
+            
+            const days = [];
+            for (let i = 0; i < totalDays; i++) {
+                const date = new Date(startYear, startMonth - 1, startDay + i);
+                const dateStr = dateToString(date);
+                const citiesForDay = getCityForDate(trip.cities, dateStr);
+                
+                // Get primary city for display (first one if multiple)
+                const primaryCity = citiesForDay[0];
+                const cityName = citiesForDay.map(c => c.name).join(' / ') || (currentLanguage === 'en' ? 'No city' : 'Sin ciudad');
+                const countryFlag = primaryCity ? primaryCity.emoji : '🌍';
+                
+                days.push({
+                    date: dateStr,
+                    dayName: date.toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { weekday: 'short' }),
+                    dayNum: date.getDate(),
+                    monthName: date.toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { month: 'short' }),
+                    cityName: cityName,
+                    countryFlag: countryFlag
+                });
+            }
+            
+            // Create 5 header rows
+            // Row 1: Month
+            let monthRow = '<div class="itinerary-header-row">';
+            monthRow += '<div class="itinerary-header-cell time-column month-row"></div>';
+            days.forEach(day => {
+                monthRow += `<div class="itinerary-header-cell month-row">${day.monthName}</div>`;
+            });
+            monthRow += '</div>';
+            grid.innerHTML += monthRow;
+            
+            // Row 2: Date
+            let dateRow = '<div class="itinerary-header-row">';
+            dateRow += '<div class="itinerary-header-cell time-column date-row"></div>';
+            days.forEach(day => {
+                dateRow += `<div class="itinerary-header-cell date-row">${day.dayNum}</div>`;
+            });
+            dateRow += '</div>';
+            grid.innerHTML += dateRow;
+            
+            // Row 3: Day of week
+            let dayRow = '<div class="itinerary-header-row">';
+            dayRow += '<div class="itinerary-header-cell time-column day-row"></div>';
+            days.forEach(day => {
+                dayRow += `<div class="itinerary-header-cell day-row">${day.dayName}</div>`;
+            });
+            dayRow += '</div>';
+            grid.innerHTML += dayRow;
+            
+            // Row 4: Country flag
+            let flagRow = '<div class="itinerary-header-row">';
+            flagRow += '<div class="itinerary-header-cell time-column flag-row"></div>';
+            days.forEach(day => {
+                flagRow += `<div class="itinerary-header-cell flag-row">${day.countryFlag}</div>`;
+            });
+            flagRow += '</div>';
+            grid.innerHTML += flagRow;
+            
+            // Row 5: City name
+            let cityRow = '<div class="itinerary-header-row">';
+            cityRow += `<div class="itinerary-header-cell time-column city-row">${currentLanguage === 'en' ? 'Time' : 'Hora'}</div>`;
+            days.forEach(day => {
+                cityRow += `<div class="itinerary-header-cell city-row">${day.cityName}</div>`;
+            });
+            cityRow += '</div>';
+            grid.innerHTML += cityRow;
+            
+            // Create time rows (24 hours)
+            const hours = [];
+            for (let h = 0; h < 24; h++) {
+                hours.push(h);
+            }
+            
+            // Migrate old activities/transport with single 'time' field
+            trip.activities.forEach(a => {
+                if (a.time && !a.startTime) {
+                    a.startTime = a.time;
+                    a.endTime = a.time;
+                    delete a.time;
+                }
+            });
+            trip.transport.forEach(t => {
+                if (t.time && !t.startTime) {
+                    t.startTime = t.time;
+                    t.endTime = t.time;
+                    delete t.time;
+                }
+            });
+            
+            hours.forEach(hour => {
+                const time12 = hour === 0 ? '12:00 AM' : hour < 12 ? `${hour}:00 AM` : hour === 12 ? '12:00 PM' : `${hour - 12}:00 PM`;
+                const time24 = `${hour.toString().padStart(2, '0')}:00`;
+                const currentHour = hour.toString().padStart(2, '0');
+                
+                let timeRow = '<div class="itinerary-body-row">';
+                timeRow += `<div class="time-label">${time12}</div>`;
+                
+                days.forEach(day => {
+                    // Get activities that span this hour
+                    const activities = trip.activities.filter(a => {
+                        if (!a.startTime || a.date !== day.date) return false;
+                        const startHour = parseInt(a.startTime.slice(0, 2));
+                        const endHour = parseInt(a.endTime ? a.endTime.slice(0, 2) : a.startTime.slice(0, 2));
+                        return hour >= startHour && hour <= endHour;
+                    });
+                    
+                    // Get transport that spans this hour
+                    const transports = trip.transport.filter(t => {
+                        if (!t.startTime || t.date !== day.date) return false;
+                        const startHour = parseInt(t.startTime.slice(0, 2));
+                        const endHour = parseInt(t.endTime ? t.endTime.slice(0, 2) : t.startTime.slice(0, 2));
+                        return hour >= startHour && hour <= endHour;
+                    });
+                    
+                    // Determine slot class based on what's in it
+                    let slotClass = 'time-slot';
+                    if (activities.length > 0) slotClass += ' has-activity';
+                    if (transports.length > 0) slotClass += ' has-transport';
+                    
+                    // Only show details in the first slot of the span
+                    const itemsHTML = [
+                        ...activities.map(a => {
+                            const isFirstSlot = currentHour === a.startTime.slice(0, 2);
+                            if (!isFirstSlot) return '';
+                            const timeRange = a.endTime && a.endTime !== a.startTime 
+                                ? `${a.startTime.slice(0, 5)} - ${a.endTime.slice(0, 5)}` 
+                                : a.startTime.slice(0, 5);
+                            return `
+                                <div class="time-slot-item" onclick="event.stopPropagation();">
+                                    <span class="time-slot-item-emoji">${a.emoji}</span>
+                                    <span>${a.name}</span>
+                                    <div style="font-size: 10px; margin-top: 2px; opacity: 0.9;">${timeRange}</div>
+                                </div>
+                            `;
+                        }),
+                        ...transports.map(t => {
+                            const isFirstSlot = currentHour === t.startTime.slice(0, 2);
+                            if (!isFirstSlot) return '';
+                            const timeRange = t.endTime && t.endTime !== t.startTime 
+                                ? `${t.startTime.slice(0, 5)} - ${t.endTime.slice(0, 5)}` 
+                                : t.startTime.slice(0, 5);
+                            return `
+                                <div class="time-slot-item transport" onclick="event.stopPropagation();">
+                                    <span class="time-slot-item-emoji">${getTransportEmoji(t.type)}</span>
+                                    <span>${t.from} → ${t.to}</span>
+                                    <div style="font-size: 10px; margin-top: 2px; opacity: 0.9;">${timeRange}</div>
+                                </div>
+                            `;
+                        })
+                    ].join('');
+                    
+                    timeRow += `<div class="${slotClass}" onclick="openItineraryModal('${day.date}', '${time24}')">${itemsHTML}</div>`;
+                });
+                
+                timeRow += '</div>';
+                grid.innerHTML += timeRow;
+            });
+        }
+
+        function getTransportEmoji(type) {
+            const emojis = {
+                flight: '✈️',
+                train: '🚄',
+                bus: '🚌',
+                car: '🚗',
+                ferry: '⛴️'
+            };
+            return emojis[type] || '🚗';
+        }
+
+        function openItineraryModal(date, time) {
+            selectedItineraryDate = date;
+            selectedItineraryTime = time;
+            selectedItineraryType = 'activity';
+            currentItineraryEmoji = '🎯';
+            
+            document.getElementById('itineraryModal').classList.remove('hidden');
+            document.getElementById('activityTypeBtn').classList.add('active');
+            document.getElementById('transportTypeBtn').classList.remove('active');
+            document.getElementById('activityForm').style.display = 'block';
+            document.getElementById('transportForm').style.display = 'none';
+            
+            // Clear and pre-fill form
+            document.getElementById('itineraryActivityName').value = '';
+            document.getElementById('itineraryActivityEmoji').textContent = '🎯';
+            document.getElementById('itineraryActivityStartTime').value = time;
+            document.getElementById('itineraryActivityEndTime').value = '';
+            document.getElementById('itineraryTransportName').value = '';
+            document.getElementById('itineraryTransportFrom').value = '';
+            document.getElementById('itineraryTransportTo').value = '';
+            document.getElementById('itineraryTransportCost').value = '';
+            document.getElementById('itineraryTransportStartTime').value = time;
+            document.getElementById('itineraryTransportEndTime').value = '';
+        }
+
+        function closeItineraryModal() {
+            document.getElementById('itineraryModal').classList.add('hidden');
+        }
+
+        function selectItineraryType(type) {
+            selectedItineraryType = type;
+            
+            if (type === 'activity') {
+                document.getElementById('activityTypeBtn').classList.add('active');
+                document.getElementById('transportTypeBtn').classList.remove('active');
+                document.getElementById('activityForm').style.display = 'block';
+                document.getElementById('transportForm').style.display = 'none';
+            } else {
+                document.getElementById('transportTypeBtn').classList.add('active');
+                document.getElementById('activityTypeBtn').classList.remove('active');
+                document.getElementById('transportForm').style.display = 'block';
+                document.getElementById('activityForm').style.display = 'none';
+            }
+        }
+
+        function saveItineraryItem() {
+            if (!currentTrip) return;
+            
+            if (selectedItineraryType === 'activity') {
+                const name = document.getElementById('itineraryActivityName').value.trim();
+                const startTime = document.getElementById('itineraryActivityStartTime').value;
+                
+                if (!name) {
+                    alert(currentLanguage === 'en' ? 'Please enter an activity name' : 'Por favor ingrese un nombre');
+                    return;
+                }
+                
+                if (!startTime) {
+                    alert(currentLanguage === 'en' ? 'Please select a start time' : 'Por favor seleccione hora de inicio');
+                    return;
+                }
+                
+                const endTime = document.getElementById('itineraryActivityEndTime').value || startTime;
+                
+                const activity = {
+                    id: Date.now(),
+                    name: name,
+                    date: selectedItineraryDate,
+                    startTime: startTime,
+                    endTime: endTime,
+                    type: document.getElementById('itineraryActivityType').value,
+                    emoji: currentItineraryEmoji,
+                    isEditing: false
+                };
+                
+                currentTrip.activities.push(activity);
+            } else {
+                const from = document.getElementById('itineraryTransportFrom').value.trim();
+                const to = document.getElementById('itineraryTransportTo').value.trim();
+                const startTime = document.getElementById('itineraryTransportStartTime').value;
+                
+                if (!from || !to) {
+                    alert(currentLanguage === 'en' ? 'Please enter from and to locations' : 'Por favor ingrese origen y destino');
+                    return;
+                }
+                
+                if (!startTime) {
+                    alert(currentLanguage === 'en' ? 'Please select a departure time' : 'Por favor seleccione hora de salida');
+                    return;
+                }
+                
+                const endTime = document.getElementById('itineraryTransportEndTime').value || startTime;
+                
+                if (!currentTrip.transport) currentTrip.transport = [];
+                
+                const transport = {
+                    id: Date.now(),
+                    date: selectedItineraryDate,
+                    startTime: startTime,
+                    endTime: endTime,
+                    type: document.getElementById('itineraryTransportType').value,
+                    name: document.getElementById('itineraryTransportName').value.trim(),
+                    from: from,
+                    to: to,
+                    cost: parseFloat(document.getElementById('itineraryTransportCost').value) || 0
+                };
+                
+                currentTrip.transport.push(transport);
+            }
+            
+            saveCurrentTrip();
+            renderItineraryTimeline(currentTrip);
+            renderActivities(currentTrip);
+            closeItineraryModal();
+        }
+
+        function openItineraryEmojiPicker() {
+            emojiPickerContext = 'itinerary';
+            openEmojiPicker();
         }
 
     </script>
