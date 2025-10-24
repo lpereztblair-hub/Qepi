@@ -318,13 +318,6 @@
 
         .greeting-wave {
             display: inline-block;
-            animation: wave 0.5s ease-in-out;
-        }
-
-        @keyframes wave {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(20deg); }
-            75% { transform: rotate(-20deg); }
         }
 
         .subheading {
@@ -682,9 +675,21 @@
 
         .form-row {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 80px 1fr 1fr;
             gap: 15px;
             margin-bottom: 20px;
+        }
+
+        .form-group-emoji {
+            width: 80px;
+        }
+
+        .form-group-name {
+            flex: 1;
+        }
+
+        .form-group-dates {
+            flex: 1;
         }
 
         /* Date Range Picker Button */
@@ -711,6 +716,28 @@
         .date-picker-button.has-dates {
             color: #1a1a1a;
             font-weight: 500;
+        }
+
+        /* Trip Creation Emoji Picker Button */
+        .trip-emoji-button {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            background: #f8f9fa;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            line-height: 1;
+        }
+
+        .trip-emoji-button:hover {
+            border-color: var(--accent-primary);
+            background: var(--accent-light);
+            transform: scale(1.05);
         }
 
         /* Date Range Picker Modal */
@@ -1268,6 +1295,146 @@
             color: #bbb;
         }
 
+        /* Cities Section */
+        .cities-section {
+            margin-bottom: 35px;
+        }
+
+        .cities-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .cities-section h3 {
+            color: #1a1a1a;
+            font-size: var(--text-lg);
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .add-city-link {
+            background: transparent;
+            color: var(--accent-primary);
+            border: none;
+            cursor: pointer;
+            font-size: var(--text-sm);
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .add-city-link:hover {
+            background: rgba(102, 126, 234, 0.1);
+            color: #5566d6;
+        }
+
+        .cities-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .city-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .city-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            border-color: #667eea;
+        }
+
+        .city-card-emoji {
+            font-size: 40px;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .city-card-content {
+            flex: 1;
+        }
+
+        .city-card-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 6px;
+        }
+
+        .city-card-dates {
+            font-size: 14px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .city-card-socket {
+            font-size: 13px;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        .city-card-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .city-card-actions button {
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .city-card-actions button:hover {
+            background: white;
+            transform: scale(1.05);
+        }
+
+        .no-cities {
+            text-align: center;
+            color: #999;
+            font-size: var(--text-sm);
+            padding: 40px 20px;
+            background: #f9f9f9;
+            border-radius: 12px;
+            border: 2px dashed #e0e0e0;
+        }
+
+        /* City Tag in Outfit Planner */
+        .city-tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            margin: 8px 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .city-tag-emoji {
+            font-size: 14px;
+        }
+
         /* Activities */
         .activities-section {
             margin-bottom: 35px;
@@ -1563,91 +1730,6 @@
         .delete-btn:hover {
             background: #ff5252;
             color: white;
-        }
-
-        /* Clothing Drop Animation */
-        .clothing-animation-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9999;
-            overflow: hidden;
-        }
-
-        .clothing-item {
-            position: absolute;
-            font-size: 40px;
-            animation: dropAndFade 2s ease-in forwards;
-            opacity: 0;
-        }
-
-        /* Background Clothing Animation for Auth Screen */
-        .auth-bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .auth-bg-clothing {
-            position: absolute;
-            font-size: 35px;
-            animation: bgDropAndFade 8s linear infinite;
-            opacity: 0;
-        }
-
-        @keyframes dropAndFade {
-            0% {
-                transform: translateY(-50px) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            70% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        @keyframes bgDropAndFade {
-            0% {
-                transform: translateY(-80px) rotate(0deg);
-                opacity: 0;
-            }
-            5% {
-                opacity: 0.15;
-            }
-            85% {
-                opacity: 0.15;
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        @keyframes wiggle {
-            0%, 100% {
-                transform: rotate(-3deg);
-            }
-            50% {
-                transform: rotate(3deg);
-            }
-        }
-
-        .packing-animation {
-            animation: wiggle 0.3s ease-in-out 3;
         }
 
         .add-btn {
@@ -2707,9 +2789,6 @@
     </style>
 </head>
 <body>
-    <!-- Background Clothing Animation for Auth Screen -->
-    <div id="authBgAnimation" class="auth-bg-animation"></div>
-
     <!-- Auth Screen -->
     <div id="authScreen" class="auth-screen">
         <div class="auth-logo" onclick="window.location.reload()">
@@ -2842,22 +2921,25 @@
                 <div class="trip-form">
                     <h2 id="createTripTitle">Create New Trip</h2>
                     <div class="form-row">
-                        <div class="form-group">
-                            <label id="destinationLabel">Destination</label>
-                            <div class="autocomplete-container">
-                                <input type="text" id="destination" placeholder="Where are you going?" autocomplete="off">
-                                <div id="autocompleteSuggestions" class="autocomplete-suggestions"></div>
-                            </div>
+                        <div class="form-group form-group-emoji">
+                            <label id="tripEmojiLabel">Emoji</label>
+                            <button type="button" class="trip-emoji-button" id="tripEmojiButton" onclick="openTripCreationEmojiPicker()">
+                                <span id="selectedTripEmoji">🌍</span>
+                            </button>
                         </div>
-                        <div class="form-group">
-                            <label id="dateRangeLabel">Select Travel Dates</label>
+                        <div class="form-group form-group-name">
+                            <label id="tripNameLabel">Trip Name</label>
+                            <input type="text" id="tripNameInput" placeholder="e.g., Europe Summer 2025" autocomplete="off">
+                        </div>
+                        <div class="form-group form-group-dates">
+                            <label id="dateRangeLabel">Total Duration</label>
                             <button type="button" class="date-picker-button" id="datePickerButton" onclick="openCalendar()">
                                 <span id="datePickerButtonText">Click to select dates</span>
                                 <span>📅</span>
                             </button>
                         </div>
                     </div>
-                    <button class="btn" id="createTripBtn">Create Trip</button>
+                    <button type="button" class="btn" id="createTripBtn">Create Trip</button>
                 </div>
 
                     <!-- Upcoming Trips -->
@@ -2900,6 +2982,17 @@
                     <div class="notes-section">
                         <h3 id="notesTitle">Notes</h3>
                         <textarea class="trip-notes" id="tripNotes" placeholder="Quick trip notes..." oninput="saveCurrentTrip()"></textarea>
+                    </div>
+
+                    <!-- Cities Section -->
+                    <div class="cities-section">
+                        <div class="cities-header">
+                            <h3 id="citiesTitle">Cities & Destinations</h3>
+                            <button class="add-city-link" onclick="openAddCityModal()">+ <span id="addCityText">Add City</span></button>
+                        </div>
+                        <div class="cities-list" id="citiesList">
+                            <p class="no-cities" id="noCitiesText">No cities added yet. Click "Add City" to start planning!</p>
+                        </div>
                     </div>
 
                     <!-- Activities -->
@@ -3012,6 +3105,49 @@
                 <p class="date-range" id="editSelectedDatesRange"></p>
             </div>
             <button class="btn calendar-close-btn" onclick="closeEditTripCalendar()">Done</button>
+        </div>
+
+        <!-- Add City Modal -->
+        <div id="addCityModal" class="date-range-picker hidden">
+            <h3 id="addCityModalTitle" style="margin-bottom: 20px; font-size: 24px;">Add City</h3>
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label id="cityDestinationLabel">City</label>
+                <div class="autocomplete-container">
+                    <input type="text" id="cityDestination" placeholder="e.g., Paris, France" autocomplete="off" style="width: 100%; padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 10px; font-size: 15px;">
+                    <div id="citySuggestions" class="autocomplete-suggestions"></div>
+                </div>
+            </div>
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label id="cityDatesLabel">Dates in this city</label>
+                <button type="button" class="date-picker-button" id="cityDatePickerButton" onclick="openCityCalendar()" style="width: 100%;">
+                    <span id="cityDatePickerButtonText">Click to select dates</span>
+                    <span>📅</span>
+                </button>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn" onclick="saveCityToTrip()" style="flex: 1;">
+                    <span id="saveCityText">Add City</span>
+                </button>
+                <button class="btn btn-secondary" onclick="closeAddCityModal()" style="flex: 1;">
+                    <span id="cancelCityText">Cancel</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- City Calendar Picker -->
+        <div id="cityCalendar" class="date-range-picker hidden">
+            <div class="calendar-header">
+                <button type="button" onclick="changeCityMonth(-1)">←</button>
+                <h4 id="cityCalendarMonth"></h4>
+                <button type="button" onclick="changeCityMonth(1)">→</button>
+            </div>
+            <div class="calendar-weekdays" id="cityCalendarWeekdays"></div>
+            <div class="calendar-days" id="cityCalendarDays"></div>
+            <div class="selected-dates-display">
+                <p id="citySelectedDatesText">Select start and end dates</p>
+                <p class="date-range" id="citySelectedDatesRange"></p>
+            </div>
+            <button class="btn calendar-close-btn" onclick="closeCityCalendar()">Done</button>
         </div>
 
         <!-- Emoji Picker -->
@@ -3156,10 +3292,23 @@
                 logoutBtn: "Logout",
                 appTitle: "🧳 Packing Planner",
                 createTripTitle: "Create New Trip",
+                tripNameLabel: "Trip Name",
+                tripEmojiLabel: "Emoji",
                 destinationLabel: "Destination",
                 startDateLabel: "Start Date",
                 endDateLabel: "End Date",
                 createTripBtn: "Create Trip",
+                citiesTitle: "Cities & Destinations",
+                addCityText: "Add City",
+                noCitiesText: "No cities added yet. Click \"Add City\" to start planning!",
+                addCityModalTitle: "Add City",
+                cityDestinationLabel: "City",
+                cityDatesLabel: "Dates in this city",
+                saveCityText: "Add City",
+                cancelCityText: "Cancel",
+                citySelectedDatesText: "Select start and end dates",
+                editCityText: "Edit",
+                deleteCityText: "Delete",
                 upcomingTripsTitle: "Upcoming trips",
                 pastTripsTitle: "Past trips",
                 backBtnText: "Back to Trips",
@@ -3234,10 +3383,23 @@
                 logoutBtn: "Cerrar Sesión",
                 appTitle: "🧳 Planificador de Maletas",
                 createTripTitle: "Crear Nuevo Viaje",
+                tripNameLabel: "Nombre del Viaje",
+                tripEmojiLabel: "Emoji",
                 destinationLabel: "Destino",
                 startDateLabel: "Fecha de Inicio",
                 endDateLabel: "Fecha de Fin",
                 createTripBtn: "Crear Viaje",
+                citiesTitle: "Ciudades y Destinos",
+                addCityText: "Agregar Ciudad",
+                noCitiesText: "Aún no hay ciudades. ¡Haz clic en \"Agregar Ciudad\" para comenzar a planificar!",
+                addCityModalTitle: "Agregar Ciudad",
+                cityDestinationLabel: "Ciudad",
+                cityDatesLabel: "Fechas en esta ciudad",
+                saveCityText: "Agregar Ciudad",
+                cancelCityText: "Cancelar",
+                citySelectedDatesText: "Selecciona fechas de inicio y fin",
+                editCityText: "Editar",
+                deleteCityText: "Eliminar",
                 upcomingTripsTitle: "Próximos viajes",
                 pastTripsTitle: "Viajes pasados",
                 backBtnText: "Volver a Viajes",
@@ -3296,7 +3458,8 @@
         let selectedActivityEmoji = '🎯';
         let activityModalSource = ''; // 'planner' or 'info'
         let isActivityCalendarOpen = false;
-        let emojiPickerContext = null; // 'trip' or 'activity'
+        let emojiPickerContext = null; // 'trip', 'activity', 'activityModal', or 'tripCreation'
+        let tripCreationEmoji = '🌍'; // Default emoji for new trip
         let selectedStartDate = null;
         let selectedEndDate = null;
         let currentCalendarMonth = new Date();
@@ -3319,6 +3482,10 @@
 
         // Get country flag emoji based on destination
         function getCountryFlagEmoji(destination) {
+            if (!destination) {
+                return '🌍';
+            }
+            
             const dest = destination.toLowerCase();
             
             // Country name to flag emoji mapping
@@ -3610,6 +3777,9 @@
 
         // Helper function to get weather icon emoji
         function getWeatherEmoji(condition) {
+            // Safety check
+            if (!condition) return '☀️';
+            
             const text = condition.toLowerCase();
             if (text.includes('sun') || text.includes('clear')) return '☀️';
             if (text.includes('cloud')) return '☁️';
@@ -3822,11 +3992,6 @@
             checkAuth();
             setupEventListeners();
             initializeEmojiPicker();
-            
-            // Start background animation if on auth screen
-            if (!document.getElementById('authScreen').classList.contains('hidden')) {
-                startAuthBackgroundAnimation();
-            }
         });
 
         function setupEventListeners() {
@@ -3836,22 +4001,6 @@
             document.getElementById('forgotPasswordLink').addEventListener('click', showResetPasswordScreen);
             document.getElementById('resetPasswordBtn').addEventListener('click', resetPassword);
             document.getElementById('backToLoginLink').addEventListener('click', showLoginScreen);
-            document.getElementById('createTripBtn').addEventListener('click', createTrip);
-            document.getElementById('tripName').addEventListener('input', saveCurrentTrip);
-            
-            // Autocomplete for destination
-            const destinationInput = document.getElementById('destination');
-            destinationInput.addEventListener('input', handleDestinationInput);
-            destinationInput.addEventListener('focus', handleDestinationFocus);
-            destinationInput.addEventListener('keydown', handleDestinationKeydown);
-            
-            // Close autocomplete when clicking outside
-            document.addEventListener('click', function(e) {
-                const autocompleteContainer = document.querySelector('.autocomplete-container');
-                if (autocompleteContainer && !autocompleteContainer.contains(e.target)) {
-                    hideAutocompleteSuggestions();
-                }
-            });
         }
 
         function checkAuth() {
@@ -3921,9 +4070,6 @@
             document.getElementById('name').value = '';
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
-            
-            // Restart background animation
-            startAuthBackgroundAnimation();
         }
 
         function showResetPasswordScreen(e) {
@@ -3995,9 +4141,6 @@
             document.getElementById('mainApp').classList.remove('hidden');
             document.getElementById('currentUser').textContent = currentUser;
             
-            // Stop background animation
-            stopAuthBackgroundAnimation();
-            
             // Get user's stored name
             const users = JSON.parse(localStorage.getItem('users') || '{}');
             const userName = users[currentUser]?.name || currentUser;
@@ -4010,10 +4153,27 @@
             const firstName = userName.split(' ')[0] || userName;
             document.getElementById('userFirstName').textContent = firstName;
             
+            // Setup event listeners for main app elements (now that they're visible)
+            setupMainAppEventListeners();
+            
             initCalendar();
             loadTrips();
             loadSidebarTrips();
             checkApiSetup();
+        }
+
+        function setupMainAppEventListeners() {
+            // Setup create trip button (landing page)
+            const createTripBtn = document.getElementById('createTripBtn');
+            if (createTripBtn) {
+                createTripBtn.onclick = createTrip;
+            }
+            
+            // Setup trip name input (trip detail page)
+            const tripNameInput = document.getElementById('tripName');
+            if (tripNameInput) {
+                tripNameInput.oninput = saveCurrentTrip;
+            }
         }
 
         function checkApiSetup() {
@@ -4340,12 +4500,15 @@
                 'newPasswordLabel', 'resetPasswordBtn', 'backToLoginLink',
                 'editTripText', 'deleteTripText', 'editTripModalTitle', 'editDestinationLabel', 
                 'editDatesLabel', 'saveEditTripText', 'cancelEditTripText',
-                'createTripTitle', 'destinationLabel',
+                'createTripTitle', 'tripNameLabel', 'tripEmojiLabel', 'destinationLabel',
                 'dateRangeLabel', 'createTripBtn', 'upcomingTripsTitle',
                 'pastTripsTitle', 'backBtnText', 'startLabel', 'endLabel', 'durationLabel',
                 'socketLabel', 'activitiesTitle', 'addActivityText', 'essentialsTitle',
                 'toiletriesTitle', 'addItemText1', 'addItemText2', 'addItemText3',
                 'addListBtnText',
+                'citiesTitle', 'addCityText', 'noCitiesText', 'addCityModalTitle',
+                'cityDestinationLabel', 'cityDatesLabel', 'saveCityText', 'cancelCityText',
+                'citySelectedDatesText',
                 'outfitPlannerTitle', 'calendarDoneBtn', 'subheadingText', 'viewDetailsLink',
                 'notesTitle', 'deleteTripText', 'apiBannerTitle',
                 'upcomingTripsSidebarTitle', 'pastTripsSidebarTitle', 'newTripBtnText',
@@ -4410,9 +4573,14 @@
                 newPasswordInput.placeholder = currentLanguage === 'en' ? 'Enter new password' : 'Ingresa nueva contraseña';
             }
             
-            const destInput = document.getElementById('destination');
-            if (destInput) {
-                destInput.placeholder = currentLanguage === 'en' ? 'Where are you going?' : '¿A dónde vas?';
+            const tripNameInput = document.getElementById('tripNameInput');
+            if (tripNameInput) {
+                tripNameInput.placeholder = currentLanguage === 'en' ? 'e.g., Europe Summer 2025' : 'ej., Verano Europeo 2025';
+            }
+            
+            const cityDestInput = document.getElementById('cityDestination');
+            if (cityDestInput) {
+                cityDestInput.placeholder = currentLanguage === 'en' ? 'e.g., Paris, France' : 'ej., París, Francia';
             }
 
             // Update date picker button
@@ -4425,65 +4593,37 @@
             }
         }
 
-        async function createTrip() {
-            const destination = document.getElementById('destination').value.trim();
+        function createTrip() {
+            // Prevent multiple clicks
+            const createBtn = document.getElementById('createTripBtn');
+            if (createBtn.disabled) return;
+            createBtn.disabled = true;
+            
+            const tripNameInput = document.getElementById('tripNameInput');
+            const tripName = tripNameInput ? tripNameInput.value.trim() : '';
             const startDate = selectedStartDate;
             const endDate = selectedEndDate;
 
-            if (!destination) {
-                alert(currentLanguage === 'en' ? 'Please enter a destination' : 'Por favor ingrese un destino');
+            if (!tripName) {
+                alert(currentLanguage === 'en' ? 'Please enter a trip name' : 'Por favor ingrese un nombre para el viaje');
+                createBtn.disabled = false;
                 return;
             }
 
             if (!startDate || !endDate) {
                 alert(currentLanguage === 'en' ? 'Please select start and end dates' : 'Por favor seleccione fechas de inicio y fin');
+                createBtn.disabled = false;
                 return;
-            }
-
-            // Trigger clothing animation
-            triggerClothingAnimation();
-
-            // Show loading message
-            const createBtn = document.getElementById('createTripBtn');
-            const originalBtnText = createBtn.textContent;
-            createBtn.textContent = currentLanguage === 'en' ? 'Creating trip...' : 'Creando viaje...';
-            createBtn.disabled = true;
-            
-            // Add wiggle animation to the button
-            createBtn.classList.add('packing-animation');
-
-            // Fetch real data from APIs
-            const [countryData, weatherData] = await Promise.all([
-                fetchCountryData(destination),
-                fetchWeatherForecast(destination, startDate, endDate)
-            ]);
-
-            // Determine socket type using improved detection
-            let socketType = getSocketType(destination);
-            let voltage = getVoltage(socketType);
-            
-            // Try to use REST Countries API data if available (though it rarely has socket info)
-            if (countryData) {
-                if (countryData.plugTypes && countryData.plugTypes !== 'Check local' && countryData.plugTypes !== '') {
-                    socketType = `Type ${countryData.plugTypes}`;
-                }
-                if (countryData.voltage && countryData.voltage !== 'Unknown' && countryData.voltage !== '') {
-                    voltage = Array.isArray(countryData.voltage) 
-                        ? `${countryData.voltage.join('/')}V` 
-                        : `${countryData.voltage}V`;
-                }
             }
 
             const users = JSON.parse(localStorage.getItem('users') || '{}');
             const trip = {
                 id: Date.now(),
-                name: destination,
-                destination: destination,
+                name: tripName,
+                emoji: tripCreationEmoji,
                 startDate: startDate,
                 endDate: endDate,
-                socketType: `${socketType} • ${voltage}`,
-                socketIcon: getSocketSVG(socketType),
-                emoji: getCountryFlagEmoji(destination),
+                cities: [],
                 notes: '',
                 activities: [],
                 checklists: {
@@ -4492,33 +4632,36 @@
                     custom: [],
                     customName: currentLanguage === 'en' ? 'Custom Items' : 'Artículos Personalizados'
                 },
-                outfits: {},
-                weatherData: weatherData // Store weather data with trip
+                outfits: {}
             };
 
             users[currentUser].trips.push(trip);
             localStorage.setItem('users', JSON.stringify(users));
 
             // Clear form
-            document.getElementById('destination').value = '';
+            tripNameInput.value = '';
+            tripCreationEmoji = '🌍'; // Reset to default emoji
+            document.getElementById('selectedTripEmoji').textContent = '🌍';
             selectedStartDate = null;
             selectedEndDate = null;
             renderCalendar();
             updateDatePickerButton();
 
-            // Reset button
-            createBtn.textContent = originalBtnText;
-            createBtn.disabled = false;
-            createBtn.classList.remove('packing-animation');
-
-            // Update sidebar with new trip
+            // Update sidebar
             loadSidebarTrips();
 
             // Open the trip
             openTrip(trip.id);
+            
+            // Re-enable button
+            createBtn.disabled = false;
         }
 
         function getSocketType(destination) {
+            if (!destination) {
+                return 'Type C';
+            }
+            
             const dest = destination.toLowerCase();
             
             // North America - Type A/B (110V)
@@ -4838,10 +4981,14 @@
         }
 
         function renderTripDetail(trip) {
+            // Ensure required arrays exist
+            if (!trip.cities) trip.cities = [];
+            if (!trip.activities) trip.activities = [];
+            
             const duration = Math.ceil((new Date(trip.endDate) - new Date(trip.startDate)) / (1000 * 60 * 60 * 24)) + 1;
 
-            // Set trip icon (emoji)
-            const tripEmoji = trip.emoji || getCountryFlagEmoji(trip.destination);
+            // Set trip icon (emoji) - prefer trip.emoji, then first city's emoji, then default
+            const tripEmoji = trip.emoji || (trip.cities.length > 0 ? trip.cities[0].emoji : '🌍');
             const tripIconEl = document.getElementById('tripIcon');
             tripIconEl.textContent = tripEmoji;
             tripIconEl.style.cursor = 'pointer';
@@ -4854,10 +5001,17 @@
             // Set duration badge
             document.getElementById('tripDurationBadge').textContent = `${duration} ${duration === 1 ? (currentLanguage === 'en' ? 'day' : 'día') : translations[currentLanguage].days}`;
 
-            // Set socket info
-            document.getElementById('tripSocketInline').innerHTML = `${trip.socketIcon || getSocketSVG(trip.socketType)}${trip.socketType}`;
+            // Set socket info - show first city's socket or hide if no cities
+            const socketInfo = document.getElementById('tripSocketInline');
+            if (trip.cities.length > 0) {
+                const firstCity = trip.cities[0];
+                socketInfo.innerHTML = `${firstCity.socketIcon}${firstCity.socketType}`;
+                socketInfo.style.display = 'flex';
+            } else {
+                socketInfo.style.display = 'none';
+            }
 
-            // Set subtitle with location, dates, and duration
+            // Set subtitle with dates and duration
             const startDate = formatDate(trip.startDate);
             const endDate = formatDate(trip.endDate);
             // Parse dates in local time to avoid timezone shift
@@ -4865,17 +5019,28 @@
             const [endYear, endMonth, endDay] = trip.endDate.split('-').map(Number);
             const monthStart = new Date(startYear, startMonth - 1, startDay).toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { month: 'short', day: 'numeric' });
             const monthEnd = new Date(endYear, endMonth - 1, endDay).toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { month: 'short', day: 'numeric' });
-            document.getElementById('tripSubtitleInline').textContent = `${trip.destination} • ${monthStart} – ${monthEnd} • ${duration} ${translations[currentLanguage].days}`;
+            
+            // Show cities count in subtitle
+            const citiesText = trip.cities.length > 0 
+                ? ` • ${trip.cities.length} ${trip.cities.length === 1 ? (currentLanguage === 'en' ? 'city' : 'ciudad') : (currentLanguage === 'en' ? 'cities' : 'ciudades')}`
+                : '';
+            document.getElementById('tripSubtitleInline').textContent = `${monthStart} – ${monthEnd} • ${duration} ${translations[currentLanguage].days}${citiesText}`;
 
             // Set notes
             document.getElementById('tripNotes').value = trip.notes || '';
 
+            renderCities();
             renderActivities(trip);
             renderChecklists(trip);
             renderOutfitPlanner(trip);
         }
 
         function renderActivities(trip) {
+            // Ensure activities array exists
+            if (!trip.activities) {
+                trip.activities = [];
+            }
+            
             // Ensure all activities have IDs (migration for old data)
             trip.activities.forEach(activity => {
                 if (!activity.id) {
@@ -4979,6 +5144,11 @@
 
         function addActivity() {
             if (!currentTrip) return;
+            
+            // Ensure activities array exists
+            if (!currentTrip.activities) {
+                currentTrip.activities = [];
+            }
 
             currentTrip.activities.push({
                 id: Date.now(),
@@ -4996,6 +5166,14 @@
 
         function updateActivity(index, field, value) {
             if (!currentTrip) return;
+            
+            // Ensure activities array exists
+            if (!currentTrip.activities) {
+                currentTrip.activities = [];
+            }
+            
+            // Ensure the activity at this index exists
+            if (!currentTrip.activities[index]) return;
             
             // Validate and format date properly
             if (field === 'date' && value) {
@@ -5072,11 +5250,39 @@
             selectedActivityIndex = activityIndex;
             emojiPickerContext = 'activity'; // Set context to activity
             
+            // Ensure emojis are initialized
+            if (allEmojis.length === 0) {
+                allEmojis = Object.values(emojiData).flat();
+            }
+            
             // Initialize the modern emoji picker with all emojis
             filterEmojiCategory('all');
             
             // Show the modern emoji picker modal
             document.getElementById('emojiPickerModal').classList.remove('hidden');
+        }
+
+        function openEmojiPickerForActivity() {
+            // This is called from the activity modal
+            // Ensure emojis are initialized
+            if (allEmojis.length === 0) {
+                allEmojis = Object.values(emojiData).flat();
+            }
+            
+            emojiPickerContext = 'activityModal'; // Set context to activity modal
+            
+            const modal = document.getElementById('emojiPickerModal');
+            modal.classList.remove('hidden');
+            
+            // Update title based on language
+            document.getElementById('emojiPickerTitle').textContent = currentLanguage === 'en' ? 'Choose Activity Emoji' : 'Elige Emoji de Actividad';
+            document.getElementById('emojiSearchInput').placeholder = currentLanguage === 'en' ? 'Search emojis...' : 'Buscar emojis...';
+            
+            // Reset and render
+            currentCategory = 'all';
+            document.getElementById('emojiSearchInput').value = '';
+            updateCategoryButtons();
+            renderEmojis(allEmojis);
         }
 
         function selectActivityEmoji(emoji) {
@@ -5328,6 +5534,11 @@
         function renderOutfitPlanner(trip) {
             const container = document.getElementById('outfitPlannerContent');
             container.innerHTML = '';
+            
+            // Ensure activities array exists
+            if (!trip.activities) {
+                trip.activities = [];
+            }
 
             // Calculate total number of days (inclusive)
             const startDate = new Date(trip.startDate);
@@ -5368,10 +5579,13 @@
                     const dayOfWeek = day.toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { weekday: 'short' });
                     const dayNum = day.getDate();
 
-                    // Get real weather data or use default
-                    const weatherDisplay = trip.weatherData 
-                        ? formatWeatherData(trip.weatherData, dateStr)
-                        : '☀️ 72°F';
+                    // Determine which city the user is in on this day
+                    const currentCity = getCityForDate(trip.cities, dateStr);
+                    
+                    // Get real weather data from the current city or use trip-level data
+                    const weatherDisplay = currentCity?.weatherData 
+                        ? formatWeatherData(currentCity.weatherData, dateStr)
+                        : (trip.weatherData ? formatWeatherData(trip.weatherData, dateStr) : '☀️ 72°F');
 
                     if (!trip.outfits[dateStr]) {
                         trip.outfits[dateStr] = {
@@ -5386,7 +5600,7 @@
 
                     const outfit = trip.outfits[dateStr];
                     // Only show saved activities (not in edit mode)
-                    const dayActivities = trip.activities.filter(a => a.date === dateStr && !a.isEditing);
+                    const dayActivities = (trip.activities || []).filter(a => a.date === dateStr && !a.isEditing);
                     const dayAct = dayActivities.find(a => a.type === 'day');
                     const nightAct = dayActivities.find(a => a.type === 'night');
 
@@ -5396,9 +5610,18 @@
                     // Build activities HTML
                     const activitiesHtml = renderDayActivities(dateStr, dayActivities);
                     
+                    // Build city tag HTML if city exists
+                    const cityTagHtml = currentCity ? `
+                        <div class="city-tag">
+                            <span class="city-tag-emoji">${currentCity.emoji}</span>
+                            <span>${currentCity.name}</span>
+                        </div>
+                    ` : '';
+                    
                     dayCard.innerHTML = `
                         <div class="day-header">${dayOfWeek} ${dayNum}</div>
                         <div class="day-date">${formatDate(dateStr)}</div>
+                        ${cityTagHtml}
                         <div class="weather-info">${outfit.weather}</div>
                         
                         <div class="day-activities-section">
@@ -5453,6 +5676,11 @@
         function addActivityFromPlanner(dateStr) {
             if (!currentTrip) return;
             
+            // Ensure activities array exists
+            if (!currentTrip.activities) {
+                currentTrip.activities = [];
+            }
+            
             // Create a new activity with the selected date
             currentTrip.activities.push({
                 id: Date.now(),
@@ -5473,6 +5701,12 @@
 
         function deleteActivityFromPlanner(activityId) {
             if (!currentTrip) return;
+            
+            // Ensure activities array exists
+            if (!currentTrip.activities) {
+                currentTrip.activities = [];
+                return;
+            }
             
             currentTrip.activities = currentTrip.activities.filter(a => a.id !== activityId);
             saveCurrentTrip();
@@ -5557,6 +5791,11 @@
         function openEmojiPicker() {
             if (!currentTrip) return;
             
+            // Ensure emojis are initialized
+            if (allEmojis.length === 0) {
+                allEmojis = Object.values(emojiData).flat();
+            }
+            
             emojiPickerContext = 'trip'; // Set context to trip
             
             const modal = document.getElementById('emojiPickerModal');
@@ -5564,6 +5803,28 @@
             
             // Update title based on language
             document.getElementById('emojiPickerTitle').textContent = currentLanguage === 'en' ? 'Choose an Emoji' : 'Elige un Emoji';
+            document.getElementById('emojiSearchInput').placeholder = currentLanguage === 'en' ? 'Search emojis...' : 'Buscar emojis...';
+            
+            // Reset and render
+            currentCategory = 'all';
+            document.getElementById('emojiSearchInput').value = '';
+            updateCategoryButtons();
+            renderEmojis(allEmojis);
+        }
+
+        function openTripCreationEmojiPicker() {
+            // Ensure emojis are initialized
+            if (allEmojis.length === 0) {
+                allEmojis = Object.values(emojiData).flat();
+            }
+            
+            emojiPickerContext = 'tripCreation'; // Set context to trip creation
+            
+            const modal = document.getElementById('emojiPickerModal');
+            modal.classList.remove('hidden');
+            
+            // Update title based on language
+            document.getElementById('emojiPickerTitle').textContent = currentLanguage === 'en' ? 'Choose Trip Emoji' : 'Elige Emoji del Viaje';
             document.getElementById('emojiSearchInput').placeholder = currentLanguage === 'en' ? 'Search emojis...' : 'Buscar emojis...';
             
             // Reset and render
@@ -5597,6 +5858,22 @@
         }
 
         function selectEmoji(emoji) {
+            // Check if we're selecting emoji for trip creation (before a trip exists)
+            if (emojiPickerContext === 'tripCreation') {
+                tripCreationEmoji = emoji;
+                document.getElementById('selectedTripEmoji').textContent = emoji;
+                closeEmojiPicker();
+                return;
+            }
+            
+            // Check if we're selecting emoji for activity modal (before activity is saved)
+            if (emojiPickerContext === 'activityModal') {
+                selectedActivityEmoji = emoji;
+                document.getElementById('activityEmojiDisplay').textContent = emoji;
+                closeEmojiPicker();
+                return;
+            }
+            
             if (!currentTrip) return;
             
             // Check if we're selecting emoji for an activity or for the trip
@@ -5674,9 +5951,19 @@
                 'moon': ['🌙', '🌛', '🌜', '🌚'],
                 'food': ['🍕', '🍔', '🍟', '🌮', '🌯', '🍎', '🍌', '🍉', '🍇', '🍓', '🍒', '🍑', '🥑', '🍆', '🥐', '🥖', '🥨', '🧀', '🍖', '🍗', '🥩', '🥓', '🍳', '🥞', '🧇', '🍕', '🍔', '🍟', '🌭', '🍿', '🧈', '🥗', '🍜', '🍲', '🍱', '🍣', '🥟', '🍤', '🍙', '🍚', '🍘', '🍥', '🥠', '🍡', '🍧', '🍨', '🍦', '🥧', '🧁', '🍰', '🎂', '🍮', '🍭', '🍬', '🍫', '🍩', '🍪'],
                 'drink': ['☕', '🍵', '🧃', '🥤', '🧋', '🍶', '🍺', '🍻', '🥂', '🍷', '🥃', '🍸', '🍹', '🧉', '🍾', '🧊'],
-                'travel': ['✈', '🚗', '🚕', '🚙', '🚌', '🚎', '🏎', '🚓', '🚑', '🚒', '🚐', '🚚', '🚛', '🚜', '🛴', '🚲', '🛵', '🏍', '🚁', '🚀', '🛸', '🛶', '⛵', '🚤', '🛥', '🛳', '⛴', '🚢'],
+                'travel': ['✈', '🛫', '🛬', '🧳', '🗺', '📍', '🏨', '🏝', '🗼', '🎒', '🚗', '🚕', '🚙', '🚌', '🚎', '🏎', '🚓', '🚑', '🚒', '🚐', '🚚', '🚛', '🚜', '🛴', '🚲', '🛵', '🏍', '🚁', '🚀', '🛸', '🛶', '⛵', '🚤', '🛥', '🛳', '⛴', '🚢', '🌍', '🌎', '🌏'],
+                'trip': ['✈', '🛫', '🛬', '🧳', '🗺', '📍', '🏨', '🏝', '🗼', '🎒', '🌍', '🌎', '🌏', '🗿', '🏛', '🕌', '🛕'],
+                'vacation': ['🏖', '🏝', '⛱', '🏄', '🏊', '🤿', '🌊', '☀', '🌞', '🕶', '🩱', '👙', '🍹', '🧳'],
+                'luggage': ['🧳', '👜', '🎒', '💼', '👛', '🛄', '🛅'],
+                'suitcase': ['🧳', '👜', '💼'],
+                'baggage': ['🧳', '👜', '🎒', '💼', '🛄', '🛅'],
+                'backpack': ['🎒', '🧳'],
                 'plane': ['✈', '🛫', '🛬', '🛩', '🚁', '🛸', '🚀'],
                 'car': ['🚗', '🚕', '🚙', '🚌', '🏎', '🚓', '🚔'],
+                'hotel': ['🏨', '🛏', '🛎', '🏩'],
+                'restaurant': ['🍽', '🍴', '🥄', '🔪', '🥢', '🍽'],
+                'shopping': ['🛍', '💳', '💰', '🛒', '💵', '💴', '💶', '💷'],
+                'money': ['💰', '💵', '💴', '💶', '💷', '💸', '💳', '🪙', '💎'],
                 'music': ['🎵', '🎶', '🎤', '🎧', '🎸', '🎹', '🎺', '🎻', '🥁', '🎷', '🎼'],
                 'sport': ['⚽', '🏀', '🏈', '⚾', '🥎', '🎾', '🏐', '🏉', '🎱', '🏓', '🏸', '🥊', '🥋', '🤺', '🏆', '🥇', '🥈', '🥉'],
                 'animal': emojiData.animals,
@@ -5687,7 +5974,23 @@
                 'weather': ['☀', '⛅', '☁', '🌤', '🌥', '🌦', '🌧', '⛈', '🌩', '🌨', '❄', '☃', '⛄', '🌬', '💨', '🌪', '🌫', '🌈'],
                 'rain': ['🌧', '⛈', '🌦', '🌨', '💧', '☔'],
                 'snow': ['❄', '☃', '⛄', '🌨'],
-                'party': ['🎉', '🎊', '🎈', '🎁', '🎀', '🎂', '🍰', '🧁', '🥳', '🎆', '🎇'],
+                'flower': ['💐', '🌸', '🌺', '🌻', '🌷', '🌹', '🥀', '🏵', '🌼', '💮'],
+                'nature': ['🌳', '🌲', '🌴', '🌱', '🍀', '🌿', '🌾', '🌵', '🌾', '🦋', '🐝', '🐛', '🐞', '🦗', '🕷', '🌍', '🌎', '🌏'],
+                'tree': ['🌳', '🌲', '🌴', '🌱', '🎄', '🌵'],
+                'plant': ['🌱', '🌿', '☘', '🍀', '🎍', '🎋', '🌾', '🌵', '🪴'],
+                'garden': ['🌻', '🌺', '🌸', '🌷', '🌹', '💐', '🌼', '🏵', '🌱', '🌿', '🍀'],
+                'wedding': ['💍', '👰', '🤵', '💐', '💒', '🎊', '🥂', '🎉', '💕', '💖', '💗', '❤', '🎂', '🍾'],
+                'romance': ['❤', '💕', '💖', '💗', '💘', '💝', '💞', '💓', '🥰', '😍', '😘', '💏', '💑', '🌹', '💐'],
+                'party': ['🎉', '🎊', '🎈', '🎁', '🎀', '🎂', '🍰', '🧁', '🥳', '🎆', '🎇', '🪅'],
+                'celebration': ['🎉', '🎊', '🎈', '🎁', '🎀', '🎆', '🎇', '🥳', '🍾', '🥂', '🎇'],
+                'birthday': ['🎂', '🎁', '🎈', '🎉', '🎊', '🥳', '🧁', '🍰', '🎀', '🕯'],
+                'christmas': ['🎄', '🎅', '🤶', '🎁', '❄', '⛄', '☃', '🔔', '🎀', '⛷', '🎿'],
+                'halloween': ['🎃', '👻', '🦇', '🕷', '🕸', '🧛', '🧟', '💀', '🕯', '🍬', '🍭'],
+                'summer': ['☀', '🌞', '🏖', '🏝', '⛱', '🍉', '🕶', '🩱', '👙', '🌊', '🏄', '🏊'],
+                'winter': ['❄', '⛄', '☃', '🌨', '🎿', '⛷', '🏂', '⛸', '🧣', '🧤', '🧥'],
+                'spring': ['🌸', '🌺', '🌻', '🌷', '🌼', '🦋', '🐝', '🌱', '☀', '🌦', '🌈'],
+                'autumn': ['🍂', '🍁', '🎃', '🌾', '🍄', '🦃', '🥧'],
+                'fall': ['🍂', '🍁', '🎃', '🌾', '🍄', '🦃', '🥧'],
                 'flag': emojiData.flags,
                 'check': ['✅', '✔', '☑'],
                 'cross': ['❌', '❎', '✖'],
@@ -6031,103 +6334,345 @@
                 : '¡Viaje actualizado exitosamente!');
         }
 
-        // Clothing Drop Animation
-        function triggerClothingAnimation() {
-            const container = document.createElement('div');
-            container.className = 'clothing-animation-container';
-            document.body.appendChild(container);
+        // City Management Functions
+        let cityStartDate = null;
+        let cityEndDate = null;
+        let cityCalendarMonth = new Date();
 
-            const clothingItems = ['👕', '👔', '👗', '👘', '👚', '👖', '👙', '🩱', '🧥', '🧤', '🧣', '🧦', '👟', '👠', '👡', '👢', '👞', '🥾', '🩴', '👒', '🎩', '🧢', '👑', '🎒', '👜', '💼', '🧳'];
+        function openAddCityModal() {
+            if (!currentTrip) return;
             
-            // Create 15 random clothing items
-            for (let i = 0; i < 15; i++) {
-                setTimeout(() => {
-                    const item = document.createElement('div');
-                    item.className = 'clothing-item';
-                    item.textContent = clothingItems[Math.floor(Math.random() * clothingItems.length)];
-                    
-                    // Random horizontal position
-                    item.style.left = Math.random() * 100 + '%';
-                    
-                    // Random delay
-                    item.style.animationDelay = Math.random() * 0.5 + 's';
-                    
-                    // Random duration for variety
-                    item.style.animationDuration = (1.5 + Math.random() * 0.5) + 's';
-                    
-                    container.appendChild(item);
-                    
-                    // Remove item after animation
-                    setTimeout(() => {
-                        item.remove();
-                    }, 2500);
-                }, i * 100);
-            }
+            document.getElementById('addCityModal').classList.remove('hidden');
+            document.getElementById('overlay').classList.remove('hidden');
             
-            // Remove container after all animations
-            setTimeout(() => {
-                container.remove();
-            }, 4000);
+            // Reset form
+            document.getElementById('cityDestination').value = '';
+            cityStartDate = null;
+            cityEndDate = null;
+            updateCityDatePickerButton();
+            
+            // Setup autocomplete for city input
+            setupCityAutocomplete();
         }
 
-        // Background Clothing Animation for Auth Screen
-        let authAnimationInterval = null;
-        
-        function startAuthBackgroundAnimation() {
-            const container = document.getElementById('authBgAnimation');
-            if (!container) return;
-            
-            const clothingItems = ['👕', '👔', '👗', '👘', '👚', '👖', '👙', '🩱', '🧥', '🧤', '🧣', '🧦', '👟', '👠', '👡', '👢', '👞', '🥾', '🩴', '👒', '🎩', '🧢', '🎒', '👜', '💼', '🧳'];
-            
-            function createClothingItem() {
-                const item = document.createElement('div');
-                item.className = 'auth-bg-clothing';
-                item.textContent = clothingItems[Math.floor(Math.random() * clothingItems.length)];
-                
-                // Random horizontal position
-                item.style.left = Math.random() * 100 + '%';
-                
-                // Random delay
-                item.style.animationDelay = Math.random() * 2 + 's';
-                
-                // Random duration for variety
-                item.style.animationDuration = (6 + Math.random() * 4) + 's';
-                
-                container.appendChild(item);
-                
-                // Remove item after animation completes
-                setTimeout(() => {
-                    if (item.parentNode) {
-                        item.remove();
-                    }
-                }, 12000);
-            }
-            
-            // Create initial batch
-            for (let i = 0; i < 8; i++) {
-                setTimeout(() => createClothingItem(), i * 1000);
-            }
-            
-            // Keep creating new items periodically
-            authAnimationInterval = setInterval(() => {
-                createClothingItem();
-            }, 1500);
+        function closeAddCityModal() {
+            document.getElementById('addCityModal').classList.add('hidden');
+            document.getElementById('overlay').classList.add('hidden');
         }
-        
-        function stopAuthBackgroundAnimation() {
-            if (authAnimationInterval) {
-                clearInterval(authAnimationInterval);
-                authAnimationInterval = null;
+
+        function openCityCalendar() {
+            document.getElementById('addCityModal').classList.add('hidden');
+            document.getElementById('cityCalendar').classList.remove('hidden');
+            
+            // Initialize calendar to trip start date or current month
+            cityCalendarMonth = new Date(currentTrip.startDate);
+            renderCityCalendar();
+        }
+
+        function closeCityCalendar() {
+            document.getElementById('cityCalendar').classList.add('hidden');
+            document.getElementById('addCityModal').classList.remove('hidden');
+            updateCityDatePickerButton();
+        }
+
+        function changeCityMonth(direction) {
+            cityCalendarMonth.setMonth(cityCalendarMonth.getMonth() + direction);
+            renderCityCalendar();
+        }
+
+        function renderCityCalendar() {
+            const monthNames = currentLanguage === 'en' 
+                ? ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+                : ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            
+            const year = cityCalendarMonth.getFullYear();
+            const month = cityCalendarMonth.getMonth();
+            
+            document.getElementById('cityCalendarMonth').textContent = `${monthNames[month]} ${year}`;
+            
+            const weekdaysContainer = document.getElementById('cityCalendarWeekdays');
+            const weekdays = currentLanguage === 'en' 
+                ? ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+                : ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+            
+            weekdaysContainer.innerHTML = weekdays.map(day => 
+                `<div class="calendar-weekday">${day}</div>`
+            ).join('');
+            
+            const daysContainer = document.getElementById('cityCalendarDays');
+            daysContainer.innerHTML = '';
+            
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            // Add empty cells for days before the first day of the month
+            for (let i = 0; i < firstDay; i++) {
+                daysContainer.appendChild(document.createElement('div'));
             }
-            const container = document.getElementById('authBgAnimation');
-            if (container) {
-                container.innerHTML = '';
+            
+            // Add day cells
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = createCityDayElement(year, month, day);
+                daysContainer.appendChild(dayElement);
+            }
+            
+            updateCitySelectedDatesDisplay();
+        }
+
+        function createCityDayElement(year, month, day) {
+            const date = new Date(year, month, day);
+            const dateStr = dateToString(date);
+            const dayElement = document.createElement('div');
+            dayElement.className = 'calendar-day';
+            dayElement.textContent = day;
+            dayElement.onclick = () => selectCityDate(dateStr);
+            
+            // Check if date is within trip range
+            const tripStart = currentTrip.startDate;
+            const tripEnd = currentTrip.endDate;
+            
+            if (dateStr < tripStart || dateStr > tripEnd) {
+                dayElement.classList.add('disabled');
+                dayElement.onclick = null;
+                return dayElement;
+            }
+            
+            // Highlight selected dates
+            if (dateStr === cityStartDate) {
+                dayElement.classList.add('selected-start');
+            }
+            if (dateStr === cityEndDate) {
+                dayElement.classList.add('selected-end');
+            }
+            if (cityStartDate && cityEndDate && dateStr > cityStartDate && dateStr < cityEndDate) {
+                dayElement.classList.add('in-range');
+            }
+            
+            return dayElement;
+        }
+
+        function selectCityDate(dateStr) {
+            if (!cityStartDate || (cityStartDate && cityEndDate)) {
+                // Start new selection
+                cityStartDate = dateStr;
+                cityEndDate = null;
+            } else {
+                // Set end date
+                if (dateStr < cityStartDate) {
+                    cityEndDate = cityStartDate;
+                    cityStartDate = dateStr;
+                } else {
+                    cityEndDate = dateStr;
+                }
+            }
+            
+            renderCityCalendar();
+        }
+
+        function updateCitySelectedDatesDisplay() {
+            const selectedDatesText = document.getElementById('citySelectedDatesText');
+            const selectedDatesRange = document.getElementById('citySelectedDatesRange');
+            
+            if (cityStartDate && cityEndDate) {
+                selectedDatesText.textContent = currentLanguage === 'en' ? 'Selected dates:' : 'Fechas seleccionadas:';
+                selectedDatesRange.textContent = `${formatDate(cityStartDate)} - ${formatDate(cityEndDate)}`;
+            } else if (cityStartDate) {
+                selectedDatesText.textContent = currentLanguage === 'en' ? 'Select end date' : 'Selecciona fecha de fin';
+                selectedDatesRange.textContent = formatDate(cityStartDate);
+            } else {
+                selectedDatesText.textContent = translations[currentLanguage].citySelectedDatesText;
+                selectedDatesRange.textContent = '';
             }
         }
+
+        function updateCityDatePickerButton() {
+            const button = document.getElementById('cityDatePickerButton');
+            const buttonText = document.getElementById('cityDatePickerButtonText');
+            
+            if (cityStartDate && cityEndDate) {
+                buttonText.textContent = `${formatDate(cityStartDate)} - ${formatDate(cityEndDate)}`;
+            } else {
+                buttonText.textContent = translations[currentLanguage].clickToSelectDates;
+            }
+        }
+
+        function setupCityAutocomplete() {
+            const cityInput = document.getElementById('cityDestination');
+            const suggestionsDiv = document.getElementById('citySuggestions');
+            
+            cityInput.addEventListener('input', async (e) => {
+                const query = e.target.value.trim();
+                
+                if (query.length < 2) {
+                    suggestionsDiv.innerHTML = '';
+                    suggestionsDiv.style.display = 'none';
+                    return;
+                }
+                
+                const suggestions = await fetchCitySuggestions(query);
+                
+                if (suggestions.length > 0) {
+                    suggestionsDiv.innerHTML = suggestions.map(city => 
+                        `<div class="autocomplete-item" onclick="selectCityFromSuggestion('${city.name}', '${city.region}', '${city.country}')">${city.name}, ${city.region !== city.name ? city.region + ', ' : ''}${city.country}</div>`
+                    ).join('');
+                    suggestionsDiv.style.display = 'block';
+                } else {
+                    suggestionsDiv.innerHTML = '';
+                    suggestionsDiv.style.display = 'none';
+                }
+            });
+        }
+
+        function selectCityFromSuggestion(name, region, country) {
+            const fullName = region !== name ? `${name}, ${region}, ${country}` : `${name}, ${country}`;
+            document.getElementById('cityDestination').value = fullName;
+            document.getElementById('citySuggestions').style.display = 'none';
+        }
+
+        async function saveCityToTrip() {
+            const destination = document.getElementById('cityDestination').value.trim();
+            
+            if (!destination) {
+                alert(currentLanguage === 'en' ? 'Please enter a city' : 'Por favor ingrese una ciudad');
+                return;
+            }
+            
+            if (!cityStartDate || !cityEndDate) {
+                alert(currentLanguage === 'en' ? 'Please select dates for this city' : 'Por favor seleccione fechas para esta ciudad');
+                return;
+            }
+            
+            // Check for overlapping cities
+            const overlap = currentTrip.cities.some(city => {
+                return !(cityEndDate < city.startDate || cityStartDate > city.endDate);
+            });
+            
+            if (overlap) {
+                alert(currentLanguage === 'en' 
+                    ? 'These dates overlap with another city. Please choose different dates.' 
+                    : 'Estas fechas se superponen con otra ciudad. Por favor elige fechas diferentes.');
+                return;
+            }
+            
+            // Show loading
+            const saveBtn = document.querySelector('#addCityModal .btn');
+            const originalText = saveBtn.textContent;
+            saveBtn.textContent = currentLanguage === 'en' ? 'Adding city...' : 'Agregando ciudad...';
+            saveBtn.disabled = true;
+            
+            // Fetch weather and socket data
+            const [countryData, weatherData] = await Promise.all([
+                fetchCountryData(destination),
+                fetchWeatherForecast(destination, cityStartDate, cityEndDate)
+            ]);
+            
+            let socketType = getSocketType(destination);
+            let voltage = getVoltage(socketType);
+            
+            if (countryData) {
+                if (countryData.plugTypes && countryData.plugTypes !== 'Check local' && countryData.plugTypes !== '') {
+                    socketType = `Type ${countryData.plugTypes}`;
+                }
+                if (countryData.voltage && countryData.voltage !== 'Unknown' && countryData.voltage !== '') {
+                    voltage = Array.isArray(countryData.voltage) 
+                        ? `${countryData.voltage.join('/')}V` 
+                        : `${countryData.voltage}V`;
+                }
+            }
+            
+            const city = {
+                id: Date.now(),
+                name: destination,
+                startDate: cityStartDate,
+                endDate: cityEndDate,
+                socketType: `${socketType} • ${voltage}`,
+                socketIcon: getSocketSVG(socketType),
+                emoji: getCountryFlagEmoji(destination),
+                weatherData: weatherData,
+                activities: []
+            };
+            
+            currentTrip.cities.push(city);
+            currentTrip.cities.sort((a, b) => a.startDate.localeCompare(b.startDate));
+            
+            saveCurrentTrip();
+            renderCities();
+            renderOutfitPlanner(currentTrip);
+            
+            // Reset button
+            saveBtn.textContent = originalText;
+            saveBtn.disabled = false;
+            
+            closeAddCityModal();
+        }
+
+        function renderCities() {
+            if (!currentTrip) return;
+            
+            const citiesList = document.getElementById('citiesList');
+            
+            if (!currentTrip.cities || currentTrip.cities.length === 0) {
+                const noCitiesText = translations[currentLanguage] && translations[currentLanguage].noCitiesText 
+                    ? translations[currentLanguage].noCitiesText 
+                    : 'No cities added yet. Click "Add City" to start planning!';
+                citiesList.innerHTML = `<p class="no-cities" id="noCitiesText">${noCitiesText}</p>`;
+                return;
+            }
+            
+            const deleteCityText = translations[currentLanguage] && translations[currentLanguage].deleteCityText 
+                ? translations[currentLanguage].deleteCityText 
+                : 'Delete';
+            
+            citiesList.innerHTML = currentTrip.cities.map(city => `
+                <div class="city-card">
+                    <div class="city-card-emoji">${city.emoji}</div>
+                    <div class="city-card-content">
+                        <div class="city-card-name">${city.name}</div>
+                        <div class="city-card-dates">
+                            📅 ${formatDate(city.startDate)} - ${formatDate(city.endDate)}
+                        </div>
+                        <div class="city-card-socket">${city.socketIcon} ${city.socketType}</div>
+                    </div>
+                    <div class="city-card-actions">
+                        <button onclick="deleteCity(${city.id})" title="${deleteCityText}">🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function deleteCity(cityId) {
+            if (!currentTrip) return;
+            
+            const city = currentTrip.cities.find(c => c.id === cityId);
+            if (!city) return;
+            
+            const confirmMsg = currentLanguage === 'en' 
+                ? `Are you sure you want to remove ${city.name} from this trip?` 
+                : `¿Estás seguro de que quieres eliminar ${city.name} de este viaje?`;
+            
+            if (!confirm(confirmMsg)) return;
+            
+            currentTrip.cities = currentTrip.cities.filter(c => c.id !== cityId);
+            
+            // Remove activities associated with this city
+            if (currentTrip.cities.length === 0) {
+                // If no cities left, keep old activities structure (for backward compat)
+            }
+            
+            saveCurrentTrip();
+            renderCities();
+            renderOutfitPlanner(currentTrip);
+        }
+
+        function getCityForDate(cities, dateStr) {
+            if (!cities || cities.length === 0) return null;
+            
+            return cities.find(city => {
+                return dateStr >= city.startDate && dateStr <= city.endDate;
+            });
+        }
+
     </script>
-
-    <!-- Clothing Animation Container -->
-    <div id="clothingAnimationContainer"></div>
 </body>
 </html>
 
