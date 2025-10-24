@@ -263,6 +263,15 @@
             margin-bottom: var(--spacing-8);
         }
 
+        /* Sidebar section title colors */
+        #upcomingTripsSidebarTitle {
+            color: var(--accent-secondary);
+        }
+
+        #pastTripsSidebarTitle {
+            color: var(--accent-tertiary);
+        }
+
         .sidebar-trips-list {
             display: flex;
             flex-direction: column;
@@ -727,16 +736,17 @@
 
         .btn {
             width: 100%;
-            padding: var(--spacing-15) var(--spacing-14);
+            padding: var(--spacing-12) var(--spacing-16);
             background: var(--accent-primary);
             color: var(--color-white);
             border: none;
-            border-radius: var(--radius-lg);
+            border-radius: var(--radius-xl);
             cursor: pointer;
             font-size: var(--text-fixed-16);
-            font-weight: 600;
+            font-weight: 700;
+            font-family: 'Nunito', sans-serif;
             transition: all var(--duration-medium) var(--easing-standard);
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-sm);
         }
 
         .btn:hover {
@@ -749,12 +759,16 @@
             background: var(--color-white);
             color: var(--accent-primary);
             border: 2px solid var(--accent-primary);
-            margin-top: var(--spacing-8);
             box-shadow: var(--shadow-none);
         }
 
         .btn-secondary:hover {
             background: var(--accent-light);
+            border-color: var(--accent-hover);
+        }
+        
+        .auth-screen .btn-secondary {
+            margin-top: var(--spacing-8);
         }
 
         /* Password Reset Links */
@@ -922,11 +936,12 @@
             cursor: pointer;
             text-align: left;
             font-size: var(--text-fixed-14);
-            color: #bbb;
+            color: var(--color-gray-500);
             transition: all var(--duration-medium) var(--easing-standard);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-weight: 500;
         }
 
         .date-picker-button:hover {
@@ -935,7 +950,7 @@
 
         .date-picker-button.has-dates {
             color: var(--color-black);
-            font-weight: 500;
+            font-weight: 600;
         }
 
         /* Trip Creation Emoji Picker Button */
@@ -967,12 +982,31 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background: var(--color-white);
-            padding: var(--spacing-20);
+            padding: var(--spacing-32);
             border-radius: var(--radius-2xl);
             box-shadow: var(--shadow-xl);
             z-index: 1000;
-            max-width: 400px;
+            max-width: 450px;
             width: 90%;
+        }
+
+        .date-range-picker h3 {
+            margin: 0 0 var(--spacing-24) 0;
+            font-size: var(--text-fixed-24);
+            font-weight: 700;
+            color: var(--color-black);
+        }
+
+        .date-range-picker .form-group {
+            margin-bottom: var(--spacing-16);
+        }
+
+        .date-range-picker .form-group label {
+            display: block;
+            margin-bottom: var(--spacing-6);
+            color: var(--color-gray-700);
+            font-weight: 600;
+            font-size: var(--text-fixed-14);
         }
 
         .calendar-header {
@@ -1198,11 +1232,20 @@
         }
 
         .trips-section h2 {
-            color: var(--accent-primary);
+            color: var(--color-black);
             font-size: var(--text-lg);
             font-weight: 600;
             letter-spacing: -0.3px;
             text-transform: capitalize;
+        }
+
+        /* Landing page section title colors */
+        #upcomingTripsTitle {
+            color: var(--accent-secondary);
+        }
+
+        #pastTripsTitle {
+            color: var(--accent-tertiary);
         }
 
 
@@ -1501,6 +1544,17 @@
             border-bottom-color: var(--accent-primary);
         }
 
+        /* Tab-specific colors */
+        #itineraryTab.active {
+            color: var(--accent-secondary);
+            border-bottom-color: var(--accent-secondary);
+        }
+
+        #packingTab.active {
+            color: var(--accent-secondary);
+            border-bottom-color: var(--accent-secondary);
+        }
+
         .trip-tab-content {
             display: none;
             padding-top: var(--spacing-24);
@@ -1748,8 +1802,8 @@
             height: 40px;
             padding: 0;
             background: var(--color-white);
-            color: var(--accent-primary);
-            border: 1px solid var(--accent-primary);
+            color: var(--accent-secondary);
+            border: 1px solid var(--accent-secondary);
             border-radius: var(--radius-md);
             cursor: pointer;
             font-size: var(--text-fixed-18);
@@ -1760,7 +1814,7 @@
         }
 
         .edit-trip-btn:hover {
-            background: var(--accent-light);
+            background: var(--accent-secondary-light);
             transform: scale(1.05);
         }
 
@@ -1769,8 +1823,8 @@
             height: 40px;
             padding: 0;
             background: var(--color-white);
-            color: var(--color-gray-700);
-            border: 1px solid var(--color-gray-400);
+            color: var(--accent-tertiary);
+            border: 1px solid var(--accent-tertiary);
             border-radius: var(--radius-md);
             cursor: pointer;
             font-size: var(--text-fixed-18);
@@ -1781,9 +1835,8 @@
         }
 
         .delete-trip-btn:hover {
-            border-color: var(--color-error);
-            color: var(--color-error);
-            background: var(--color-error-bg);
+            background: var(--accent-tertiary);
+            color: var(--color-white);
             transform: scale(1.05);
         }
 
@@ -1801,10 +1854,14 @@
         }
 
         .notes-section h3 {
-            color: var(--color-gray-700);
+            color: var(--color-black);
             font-size: var(--text-base);
             font-weight: 600;
             margin-bottom: var(--spacing-6);
+        }
+
+        #notesTitle {
+            color: var(--accent-tertiary);
         }
 
         .trip-notes {
@@ -1850,9 +1907,14 @@
             margin: var(--spacing-0);
         }
 
+        /* Trip detail section title colors */
+        #citiesTitle {
+            color: var(--accent-secondary);
+        }
+
         .add-city-link {
             background: transparent;
-            color: var(--accent-primary);
+            color: var(--accent-secondary);
             border: none;
             cursor: pointer;
             font-size: var(--text-sm);
@@ -1863,8 +1925,8 @@
         }
 
         .add-city-link:hover {
-            background: var(--accent-light);
-            color: var(--accent-primary);
+            background: var(--accent-secondary-light);
+            color: var(--accent-secondary);
         }
 
         .cities-list {
@@ -1995,20 +2057,27 @@
             margin: var(--spacing-0);
         }
 
+        #activitiesTitle {
+            color: var(--accent-tertiary);
+        }
+
         .add-activity-link {
             background: transparent;
-            color: var(--accent-primary);
+            color: var(--accent-tertiary);
             border: none;
             font-size: var(--text-sm);
             font-weight: 600;
             cursor: pointer;
+            padding: var(--spacing-4) var(--spacing-12);
+            border-radius: var(--radius-sm);
             transition: all var(--duration-medium) var(--easing-standard);
             text-decoration: none;
         }
 
         .add-activity-link:hover {
-            color: var(--accent-hover);
-            text-decoration: underline;
+            background: var(--accent-tertiary-light);
+            color: var(--accent-tertiary);
+            text-decoration: none;
         }
 
         .activities-list {
@@ -2279,8 +2348,8 @@
             gap: var(--spacing-2);
             padding: var(--spacing-6) var(--spacing-14);
             background: var(--color-white);
-            color: var(--accent-primary);
-            border: 2px solid var(--accent-primary);
+            color: var(--accent-secondary);
+            border: 2px solid var(--accent-secondary);
             border-radius: var(--radius-md);
             cursor: pointer;
             font-size: var(--text-fixed-14);
@@ -2290,7 +2359,7 @@
         }
 
         .add-btn:hover {
-            background: var(--accent-primary);
+            background: var(--accent-secondary);
             color: var(--color-white);
         }
 
@@ -2307,9 +2376,9 @@
             gap: var(--spacing-2);
             padding: var(--spacing-6) var(--spacing-14);
             background: var(--color-white);
-            border: 2px solid var(--color-success);
+            border: 2px solid var(--accent-tertiary);
             border-radius: var(--radius-lg);
-            color: var(--color-success);
+            color: var(--accent-tertiary);
             font-size: var(--text-fixed-14);
             font-weight: 600;
             cursor: pointer;
@@ -2317,10 +2386,10 @@
         }
 
         .add-list-btn:hover {
-            background: var(--color-success);
+            background: var(--accent-tertiary);
             color: var(--color-white);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(139, 195, 74, 0.3);
+            box-shadow: var(--shadow-accent-md);
         }
 
         .checklists-section {
@@ -2359,6 +2428,15 @@
             font-size: 17px;
             font-weight: 700;
             margin-bottom: var(--spacing-15);
+        }
+
+        /* Checklist title colors */
+        #essentialsTitle {
+            color: var(--accent-secondary);
+        }
+
+        #toiletriesTitle {
+            color: var(--accent-secondary);
         }
 
         .checklist-column h3 input {
@@ -2433,10 +2511,14 @@
         }
 
         .outfit-planner h3 {
-            color: #1a1a1a;
+            color: var(--color-black);
             margin-bottom: 20px;
             font-size: 20px;
             font-weight: 700;
+        }
+
+        #outfitPlannerTitle {
+            color: var(--accent-tertiary);
         }
 
         .week-row {
@@ -3338,16 +3420,26 @@
         /* Utility Classes for Modal Forms */
         .modal-input, .modal-select {
             width: 100%;
-            padding: var(--spacing-8);
-            border: 1.5px solid var(--color-gray-400);
-            border-radius: var(--radius-md);
+            padding: var(--spacing-10) var(--spacing-12);
+            border: 2px solid var(--color-gray-400);
+            border-radius: var(--radius-lg);
             font-size: var(--text-fixed-15);
+            font-weight: 500;
+            font-family: 'Nunito', sans-serif;
+            color: var(--color-black);
+            background: var(--color-white);
+            transition: all var(--duration-medium) var(--easing-standard);
         }
 
         .modal-input:focus, .modal-select:focus {
             outline: none;
             border-color: var(--accent-primary);
             box-shadow: var(--shadow-accent-focus);
+        }
+
+        .modal-input::placeholder {
+            color: var(--color-gray-500);
+            font-weight: 500;
         }
 
         .modal-emoji-button {
@@ -3358,12 +3450,16 @@
 
         .modal-footer-buttons {
             display: flex;
-            gap: var(--spacing-8);
-            margin-top: var(--spacing-16);
+            gap: var(--spacing-12);
+            margin-top: var(--spacing-24);
         }
 
         .modal-footer-buttons .btn {
             flex: 1;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .modal-form-group-inline {
@@ -3808,23 +3904,23 @@
 
         <!-- Edit Trip Modal -->
         <div id="editTripModal" class="date-range-picker hidden">
-            <h3 id="editTripModalTitle" class="modal-title-inline">Edit Trip</h3>
-            <div class="form-group modal-form-group-inline">
-                <label id="editDestinationLabel" class="modal-label-inline">Destination</label>
-                <input type="text" id="editDestination" placeholder="Enter destination" class="modal-input">
+            <h3 id="editTripModalTitle">Edit Trip</h3>
+            <div class="form-group">
+                <label id="editTripNameLabel">Trip Name</label>
+                <input type="text" id="editTripName" placeholder="Enter trip name" class="modal-input">
             </div>
-            <div class="form-group modal-form-group-inline">
-                <label id="editDatesLabel" class="modal-label-inline">Travel Dates</label>
+            <div class="form-group">
+                <label id="editDatesLabel">Travel Dates</label>
                 <button type="button" class="date-picker-button" id="editDatePickerButton" onclick="openEditTripCalendar()">
                     <span id="editDatePickerButtonText">Click to select dates</span>
                     <span>📅</span>
                 </button>
             </div>
-            <div class="modal-actions-wrapper">
-                <button class="btn modal-edit-btn-inline" onclick="saveEditedTrip()">
+            <div class="modal-footer-buttons">
+                <button class="btn" onclick="saveEditedTrip()">
                     <span id="saveEditTripText">Save Changes</span>
                 </button>
-                <button class="btn btn-secondary modal-edit-btn-inline" onclick="closeEditTripModal()">
+                <button class="btn btn-secondary" onclick="closeEditTripModal()">
                     <span id="cancelEditTripText">Cancel</span>
                 </button>
             </div>
@@ -4024,7 +4120,7 @@
                 editTripText: "Edit",
                 deleteTripText: "Delete",
                 editTripModalTitle: "Edit Trip",
-                editDestinationLabel: "Destination",
+                editTripNameLabel: "Trip Name",
                 editDatesLabel: "Travel Dates",
                 saveEditTripText: "Save Changes",
                 cancelEditTripText: "Cancel",
@@ -4131,7 +4227,7 @@
                 editTripText: "Editar",
                 deleteTripText: "Eliminar",
                 editTripModalTitle: "Editar Viaje",
-                editDestinationLabel: "Destino",
+                editTripNameLabel: "Nombre del Viaje",
                 editDatesLabel: "Fechas de Viaje",
                 saveEditTripText: "Guardar Cambios",
                 cancelEditTripText: "Cancelar",
@@ -5329,7 +5425,7 @@
                 'authTitle', 'nameLabel', 'usernameLabel', 'passwordLabel', 'loginBtn', 'registerBtn',
                 'forgotPasswordLink', 'resetPasswordTitle', 'resetUsernameLabel', 'resetNameLabel', 
                 'newPasswordLabel', 'resetPasswordBtn', 'backToLoginLink',
-                'editTripText', 'deleteTripText', 'editTripModalTitle', 'editDestinationLabel', 
+                'editTripText', 'deleteTripText', 'editTripModalTitle', 'editTripNameLabel', 
                 'editDatesLabel', 'saveEditTripText', 'cancelEditTripText',
                 'createTripTitle', 'tripNameLabel', 'tripEmojiLabel', 'destinationLabel',
                 'dateRangeLabel', 'createTripBtn', 'upcomingTripsTitle',
@@ -7044,7 +7140,7 @@
             if (!currentTrip) return;
             
             // Pre-fill with current trip data
-            document.getElementById('editDestination').value = currentTrip.destination;
+            document.getElementById('editTripName').value = currentTrip.name;
             editTripStartDate = currentTrip.startDate;
             editTripEndDate = currentTrip.endDate;
             
@@ -7227,10 +7323,10 @@
         async function saveEditedTrip() {
             if (!currentTrip) return;
             
-            const newDestination = document.getElementById('editDestination').value.trim();
+            const newTripName = document.getElementById('editTripName').value.trim();
             
-            if (!newDestination) {
-                alert(currentLanguage === 'en' ? 'Please enter a destination' : 'Por favor ingrese un destino');
+            if (!newTripName) {
+                alert(currentLanguage === 'en' ? 'Please enter a trip name' : 'Por favor ingrese un nombre de viaje');
                 return;
             }
             
@@ -7239,43 +7335,37 @@
                 return;
             }
             
-            // Check if dates or destination changed
+            // Check if dates or name changed
             const datesChanged = editTripStartDate !== currentTrip.startDate || editTripEndDate !== currentTrip.endDate;
-            const destinationChanged = newDestination !== currentTrip.destination;
+            const nameChanged = newTripName !== currentTrip.name;
             
-            if (!datesChanged && !destinationChanged) {
+            if (!datesChanged && !nameChanged) {
                 closeEditTripModal();
                 return;
             }
             
             // Update trip
-            currentTrip.destination = newDestination;
+            currentTrip.name = newTripName;
             currentTrip.startDate = editTripStartDate;
             currentTrip.endDate = editTripEndDate;
             
-            // If destination changed, fetch new data
-            if (destinationChanged) {
-                const [countryData, weatherData] = await Promise.all([
-                    fetchCountryData(newDestination),
-                    fetchWeatherForecast(newDestination, editTripStartDate, editTripEndDate)
-                ]);
-                
-                let socketType = getSocketType(newDestination);
-                let voltage = getVoltage(socketType);
-                
-                if (countryData && countryData.plugTypes) {
-                    socketType = `Type ${countryData.plugTypes}`;
+            // If dates changed, update weather data for each city
+            if (datesChanged) {
+                // Update weather data for main destination if available
+                if (currentTrip.destination) {
+                    const weatherData = await fetchWeatherForecast(currentTrip.destination, editTripStartDate, editTripEndDate);
+                    currentTrip.weatherData = weatherData;
                 }
                 
-                currentTrip.socketType = socketType;
-                currentTrip.socketIcon = getSocketSVG(socketType);
-                currentTrip.weatherData = weatherData;
-            }
-            
-            // If dates changed, update weather data
-            if (datesChanged && !destinationChanged) {
-                const weatherData = await fetchWeatherForecast(currentTrip.destination, editTripStartDate, editTripEndDate);
-                currentTrip.weatherData = weatherData;
+                // Update weather data for all cities
+                if (currentTrip.cities && currentTrip.cities.length > 0) {
+                    for (let city of currentTrip.cities) {
+                        if (city.destination) {
+                            const cityWeather = await fetchWeatherForecast(city.destination, editTripStartDate, editTripEndDate);
+                            city.weatherData = cityWeather;
+                        }
+                    }
+                }
             }
             
             // Adjust activities to be within new date range
