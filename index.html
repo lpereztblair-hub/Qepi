@@ -4511,6 +4511,9 @@
             createBtn.disabled = false;
             createBtn.classList.remove('packing-animation');
 
+            // Update sidebar with new trip
+            loadSidebarTrips();
+
             // Open the trip
             openTrip(trip.id);
         }
@@ -4831,6 +4834,7 @@
             renderCalendar();
             updateDatePickerButton();
             loadTrips();
+            loadSidebarTrips(); // Update sidebar when returning to landing page
         }
 
         function renderTripDetail(trip) {
