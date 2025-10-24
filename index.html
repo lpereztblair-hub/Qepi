@@ -823,6 +823,17 @@
             background: var(--accent-light);
         }
 
+        .calendar-day.disabled {
+            color: #ddd;
+            cursor: not-allowed;
+            background: #f9f9f9;
+            opacity: 0.5;
+        }
+
+        .calendar-day.disabled:hover {
+            background: #f9f9f9;
+        }
+
         .calendar-day.other-month {
             color: #ccc;
         }
@@ -1420,20 +1431,24 @@
         .city-tag {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
             font-weight: 600;
             text-align: center;
-            margin: 8px 0;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+            gap: 4px;
+            box-shadow: 0 1px 4px rgba(102, 126, 234, 0.25);
+        }
+
+        .city-tag.travel-tag {
+            background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+            box-shadow: 0 1px 4px rgba(255, 152, 0, 0.25);
         }
 
         .city-tag-emoji {
-            font-size: 14px;
+            font-size: 13px;
         }
 
         /* Activities */
@@ -5586,13 +5601,20 @@
                     const dayOfWeek = day.toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { weekday: 'short' });
                     const dayNum = day.getDate();
 
-                    // Determine which city the user is in on this day
-                    const currentCity = getCityForDate(trip.cities, dateStr);
+                    // Determine which city/cities the user is in on this day (can be multiple on travel days!)
+                    const citiesForDay = getCityForDate(trip.cities, dateStr);
                     
-                    // Get real weather data from the current city or use trip-level data
-                    const weatherDisplay = currentCity?.weatherData 
-                        ? formatWeatherData(currentCity.weatherData, dateStr)
-                        : (trip.weatherData ? formatWeatherData(trip.weatherData, dateStr) : '☀️ 72°F');
+                    // Only show weather if there's a city for this day
+                    let weatherDisplay = '';
+                    if (citiesForDay.length > 0) {
+                        // Get real weather data from the first city
+                        weatherDisplay = citiesForDay[0].weatherData
+                            ? formatWeatherData(citiesForDay[0].weatherData, dateStr)
+                            : '☀️ 72°F'; // Default if city has no weather data
+                    } else {
+                        // No city selected for this day
+                        weatherDisplay = currentLanguage === 'en' ? 'No city selected' : 'No hay ciudad';
+                    }
 
                     if (!trip.outfits[dateStr]) {
                         trip.outfits[dateStr] = {
@@ -5617,18 +5639,41 @@
                     // Build activities HTML
                     const activitiesHtml = renderDayActivities(dateStr, dayActivities);
                     
-                    // Build city tag HTML if city exists
-                    const cityTagHtml = currentCity ? `
-                        <div class="city-tag">
-                            <span class="city-tag-emoji">${currentCity.emoji}</span>
-                            <span>${currentCity.name}</span>
-                        </div>
-                    ` : '';
+                    // Build city tags HTML - show all cities for this day
+                    let cityTagsHtml = '';
+                    if (citiesForDay.length > 0) {
+                        // If multiple cities, it's a travel day!
+                        const isTravelDay = citiesForDay.length > 1;
+                        
+                        cityTagsHtml = '<div style="display: flex; flex-wrap: wrap; gap: 5px; margin: 6px 0;">';
+                        
+                        citiesForDay.forEach(city => {
+                            // Use country flag emoji and just city name
+                            cityTagsHtml += `
+                                <div class="city-tag">
+                                    <span class="city-tag-emoji">${city.emoji}</span>
+                                    <span>${city.name}</span>
+                                </div>
+                            `;
+                        });
+                        
+                        // Add travel tag if it's a travel day
+                        if (isTravelDay) {
+                            cityTagsHtml += `
+                                <div class="city-tag travel-tag">
+                                    <span class="city-tag-emoji">✈️</span>
+                                    <span>${currentLanguage === 'en' ? 'Travel' : 'Viaje'}</span>
+                                </div>
+                            `;
+                        }
+                        
+                        cityTagsHtml += '</div>';
+                    }
                     
                     dayCard.innerHTML = `
                         <div class="day-header">${dayOfWeek} ${dayNum}</div>
                         <div class="day-date">${formatDate(dateStr)}</div>
-                        ${cityTagHtml}
+                        ${cityTagsHtml}
                         <div class="weather-info">${outfit.weather}</div>
                         
                         <div class="day-activities-section">
@@ -6459,6 +6504,11 @@
         }
 
         function selectCityDate(dateStr) {
+            // Validate date is within trip range
+            if (dateStr < currentTrip.startDate || dateStr > currentTrip.endDate) {
+                return; // Don't allow selection outside trip dates
+            }
+            
             if (!cityStartDate || (cityStartDate && cityEndDate)) {
                 // Start new selection
                 cityStartDate = dateStr;
@@ -6487,7 +6537,9 @@
                 selectedDatesText.textContent = currentLanguage === 'en' ? 'Select end date' : 'Selecciona fecha de fin';
                 selectedDatesRange.textContent = formatDate(cityStartDate);
             } else {
-                selectedDatesText.textContent = translations[currentLanguage].citySelectedDatesText;
+                selectedDatesText.textContent = currentLanguage === 'en' 
+                    ? `Select dates within trip (${formatDate(currentTrip.startDate)} - ${formatDate(currentTrip.endDate)})`
+                    : `Selecciona fechas dentro del viaje (${formatDate(currentTrip.startDate)} - ${formatDate(currentTrip.endDate)})`;
                 selectedDatesRange.textContent = '';
             }
         }
@@ -6549,17 +6601,7 @@
                 return;
             }
             
-            // Check for overlapping cities
-            const overlap = currentTrip.cities.some(city => {
-                return !(cityEndDate < city.startDate || cityStartDate > city.endDate);
-            });
-            
-            if (overlap) {
-                alert(currentLanguage === 'en' 
-                    ? 'These dates overlap with another city. Please choose different dates.' 
-                    : 'Estas fechas se superponen con otra ciudad. Por favor elige fechas diferentes.');
-                return;
-            }
+            // Overlapping dates are allowed - they represent travel days between cities!
             
             // Show loading
             const saveBtn = document.querySelector('#addCityModal .btn');
@@ -6672,9 +6714,10 @@
         }
 
         function getCityForDate(cities, dateStr) {
-            if (!cities || cities.length === 0) return null;
+            if (!cities || cities.length === 0) return [];
             
-            return cities.find(city => {
+            // Return ALL cities that match this date (overlapping dates = travel days!)
+            return cities.filter(city => {
                 return dateStr >= city.startDate && dateStr <= city.endDate;
             });
         }
