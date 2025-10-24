@@ -1095,6 +1095,18 @@
             letter-spacing: 0.3px;
         }
 
+        .trip-countdown-badge {
+            padding: 6px 14px;
+            background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+            color: white;
+            border-radius: 16px;
+            font-size: var(--text-xs);
+            font-weight: 600;
+            white-space: nowrap;
+            letter-spacing: 0.3px;
+            margin-top: 8px;
+        }
+
         /* Past Trips */
         .past-trips-grid {
             display: grid;
@@ -2695,6 +2707,12 @@
             .trip-duration-badge-card {
                 font-size: 12px;
                 padding: 5px 12px;
+            }
+
+            .trip-countdown-badge {
+                font-size: 11px;
+                padding: 4px 10px;
+                margin-top: 6px;
             }
 
             .main-content {
@@ -4874,6 +4892,10 @@
             const container = document.getElementById('upcomingTrips');
             container.innerHTML = '';
 
+            // Get today's date as YYYY-MM-DD string
+            const today = new Date();
+            const todayStr = dateToString(today);
+
             trips.forEach(trip => {
                 const duration = Math.ceil((new Date(trip.endDate) - new Date(trip.startDate)) / (1000 * 60 * 60 * 24)) + 1;
                 // Parse dates in local time to avoid timezone shift
@@ -4881,6 +4903,10 @@
                 const [endYear, endMonth, endDay] = trip.endDate.split('-').map(Number);
                 const startDate = new Date(startYear, startMonth - 1, startDay);
                 const endDate = new Date(endYear, endMonth - 1, endDay);
+                
+                // Calculate days until trip starts
+                const todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+                const daysUntilTrip = Math.ceil((startDate - todayDate) / (1000 * 60 * 60 * 24));
                 
                 // Format dates
                 const startFormatted = startDate.toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { month: 'short', day: 'numeric' });
@@ -4894,6 +4920,14 @@
                 const tripDestination = trip.destination || (trip.cities && trip.cities.length > 0 ? trip.cities.map(c => c.name).join(', ') : '');
                 const tripSocketInfo = trip.socketType ? `<p class="trip-card-socket">${trip.socketIcon || getSocketSVG(trip.socketType)}${trip.socketType}</p>` : '';
                 
+                // Create countdown badge HTML if trip is in the future
+                let countdownBadge = '';
+                if (daysUntilTrip > 0) {
+                    countdownBadge = `<div class="trip-countdown-badge">${currentLanguage === 'en' ? `In ${daysUntilTrip} ${daysUntilTrip === 1 ? 'day' : 'days'}` : `En ${daysUntilTrip} ${daysUntilTrip === 1 ? 'día' : 'días'}`}</div>`;
+                } else if (daysUntilTrip === 0) {
+                    countdownBadge = `<div class="trip-countdown-badge">${currentLanguage === 'en' ? 'Today!' : '¡Hoy!'}</div>`;
+                }
+                
                 const card = document.createElement('div');
                 card.className = 'trip-card';
                 card.onclick = () => openTrip(trip.id);
@@ -4906,7 +4940,10 @@
                             <p class="trip-card-dates">${startFormatted} - ${endFormatted} · ${duration} ${translations[currentLanguage].days} · ${currentLanguage === 'en' ? 'Updated' : 'Actualizado'} ${updatedDate}</p>
                             ${tripSocketInfo}
                         </div>
-                        <div class="trip-duration-badge-card">${duration} ${translations[currentLanguage].days}</div>
+                        <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                            <div class="trip-duration-badge-card">${duration} ${translations[currentLanguage].days}</div>
+                            ${countdownBadge}
+                        </div>
                     </div>
                 `;
                 container.appendChild(card);
@@ -5023,6 +5060,38 @@
             // Set duration badge
             document.getElementById('tripDurationBadge').textContent = `${duration} ${duration === 1 ? (currentLanguage === 'en' ? 'day' : 'día') : translations[currentLanguage].days}`;
 
+            // Calculate days until trip starts and add countdown badge if needed
+            const today = new Date();
+            const todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+            const [startYear, startMonth, startDay] = trip.startDate.split('-').map(Number);
+            const tripStartDate = new Date(startYear, startMonth - 1, startDay);
+            const daysUntilTrip = Math.ceil((tripStartDate - todayDate) / (1000 * 60 * 60 * 24));
+            
+            // Remove existing countdown badge if any
+            const existingCountdown = document.getElementById('tripCountdownBadge');
+            if (existingCountdown) {
+                existingCountdown.remove();
+            }
+            
+            // Add countdown badge if trip hasn't started yet
+            if (daysUntilTrip >= 0) {
+                const countdownBadge = document.createElement('div');
+                countdownBadge.id = 'tripCountdownBadge';
+                countdownBadge.className = 'trip-countdown-badge';
+                countdownBadge.style.marginLeft = '8px';
+                
+                if (daysUntilTrip > 0) {
+                    countdownBadge.textContent = currentLanguage === 'en' 
+                        ? `In ${daysUntilTrip} ${daysUntilTrip === 1 ? 'day' : 'days'}`
+                        : `En ${daysUntilTrip} ${daysUntilTrip === 1 ? 'día' : 'días'}`;
+                } else if (daysUntilTrip === 0) {
+                    countdownBadge.textContent = currentLanguage === 'en' ? 'Today!' : '¡Hoy!';
+                }
+                
+                const durationBadge = document.getElementById('tripDurationBadge');
+                durationBadge.parentNode.insertBefore(countdownBadge, durationBadge.nextSibling);
+            }
+
             // Set socket info - show first city's socket or hide if no cities
             const socketInfo = document.getElementById('tripSocketInline');
             if (trip.cities.length > 0) {
@@ -5037,7 +5106,6 @@
             const startDate = formatDate(trip.startDate);
             const endDate = formatDate(trip.endDate);
             // Parse dates in local time to avoid timezone shift
-            const [startYear, startMonth, startDay] = trip.startDate.split('-').map(Number);
             const [endYear, endMonth, endDay] = trip.endDate.split('-').map(Number);
             const monthStart = new Date(startYear, startMonth - 1, startDay).toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { month: 'short', day: 'numeric' });
             const monthEnd = new Date(endYear, endMonth - 1, endDay).toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { month: 'short', day: 'numeric' });
