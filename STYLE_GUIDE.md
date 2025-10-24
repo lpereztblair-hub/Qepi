@@ -243,7 +243,9 @@ body {
 --accent-quaternary-text: #8B6B7A;
 --accent-quaternary-shadow: rgba(238, 229, 233, 0.4);
 ```
-**Usage**: Countdown badges, "days away" pills, subtle highlights
+**Usage**: Countdown badges, "days away" pills
+
+**Note**: Emoji icon backgrounds use **Bice Blue Light** (`var(--accent-secondary-light)` = `#E6F1F8`) for a subtle, professional appearance.
 
 #### Neutral Colors
 
@@ -278,9 +280,10 @@ body {
 2. Use Pear for all primary actions and active states
 3. Use Bice blue for secondary/informational elements
 4. Use Imperial red for errors, warnings, and delete actions
-5. Use Lavender blush for countdown badges and subtle accent highlights
-6. Maintain proper contrast ratios for accessibility
-7. **NO GRADIENTS** - Always use solid colors
+5. Use Lavender blush for countdown badges
+6. Use **Bice Blue Light** for emoji icon backgrounds (trip icons, trip card icons)
+7. Maintain proper contrast ratios for accessibility
+8. **NO GRADIENTS** - Always use solid colors
 
 **Usage Examples:**
 ```css
@@ -351,6 +354,7 @@ body {
 - **Border Radius**: `var(--radius-round)` (9999px) - fully rounded
 - **Purpose**: Display data, status, counts
 - **Examples**: "8 days", "In 3 days", "Type C", socket info
+- **CRITICAL**: All pills must have identical height for perfect alignment
 
 ```css
 .trip-duration-badge,
@@ -358,8 +362,30 @@ body {
 .trip-socket-inline,
 .badge-new {
     border-radius: var(--radius-round);   /* 9999px - fully rounded pill */
-    padding: var(--spacing-3) var(--spacing-10);
+    padding: 0 var(--spacing-12);         /* No vertical padding - height controlled */
+    height: 28px;                         /* Fixed height for alignment */
+    line-height: 1;                       /* Tight line-height */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-weight: 600;
+    font-size: var(--text-xs);
+}
+```
+
+#### Emoji Icon Backgrounds
+- **Border Radius**: `var(--radius-full)` (50%) - perfect circle
+- **Background**: `var(--accent-secondary-light)` (Light Blue #E6F1F8)
+- **Purpose**: Visual representation of trips
+
+```css
+.trip-icon,
+.trip-card-icon {
+    border-radius: var(--radius-full);
+    background: var(--accent-secondary-light);  /* Light blue */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 ```
 
