@@ -1525,7 +1525,7 @@
 
         .itinerary-header-cell {
             display: table-cell;
-            background: var(--color-gray-50);
+            background: var(--color-gray-200);
             padding: var(--spacing-4) var(--spacing-8);
             border-right: 1px solid var(--color-gray-400);
             border-bottom: 1px solid var(--color-gray-400);
@@ -1541,7 +1541,7 @@
         }
 
         .itinerary-header-cell.time-column {
-            background: var(--color-gray-50);
+            background: var(--color-gray-200);
             color: var(--color-gray-700);
             position: sticky;
             left: 0;
@@ -1555,7 +1555,7 @@
         .itinerary-header-cell.month-row {
             font-size: var(--text-fixed-14);
             font-weight: 700;
-            background: var(--color-white);
+            background: var(--color-gray-200);
             border-bottom: 2px solid var(--accent-primary);
             top: 0;
         }
@@ -5750,7 +5750,7 @@
             });
 
             if (trips.length === 0) {
-                container.innerHTML = `<p style="color: #999; text-align: center; width: 100%;">${currentLanguage === 'en' ? 'No upcoming trips' : 'No hay viajes próximos'}</p>`;
+                container.innerHTML = `<p class="no-trips-message">${currentLanguage === 'en' ? 'No upcoming trips yet' : 'No hay viajes próximos aún'}</p>`;
             }
         }
 
