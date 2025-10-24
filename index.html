@@ -1180,6 +1180,31 @@
             flex-shrink: 0;
         }
 
+        .trip-action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-left: auto;
+        }
+
+        .edit-trip-btn {
+            padding: 8px 18px;
+            background: white;
+            color: var(--accent-primary);
+            border: 1px solid var(--accent-primary);
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .edit-trip-btn:hover {
+            background: var(--accent-light);
+        }
+
         .delete-trip-btn {
             padding: 8px 18px;
             background: white;
@@ -1193,7 +1218,6 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            margin-left: auto;
         }
 
         .delete-trip-btn:hover {
@@ -2602,8 +2626,13 @@
                 margin-left: 0;
             }
 
-            .delete-trip-btn {
+            .trip-action-buttons {
                 margin-left: 0;
+                width: 100%;
+                flex-direction: column;
+            }
+            
+            .edit-trip-btn, .delete-trip-btn {
                 width: 100%;
                 justify-content: center;
             }
@@ -2859,7 +2888,10 @@
                             <input type="text" class="trip-name-inline" id="tripName" placeholder="Trip Name">
                             <div class="trip-duration-badge" id="tripDurationBadge">4 days</div>
                             <div class="trip-socket-inline" id="tripSocketInline">Type C/I • 220V</div>
-                            <button class="delete-trip-btn" onclick="deleteTrip()">🗑️ <span id="deleteTripText">Delete</span></button>
+                            <div class="trip-action-buttons">
+                                <button class="edit-trip-btn" onclick="openEditTripModal()">✏️ <span id="editTripText">Edit</span></button>
+                                <button class="delete-trip-btn" onclick="deleteTrip()">🗑️ <span id="deleteTripText">Delete</span></button>
+                            </div>
                         </div>
                         <div class="trip-subtitle-inline" id="tripSubtitleInline"></div>
                     </div>
@@ -2940,6 +2972,46 @@
                 <p class="date-range" id="selectedDatesRange"></p>
             </div>
             <button class="btn calendar-close-btn" id="calendarDoneBtn" onclick="closeCalendar()">Done</button>
+        </div>
+
+        <!-- Edit Trip Modal -->
+        <div id="editTripModal" class="date-range-picker hidden">
+            <h3 id="editTripModalTitle" style="margin-bottom: 20px; font-size: 24px;">Edit Trip</h3>
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label id="editDestinationLabel">Destination</label>
+                <input type="text" id="editDestination" placeholder="Enter destination" style="width: 100%; padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 10px; font-size: 15px;">
+            </div>
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label id="editDatesLabel">Travel Dates</label>
+                <button type="button" class="date-picker-button" id="editDatePickerButton" onclick="openEditTripCalendar()" style="width: 100%;">
+                    <span id="editDatePickerButtonText">Click to select dates</span>
+                    <span>📅</span>
+                </button>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn" onclick="saveEditedTrip()" style="flex: 1;">
+                    <span id="saveEditTripText">Save Changes</span>
+                </button>
+                <button class="btn btn-secondary" onclick="closeEditTripModal()" style="flex: 1;">
+                    <span id="cancelEditTripText">Cancel</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Edit Trip Calendar -->
+        <div id="editTripCalendar" class="date-range-picker hidden">
+            <div class="calendar-header">
+                <button type="button" onclick="changeEditTripMonth(-1)">←</button>
+                <h4 id="editCalendarMonth"></h4>
+                <button type="button" onclick="changeEditTripMonth(1)">→</button>
+            </div>
+            <div class="calendar-weekdays" id="editCalendarWeekdays"></div>
+            <div class="calendar-days" id="editCalendarDays"></div>
+            <div class="selected-dates-display">
+                <p id="editSelectedDatesText">Select start and end dates</p>
+                <p class="date-range" id="editSelectedDatesRange"></p>
+            </div>
+            <button class="btn calendar-close-btn" onclick="closeEditTripCalendar()">Done</button>
         </div>
 
         <!-- Emoji Picker -->
@@ -3074,6 +3146,13 @@
                 newPasswordLabel: "New Password",
                 resetPasswordBtn: "Reset Password",
                 backToLoginLink: "Back to Login",
+                editTripText: "Edit",
+                deleteTripText: "Delete",
+                editTripModalTitle: "Edit Trip",
+                editDestinationLabel: "Destination",
+                editDatesLabel: "Travel Dates",
+                saveEditTripText: "Save Changes",
+                cancelEditTripText: "Cancel",
                 logoutBtn: "Logout",
                 appTitle: "🧳 Packing Planner",
                 createTripTitle: "Create New Trip",
@@ -3145,6 +3224,13 @@
                 newPasswordLabel: "Nueva Contraseña",
                 resetPasswordBtn: "Restablecer Contraseña",
                 backToLoginLink: "Volver al Inicio de Sesión",
+                editTripText: "Editar",
+                deleteTripText: "Eliminar",
+                editTripModalTitle: "Editar Viaje",
+                editDestinationLabel: "Destino",
+                editDatesLabel: "Fechas de Viaje",
+                saveEditTripText: "Guardar Cambios",
+                cancelEditTripText: "Cancelar",
                 logoutBtn: "Cerrar Sesión",
                 appTitle: "🧳 Planificador de Maletas",
                 createTripTitle: "Crear Nuevo Viaje",
@@ -4141,7 +4227,7 @@
             }
 
             // Check if it's selected start or end
-            const dateStr = date.toISOString().split('T')[0];
+            const dateStr = dateToString(date);
             if (selectedStartDate && dateStr === selectedStartDate) {
                 div.classList.add('selected-start');
             }
@@ -4246,6 +4332,8 @@
                 'authTitle', 'nameLabel', 'usernameLabel', 'passwordLabel', 'loginBtn', 'registerBtn',
                 'forgotPasswordLink', 'resetPasswordTitle', 'resetUsernameLabel', 'resetNameLabel', 
                 'newPasswordLabel', 'resetPasswordBtn', 'backToLoginLink',
+                'editTripText', 'deleteTripText', 'editTripModalTitle', 'editDestinationLabel', 
+                'editDatesLabel', 'saveEditTripText', 'cancelEditTripText',
                 'createTripTitle', 'destinationLabel',
                 'dateRangeLabel', 'createTripBtn', 'upcomingTripsTitle',
                 'pastTripsTitle', 'backBtnText', 'startLabel', 'endLabel', 'durationLabel',
@@ -4698,6 +4786,14 @@
             });
         }
 
+        // Helper function to convert Date object to YYYY-MM-DD without timezone issues
+        function dateToString(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
         function openTrip(tripId) {
             const users = JSON.parse(localStorage.getItem('users') || '{}');
             const trip = users[currentUser].trips.find(t => t.id === tripId);
@@ -5066,7 +5162,7 @@
                 dayDiv.textContent = day;
                 
                 const currentDate = new Date(year, month, day);
-                const dateStr = currentDate.toISOString().split('T')[0];
+                const dateStr = dateToString(currentDate);
                 
                 // Check if it's today
                 if (currentDate.getTime() === today.getTime()) {
@@ -5230,7 +5326,7 @@
                 daysGrid.className = 'days-grid';
 
                 week.forEach((day, dayIndex) => {
-                    const dateStr = day.toISOString().split('T')[0];
+                    const dateStr = dateToString(day);
                     const dayOfWeek = day.toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'es-ES', { weekday: 'short' });
                     const dayNum = day.getDate();
 
@@ -5633,6 +5729,273 @@
                 localStorage.setItem('users', JSON.stringify(users));
                 showLandingPage();
             }
+        }
+
+        // Edit Trip Functions
+        let editTripStartDate = null;
+        let editTripEndDate = null;
+        let editTripCalendarMonth = null;
+
+        function openEditTripModal() {
+            if (!currentTrip) return;
+            
+            // Pre-fill with current trip data
+            document.getElementById('editDestination').value = currentTrip.destination;
+            editTripStartDate = currentTrip.startDate;
+            editTripEndDate = currentTrip.endDate;
+            
+            updateEditDatePickerButton();
+            
+            // Show modal
+            document.getElementById('editTripModal').classList.remove('hidden');
+            document.getElementById('overlay').classList.remove('hidden');
+        }
+
+        function closeEditTripModal() {
+            document.getElementById('editTripModal').classList.add('hidden');
+            document.getElementById('overlay').classList.add('hidden');
+            editTripStartDate = null;
+            editTripEndDate = null;
+        }
+
+        function openEditTripCalendar() {
+            editTripCalendarMonth = new Date();
+            renderEditTripCalendar();
+            document.getElementById('editTripCalendar').classList.remove('hidden');
+            document.getElementById('editTripModal').classList.add('hidden');
+        }
+
+        function closeEditTripCalendar() {
+            document.getElementById('editTripCalendar').classList.add('hidden');
+            document.getElementById('editTripModal').classList.remove('hidden');
+            updateEditDatePickerButton();
+        }
+
+        function changeEditTripMonth(direction) {
+            editTripCalendarMonth.setMonth(editTripCalendarMonth.getMonth() + direction);
+            renderEditTripCalendar();
+        }
+
+        function renderEditTripCalendar() {
+            const month = editTripCalendarMonth.getMonth();
+            const year = editTripCalendarMonth.getFullYear();
+            
+            // Update month display
+            const monthNames = currentLanguage === 'en' 
+                ? ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+                : ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            document.getElementById('editCalendarMonth').textContent = `${monthNames[month]} ${year}`;
+            
+            // Render weekdays
+            const weekdays = currentLanguage === 'en' 
+                ? ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+                : ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+            const weekdaysContainer = document.getElementById('editCalendarWeekdays');
+            weekdaysContainer.innerHTML = '';
+            weekdays.forEach(day => {
+                const div = document.createElement('div');
+                div.textContent = day;
+                weekdaysContainer.appendChild(div);
+            });
+            
+            // Render days
+            const container = document.getElementById('editCalendarDays');
+            container.innerHTML = '';
+            
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            // Previous month's days
+            const prevMonthDays = new Date(year, month, 0).getDate();
+            for (let i = firstDay - 1; i >= 0; i--) {
+                const day = prevMonthDays - i;
+                const date = new Date(year, month - 1, day);
+                container.appendChild(createEditDayElement(day, date, true));
+            }
+            
+            // Current month's days
+            for (let day = 1; day <= daysInMonth; day++) {
+                const date = new Date(year, month, day);
+                container.appendChild(createEditDayElement(day, date, false));
+            }
+            
+            // Next month's days
+            const totalCells = container.children.length;
+            const remainingCells = 42 - totalCells;
+            for (let day = 1; day <= remainingCells; day++) {
+                const date = new Date(year, month + 1, day);
+                container.appendChild(createEditDayElement(day, date, true));
+            }
+            
+            updateEditSelectedDatesDisplay();
+        }
+
+        function createEditDayElement(day, date, isOtherMonth) {
+            const div = document.createElement('div');
+            div.className = 'calendar-day';
+            div.textContent = day;
+            
+            if (isOtherMonth) {
+                div.classList.add('other-month');
+            }
+            
+            const dateStr = dateToString(date);
+            
+            // Check if selected
+            if (editTripStartDate && dateStr === editTripStartDate) {
+                div.classList.add('selected-start');
+            }
+            if (editTripEndDate && dateStr === editTripEndDate) {
+                div.classList.add('selected-end');
+            }
+            
+            // Check if in range
+            if (editTripStartDate && editTripEndDate) {
+                const startTime = new Date(editTripStartDate).getTime();
+                const endTime = new Date(editTripEndDate).getTime();
+                const currentTime = date.getTime();
+                
+                if (currentTime > startTime && currentTime < endTime) {
+                    div.classList.add('in-range');
+                }
+            }
+            
+            div.onclick = () => selectEditDate(dateStr);
+            
+            return div;
+        }
+
+        function selectEditDate(dateStr) {
+            if (!editTripStartDate || (editTripStartDate && editTripEndDate)) {
+                // Start new selection
+                editTripStartDate = dateStr;
+                editTripEndDate = null;
+            } else if (editTripStartDate && !editTripEndDate) {
+                // Complete selection
+                if (new Date(dateStr) < new Date(editTripStartDate)) {
+                    editTripEndDate = editTripStartDate;
+                    editTripStartDate = dateStr;
+                } else {
+                    editTripEndDate = dateStr;
+                }
+            }
+            
+            renderEditTripCalendar();
+        }
+
+        function updateEditSelectedDatesDisplay() {
+            const textElement = document.getElementById('editSelectedDatesText');
+            const rangeElement = document.getElementById('editSelectedDatesRange');
+            
+            if (!editTripStartDate) {
+                textElement.textContent = currentLanguage === 'en' 
+                    ? 'Select start and end dates' 
+                    : 'Selecciona fechas de inicio y fin';
+                rangeElement.textContent = '';
+            } else if (editTripStartDate && !editTripEndDate) {
+                textElement.textContent = currentLanguage === 'en' 
+                    ? 'Select end date' 
+                    : 'Selecciona fecha de fin';
+                rangeElement.textContent = formatDate(editTripStartDate);
+            } else if (editTripStartDate && editTripEndDate) {
+                const duration = Math.ceil((new Date(editTripEndDate) - new Date(editTripStartDate)) / (1000 * 60 * 60 * 24)) + 1;
+                textElement.textContent = currentLanguage === 'en' 
+                    ? `${duration} days trip` 
+                    : `Viaje de ${duration} días`;
+                rangeElement.textContent = `${formatDate(editTripStartDate)} → ${formatDate(editTripEndDate)}`;
+            }
+        }
+
+        function updateEditDatePickerButton() {
+            const button = document.getElementById('editDatePickerButton');
+            const buttonText = document.getElementById('editDatePickerButtonText');
+            
+            if (editTripStartDate && editTripEndDate) {
+                const duration = Math.ceil((new Date(editTripEndDate) - new Date(editTripStartDate)) / (1000 * 60 * 60 * 24)) + 1;
+                buttonText.textContent = `${formatDate(editTripStartDate)} → ${formatDate(editTripEndDate)} (${duration} ${translations[currentLanguage].days})`;
+                button.classList.add('has-dates');
+            } else if (editTripStartDate) {
+                buttonText.textContent = formatDate(editTripStartDate);
+                button.classList.add('has-dates');
+            } else {
+                buttonText.textContent = translations[currentLanguage].clickToSelectDates;
+                button.classList.remove('has-dates');
+            }
+        }
+
+        async function saveEditedTrip() {
+            if (!currentTrip) return;
+            
+            const newDestination = document.getElementById('editDestination').value.trim();
+            
+            if (!newDestination) {
+                alert(currentLanguage === 'en' ? 'Please enter a destination' : 'Por favor ingrese un destino');
+                return;
+            }
+            
+            if (!editTripStartDate || !editTripEndDate) {
+                alert(currentLanguage === 'en' ? 'Please select start and end dates' : 'Por favor seleccione fechas de inicio y fin');
+                return;
+            }
+            
+            // Check if dates or destination changed
+            const datesChanged = editTripStartDate !== currentTrip.startDate || editTripEndDate !== currentTrip.endDate;
+            const destinationChanged = newDestination !== currentTrip.destination;
+            
+            if (!datesChanged && !destinationChanged) {
+                closeEditTripModal();
+                return;
+            }
+            
+            // Update trip
+            currentTrip.destination = newDestination;
+            currentTrip.startDate = editTripStartDate;
+            currentTrip.endDate = editTripEndDate;
+            
+            // If destination changed, fetch new data
+            if (destinationChanged) {
+                const [countryData, weatherData] = await Promise.all([
+                    fetchCountryData(newDestination),
+                    fetchWeatherForecast(newDestination, editTripStartDate, editTripEndDate)
+                ]);
+                
+                let socketType = getSocketType(newDestination);
+                let voltage = getVoltage(socketType);
+                
+                if (countryData && countryData.plugTypes) {
+                    socketType = `Type ${countryData.plugTypes}`;
+                }
+                
+                currentTrip.socketType = socketType;
+                currentTrip.socketIcon = getSocketSVG(socketType);
+                currentTrip.weatherData = weatherData;
+            }
+            
+            // If dates changed, update weather data
+            if (datesChanged && !destinationChanged) {
+                const weatherData = await fetchWeatherForecast(currentTrip.destination, editTripStartDate, editTripEndDate);
+                currentTrip.weatherData = weatherData;
+            }
+            
+            // Adjust activities to be within new date range
+            if (datesChanged && currentTrip.activities) {
+                currentTrip.activities = currentTrip.activities.filter(activity => {
+                    const actDate = new Date(activity.date);
+                    const start = new Date(editTripStartDate);
+                    const end = new Date(editTripEndDate);
+                    return actDate >= start && actDate <= end;
+                });
+            }
+            
+            // Save and refresh
+            saveCurrentTrip();
+            renderTripDetail(currentTrip);
+            loadSidebarTrips();
+            closeEditTripModal();
+            
+            alert(currentLanguage === 'en' 
+                ? 'Trip updated successfully!' 
+                : '¡Viaje actualizado exitosamente!');
         }
 
         // Clothing Drop Animation
